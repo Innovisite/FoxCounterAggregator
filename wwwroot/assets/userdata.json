@@ -1,16 +1,16 @@
 {
   "user": {
     "_id": "5677d75af5fcf1641fa2dbbd",
-    "name": "ionel",
-    "email": "admin@foxstream.fr",
+    "name": "fabien",
+    "email": "fabien.pelisson@codeffekt.com",
     "admin": true,
     "enabled": true,
-    "password": "pbkdf2$10000$443bec5faba84084a67496c39873159fdaff82179cef657f320a4b2e590bbead5e91db0cb5dc6097f392b572bacbe305b336394f2e74cf0889aed6ea9a3a0dee$e3bdc25058a9aa30d6d9d65431591e0179f0c05b2a478109362b0f9fe46fd6d4cb5261e1c0dbe805db0056a1333ae3121059e824c87f127cf33adcd986b33165"
+    "password": "none"
   },
   "sites": [
     {
       "_id": "568a495b78af992414ef675b",
-      "name": "Foxstream France",
+      "name": "Codeffekt France",
       "siteInfo": {
 	  "timezone": "Europe/Paris",
 	  "occupancyTimeReset": "1500"
@@ -19,36 +19,36 @@
       "items": [
         {
           "_id": "568a49ae78af992414ef675d",
-          "name": "Foxstream north"
+          "name": "Codeffekt north"
         },
         {
           "_id": "568a49b078af992414ef675e",
-          "name": "Foxstream south"
+          "name": "Codeffekt south"
         },
         {
           "_id": "568a49b178af992414ef675f",
-          "name": "Foxstream main"
+          "name": "Codeffekt main"
         }
       ]
     },
     {
       "_id": "568a497d78af992414ef675c",
-      "name": "BEV",
+      "name": "CE",
       "isadmin": true,
       "items": [
         {
           "_id": "568a49b378af992414ef6760",
-          "name": "BEV 1"
+          "name": "CE 1"
         },
         {
           "_id": "568a49b678af992414ef6761",
-          "name": "BEV 2"
+          "name": "CE 2"
         }
       ]
     },
     {
       "_id": "568e2a6928054e901522106b",
-      "name": "vaulx-en-velin",
+      "name": "La Tour du Pin",
       "isadmin": true,
       "items": [
         {
@@ -59,7 +59,7 @@
     },
     {
       "_id": "568e2f3928054e9015221074",
-      "name": "Foxstream Miami",
+      "name": "Grenoble",
       "isadmin": true,
       "items": [
         {

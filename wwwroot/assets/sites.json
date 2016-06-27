@@ -1,32 +1,31 @@
 [
   {
     "_id": "568a495b78af992414ef675b",
-    "name": "Foxstream France",
+    "name": "Codeffekt France",
     "siteInfo": {
 	"timezone": "Europe/Paris",
 	"occupancyTimeReset": "1500"
     },
     "usersadmin": [
-      "admin@foxstream.fr",
-      "i.pop@foxstream.fr"
+      "admin@codeffekt.fr",
+      "fabien.pelisson@codeffekt.com"
     ],
     "users": [
-      "m.barduca@foxstream.fr",
-      "jb.ducatez@foxstream.fr"
+      "test@codeffekt.com"
     ],
     "items": [
       {
         "_id": "568a49ae78af992414ef675d",
         "mac": null,
-        "name": "Foxstream north",
+        "name": "Codeffekt north",
         "pairId": "ba1433df-c127-4aa4-90bb-0227dc12d15f",
         "lastUpdateTime": "2016-03-03T14:50:17.602Z",
-        "itemid": "FoxMAC1"
+        "itemid": "CEMAC1"
       },
       {
         "_id": "568a49b078af992414ef675e",
         "mac": null,
-        "name": "Foxstream south",
+        "name": "Codeffekt south",
         "pairId": "73ea8619-2df1-45f9-bada-00cfc0d52076",
         "lastUpdateTime": "2016-02-29T14:25:05.989Z",
         "itemid": null
@@ -34,61 +33,37 @@
       {
         "_id": "568a49b178af992414ef675f",
         "mac": null,
-        "name": "Foxstream main",
+        "name": "Codeffekt main",
         "pairId": "da754a09-76ca-4ca8-9a6e-47e32d1ea383",
         "lastUpdateTime": "2016-03-03T14:50:18.176Z",
-        "itemid": "FoxMAC3"
-      },
-      {
-        "_id": "56d6b0132f2effbc5090cb63",
-        "itemid": "ACCC8E0E2DC5",
-        "name": "AxisCam",
-        "pairId": "f77ac06e-7931-4346-99c0-ae067980b5ec",
-        "lastUpdateTime": "2016-03-10T13:58:12.880Z"
-      },
-      {
-        "_id": "56d6b6d52f2effbc5090cb67",
-        "itemid": "ACCC8E0E2DC5",
-        "name": "AxisCam2",
-        "pairId": "c6ab24f8-737d-4be7-9615-b89554b5e8d8",
-        "lastUpdateTime": "2016-03-18T18:43:54.598Z"
+        "itemid": null
       }
     ]
   },
   {
     "_id": "568a497d78af992414ef675c",
-    "name": "BEV",
+    "name": "La Tour du Pin",
     "usersadmin": [
-      "admin@foxstream.fr"
+      "fabien.pelisson@codeffekt.com"
     ],
     "users": [
-      "user@foxstream.fr"
     ],
     "items": [
       {
         "_id": "568a49b378af992414ef6760",
         "mac": null,
-        "name": "BEV 1",
+        "name": "CE 1",
         "pairId": "cc7b3eea-927c-4119-8430-735185a8d421",
         "lastUpdateTime": "2016-03-03T14:50:18.306Z",
-        "itemid": "BEVMACA"
-      },
-      {
-        "_id": "568a49b678af992414ef6761",
-        "mac": null,
-        "name": "BEV 2",
-        "pairId": "3e9801bf-6509-4e58-80d2-74a7f911bc49",
-        "lastUpdateTime": "2016-03-03T14:50:18.425Z",
-        "itemid": "BEVMACB"
+        "itemid": null
       }
     ]
   },
   {
     "_id": "568e2a6928054e901522106b",
-    "name": "vaulx-en-velin",
+    "name": "Grenoble",
     "usersadmin": [
-      "admin@foxstream.fr",
-      "vaulx@admin"
+      "fabien.pelisson@codeffekt.com"
     ],
     "users": [],
     "items": [
@@ -98,269 +73,7 @@
         "name": "Entree 1",
         "pairId": "e3ba1968-30c9-4702-b1bb-29cb959b8be5",
         "lastUpdateTime": "2016-03-03T14:50:18.593Z",
-        "itemid": "vaulxMAC"
-      }
-    ]
-  },
-  {
-    "_id": "568e2f3928054e9015221074",
-    "name": "Foxstream Miami",
-    "usersadmin": [
-      "i.pop@foxstream.fr",
-      "admin@foxstream.fr"
-    ],
-    "users": [
-      "pj.riviere@foxstream.us.com",
-      "jb.ducatez@foxstream.fr"
-    ],
-    "items": [
-      {
-        "_id": "568e31e528054e9015221078",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "a6832c93-73bd-463c-a937-9a208972cde1",
-        "lastUpdateTime": "2016-03-03T14:50:18.609Z",
-        "itemid": "MiamiMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f3d3e87e3ec02ad7ba52",
-    "name": "ATL 2nd level",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "atl@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510d1e87e3ec02ad7ba61",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "e7d4dd2a-5572-4857-b674-970b98637e64",
-        "lastUpdateTime": "2016-03-03T14:50:18.630Z",
-        "itemid": "DeltaMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f3dae87e3ec02ad7ba53",
-    "name": "ATL Gate A17",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "atl@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510d6e87e3ec02ad7ba62",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "c82d6e65-218e-414f-a663-9bb19009305d",
-        "lastUpdateTime": "2016-03-03T14:50:18.644Z",
-        "itemid": "DeltaMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f3dfe87e3ec02ad7ba54",
-    "name": "ATL Gate B10",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "atl@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510dae87e3ec02ad7ba63",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "b874d319-5295-48bb-a40e-cf288e11315d",
-        "lastUpdateTime": "2016-03-03T14:50:18.717Z",
-        "itemid": "DeltaMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f3e4e87e3ec02ad7ba55",
-    "name": "ATL Gate B25",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "atl@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510dee87e3ec02ad7ba64",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "2ca66d29-e886-4760-a3be-af759ed6e31e",
-        "lastUpdateTime": "2016-03-03T14:50:18.777Z",
-        "itemid": "DeltaMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f409e87e3ec02ad7ba56",
-    "name": "ATL Gate C37",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "atl@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510e1e87e3ec02ad7ba65",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "fb1ac69a-c6db-431a-a20b-4d9fd8b4153c",
-        "lastUpdateTime": "2016-03-03T14:50:18.955Z",
-        "itemid": "DeltaMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f40ee87e3ec02ad7ba57",
-    "name": "ATL Gate T6",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "atl@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510e4e87e3ec02ad7ba66",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "96841590-0293-41c5-ab57-154cd25ede25",
-        "lastUpdateTime": "2016-03-03T14:50:18.968Z",
-        "itemid": "DeltaMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f414e87e3ec02ad7ba58",
-    "name": "ATL Concourse D",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "atl@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510e7e87e3ec02ad7ba67",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "b5193373-5a8b-4411-b006-18288c007a7c",
-        "lastUpdateTime": "2016-03-03T14:50:18.986Z",
-        "itemid": "DeltaMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f419e87e3ec02ad7ba59",
-    "name": "ATL Gate D12",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "atl@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510ebe87e3ec02ad7ba68",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "417e1e0a-1091-4848-a907-29c50354d3ae",
-        "lastUpdateTime": "2016-03-03T14:50:19.000Z",
-        "itemid": "DeltaMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f41ee87e3ec02ad7ba5a",
-    "name": "ATL Concourse E",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "atl@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510f0e87e3ec02ad7ba69",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "7db90c48-6fbb-4cd4-8045-cd594163ed7c",
-        "lastUpdateTime": "2016-03-03T14:50:19.013Z",
-        "itemid": "DeltaMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f423e87e3ec02ad7ba5b",
-    "name": "ATL Concourse F",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "atl@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510f3e87e3ec02ad7ba6a",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "f074b931-c996-4698-b650-76335524e103",
-        "lastUpdateTime": "2016-03-03T14:50:19.028Z",
-        "itemid": "DeltaMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f428e87e3ec02ad7ba5c",
-    "name": "BOS Terminal A",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "bos@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510f5e87e3ec02ad7ba6b",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "6363eb0d-46e2-49f8-81a2-a18ac6ae9157",
-        "lastUpdateTime": "2016-03-03T14:50:19.042Z",
-        "itemid": "DeltaMAC"
-      }
-    ]
-  },
-  {
-    "_id": "5694f42ce87e3ec02ad7ba5d",
-    "name": "BOS Main Terminal",
-    "usersadmin": [
-      "admin@delta"
-    ],
-    "users": [
-      "bos@delta"
-    ],
-    "items": [
-      {
-        "_id": "569510f8e87e3ec02ad7ba6c",
-        "mac": null,
-        "name": "In 1",
-        "pairId": "eae139bd-2b98-4b28-80dd-4530c5794239",
-        "lastUpdateTime": "2016-03-03T14:50:19.057Z",
-        "itemid": "DeltaMAC"
+        "itemid": "GRE1"
       }
     ]
   }

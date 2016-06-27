@@ -109,7 +109,7 @@ gulp.task('install', gulpSequence('release', 'copy-files'));
 
 gulp.task('build', [ 'common', 'prepare-css', 'prepare-js']);
 
-gulp.task('release', ['common', 'prepare-css-release', 'prepare-js-release', 'extract-git-revision' ]);
+gulp.task('release', ['common', 'prepare-css-release', 'prepare-js-release' ]);
 
 gulp.task('common', [ 'lint', 'prepare-assets', 'prepare-html' ]);
 

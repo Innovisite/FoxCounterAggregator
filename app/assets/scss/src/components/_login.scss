@@ -1,0 +1,83 @@
+/**
+ * login.scss
+ * --------------------------------------------------
+ * Custom style for datable components
+ */
+
+// Colors definition
+$color-primary: #ffa10d;
+$color-dark-primary: #000000;
+
+.login-page {
+  height:100%;
+
+}
+
+.login-header {
+
+  background-color: $color-dark-primary;
+  height:40%;
+  border-bottom: 4px solid $color-primary;
+
+  img {
+    padding-top:80px;
+  }
+
+  h2 {
+    padding-right:60px;
+    padding-botton:5px;
+    margin-top:10px;
+  }
+}
+
+.login-form {
+  height:60%;
+
+  background-size: cover;
+  background-position: center;
+  background-image:url(../../assets/img/login_background.jpg);
+
+  padding-top:100px;
+
+  div.row:first-child {
+    margin-bottom: 30px;
+  }
+
+  div.row:nth-child(2) {
+    margin-bottom: 10px;
+  }
+
+  div.row div {
+
+    margin-left: auto;
+    margin-right: auto;
+    float:none;
+
+    $input-button-background-alpha: 0.9;
+    $input-button-height: 50px;
+
+    input {
+
+      background: $color-primary-light;
+      opacity: $input-button-background-alpha;
+      height:$input-button-height;
+
+      font-size:x-large;
+    }
+
+    a {
+      text-shadow: 2px 2px 8px $color-dark-primary;
+    }
+
+    button {
+        margin-top:30px;
+        background-color: $color-primary;
+        font-size:x-large;
+        border-radius: 0px;
+        height: $input-button-height;
+        opacity: $input-button-background-alpha;
+        padding: 0px 40px;
+        color: $color-primary-light;
+    }
+  }
+}

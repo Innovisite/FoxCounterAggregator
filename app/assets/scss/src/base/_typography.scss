@@ -5,6 +5,23 @@
  */
 
 @import "variables";
+
+// Getting Online Fonts
+@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+
+$font-main: 'Ubuntu', sans-serif;
+
 a {
   color: $color-link;
+}
+
+h1, h2, h3 , h4, h5, p, input, a {
+
+  &.light {
+    color: $color-primary-light;
+  }
+
+  &.crt {
+    font-family: $font-main;
+  }
 }

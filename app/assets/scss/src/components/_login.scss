@@ -8,61 +8,72 @@
 $color-primary: #ffa10d;
 $color-dark-primary: #000000;
 
+// Login button properties
+$input-button-height: 50px;
+
 .login-page {
   height:100%;
 
 }
 
+// Header Style
 .login-header {
 
   background-color: $color-dark-primary;
-  height:40%;
+  height:30%;
   border-bottom: 4px solid $color-primary;
 
-  img {
-    padding-top:80px;
-  }
+  .login-header-content {
 
-  h2 {
-    padding-right:60px;
-    padding-botton:5px;
-    margin-top:10px;
+    // Vertical centering
+    margin-top: 15vh;
+    transform: translateY(-50%);
+
+    img {
+      height: 100%;
+      max-height: 70px;
+    }
+
+    h2 {
+      padding-right: 60px;
+      padding-botton: 5px;
+      margin-top: 3px;
+    }
   }
 }
 
+// Form Style
 .login-form {
-  height:60%;
+
+  padding-top:100px;
+  height:70%;
 
   background-size: cover;
   background-position: center;
   background-image:url(../../assets/img/login_background.jpg);
 
-  padding-top:100px;
+  .login-form-content {
 
-  div.row:first-child {
-    margin-bottom: 30px;
-  }
-
-  div.row:nth-child(2) {
-    margin-bottom: 10px;
-  }
-
-  div.row div {
-
+    // Center form
     margin-left: auto;
     margin-right: auto;
     float:none;
 
-    $input-button-background-alpha: 0.9;
-    $input-button-height: 50px;
+    // Semi-transparent box
+    background-color: rgba($color-dark-primary, 0.8);
+    padding: 30px;
 
     input {
 
       background: $color-primary-light;
-      opacity: $input-button-background-alpha;
       height:$input-button-height;
+      font-size:large;
+      opacity: 0.95;
 
-      font-size:x-large;
+      // Custom margin for password input
+      &[type~=password] {
+        margin-bottom: 10px;
+      }
     }
 
     a {
@@ -70,14 +81,13 @@ $color-dark-primary: #000000;
     }
 
     button {
-        margin-top:30px;
-        background-color: $color-primary;
-        font-size:x-large;
-        border-radius: 0px;
-        height: $input-button-height;
-        opacity: $input-button-background-alpha;
-        padding: 0px 40px;
-        color: $color-primary-light;
+      margin-top:25px;
+      background-color: $color-primary;
+      font-size:x-large;
+      border-radius: 0px;
+      height: $input-button-height;
+      padding: 0px 40px;
+      color: $color-primary-light;
     }
   }
 }

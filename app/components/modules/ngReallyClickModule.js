@@ -30,7 +30,7 @@ angular.module('ngReallyClickModule', ['ui.bootstrap'])
 
 			var modalInstance = $uibModal.open({
 			    template: modalHtml,
-			    controller: ModalInstanceCtrl
+			    controller: ['$scope', '$uibModalInstance', ModalInstanceCtrl ]
 			});
 
 			modalInstance.result.then(function() {

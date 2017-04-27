@@ -25,13 +25,17 @@
                     .join(colSeparator);
             }
 
+            function getColumnsToExport(obj) {
+                return _.without(_.keys(obj), "occ");
+            }
+
             this.ConvertDataToCSV = function(myData, sitesConf) {
                 var firstDataAvailable = _(myData)
                     .map(function(x) { return x.data; })
                     .flatten()
                     .nth(0);
 
-                var elementsToExport = _.keys(firstDataAvailable);
+                var elementsToExport = getColumnsToExport(firstDataAvailable);
                 var header = "Site" + colSeparator + _.join(elementsToExport, colSeparator) + lineSeparator;
 
                 var rawDataToExport = _(myData)

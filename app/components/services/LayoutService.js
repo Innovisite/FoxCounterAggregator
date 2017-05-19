@@ -4,6 +4,8 @@
  (function() {
    angular.module('adminLTE', []).service('LayoutService', function() {
 
+    this.sideBarCollapsed = false;
+
      /* --------------------
       * - AdminLTE Options -
       * --------------------
@@ -39,63 +41,7 @@
        //native touch experience with touch devices. If you
        //choose to enable the plugin, make sure you load the script
        //before AdminLTE's app.js
-       enableFastclick: true,
-       //Control Sidebar Options
-       enableControlSidebar: true,
-       controlSidebarOptions: {
-         //Which button should trigger the open/close event
-         toggleBtnSelector: "[data-toggle='control-sidebar']",
-         //The sidebar selector
-         selector: ".control-sidebar",
-         //Enable slide over content
-         slide: true
-       },
-       //Box Widget Plugin. Enable this plugin
-       //to allow boxes to be collapsed and/or removed
-       enableBoxWidget: true,
-       //Box Widget plugin options
-       boxWidgetOptions: {
-         boxWidgetIcons: {
-           //Collapse icon
-           collapse: 'fa-minus',
-           //Open icon
-           open: 'fa-plus',
-           //Remove icon
-           remove: 'fa-times'
-         },
-         boxWidgetSelectors: {
-           //Remove button selector
-           remove: '[data-widget="remove"]',
-           //Collapse button selector
-           collapse: '[data-widget="collapse"]'
-         }
-       },
-       //Direct Chat plugin options
-       directChat: {
-         //Enable direct chat by default
-         enable: true,
-         //The button to open and close the chat contacts pane
-         contactToggleSelector: '[data-widget="chat-pane-toggle"]'
-       },
-       //Define the set of colors to use globally around the website
-       colors: {
-         lightBlue: "#3c8dbc",
-         red: "#f56954",
-         green: "#00a65a",
-         aqua: "#00c0ef",
-         yellow: "#f39c12",
-         blue: "#0073b7",
-         navy: "#001F3F",
-         teal: "#39CCCC",
-         olive: "#3D9970",
-         lime: "#01FF70",
-         orange: "#FF851B",
-         fuchsia: "#F012BE",
-         purple: "#8E24AA",
-         maroon: "#D81B60",
-         black: "#222222",
-         gray: "#d2d6de"
-       },
+       enableFastclick: true,                           
        //The standard screen sizes that bootstrap uses.
        //If you change these in the variables.less file, change
        //them here too.
@@ -123,12 +69,7 @@
        this.layout.activate();
 
        //Enable sidebar tree view controls
-       this.tree('.sidebar');
-
-       //Enable control sidebar
-       if (o.enableControlSidebar) {
-         this.controlSidebar.activate();
-       }
+       this.tree('.sidebar');      
 
        //Add slimscroll to navbar dropdown
        if (o.navbarMenuSlimscroll && typeof $.fn.slimscroll != 'undefined') {
@@ -149,40 +90,13 @@
          $('body').tooltip({
            selector: o.BSTooltipSelector
          });
-       }
-
-       //Activate box widget
-       if (o.enableBoxWidget) {
-         this.boxWidget.activate();
-       }
+       }       
 
        //Activate fast click
        if (o.enableFastclick && typeof FastClick != 'undefined') {
          FastClick.attach(document.body);
-       }
-
-       //Activate direct chat widget
-       if (o.directChat.enable) {
-         $(document).on('click', o.directChat.contactToggleSelector, function() {
-           var box = $(this).parents('.direct-chat').first();
-           box.toggleClass('direct-chat-contacts-open');
-         });
-       }
-
-       /*
-        * INITIALIZE BUTTON TOGGLE
-        * ------------------------
-        */
-       $('.btn-group[data-toggle="btn-toggle"]').each(function() {
-         var group = $(this);
-         $(this).find(".btn").on('click', function(e) {
-           group.find(".btn.active").removeClass("active");
-           $(this).addClass("active");
-           e.preventDefault();
-         });
-
-       });
-     };
+       } 
+     }     
 
      /* Layout
       * ======
@@ -220,14 +134,7 @@
            } else {
              $(".content-wrapper, .right-side").css('min-height', sidebar_height);
              postSetWidth = sidebar_height;
-           }
-
-           //Fix for the control sidebar height
-           var controlSidebar = $(options.controlSidebarOptions.selector);
-           if (typeof controlSidebar !== "undefined") {
-             if (controlSidebar.height() > postSetWidth)
-               $(".content-wrapper, .right-side").css('min-height', controlSidebar.height());
-           }
+           }           
 
          }
        },
@@ -276,7 +183,7 @@
          //Enable sidebar toggle
          $(document).on('click', toggleBtn, function(e) {
            e.preventDefault();
-
+/*
            //Enable sidebar push menu
            if ($(window).width() > (screenSizes.sm - 1)) {
              if ($("body").hasClass('sidebar-collapse')) {
@@ -292,7 +199,7 @@
              } else {
                $("body").addClass('sidebar-open').trigger('expanded.pushMenu');
              }
-           }
+           }*/
          });
 
          $(".content-wrapper").click(function() {
@@ -386,163 +293,7 @@
          }
        });
      };
-
-     /* ControlSidebar
-      * ==============
-      * Adds functionality to the right sidebar
-      *
-      * @type Object
-      * @usage $.AdminLTE.controlSidebar.activate(options)
-      */
-     this.controlSidebar = {
-       //instantiate the object
-       activate: function() {
-         //Get the object
-         var _this = this;
-         //Update options
-         var o = options.controlSidebarOptions;
-         //Get the sidebar
-         var sidebar = $(o.selector);
-         //The toggle button
-         var btn = $(o.toggleBtnSelector);
-
-         //Listen to the click event
-         btn.on('click', function(e) {
-
-           e.preventDefault();
-           //If the sidebar is not open
-           if (!sidebar.hasClass('control-sidebar-open') && !$('body').hasClass('control-sidebar-open')) {
-             //Open the sidebar
-             _this.open(sidebar, o.slide);
-           } else {
-             _this.close(sidebar, o.slide);
-           }
-         });
-
-         //If the body has a boxed layout, fix the sidebar bg position
-         var bg = $(".control-sidebar-bg");
-         _this._fix(bg);
-
-         //If the body has a fixed layout, make the control sidebar fixed
-         if ($('body').hasClass('fixed')) {
-           _this._fixForFixed(sidebar);
-         } else {
-           //If the content height is less than the sidebar's height, force max height
-           if ($('.content-wrapper, .right-side').height() < sidebar.height()) {
-             _this._fixForContent(sidebar);
-           }
-         }
-       },
-       //Open the control sidebar
-       open: function(sidebar, slide) {
-        
-         //Slide over content
-         if (slide) {
-           sidebar.addClass('control-sidebar-open');
-         } else {
-           //Push the content by adding the open class to the body instead
-           //of the sidebar itself
-           $('body').addClass('control-sidebar-open');
-         }
-       },
-       //Close the control sidebar
-       close: function(sidebar, slide) {
-         if (slide) {
-           sidebar.removeClass('control-sidebar-open');
-         } else {
-           $('body').removeClass('control-sidebar-open');
-         }
-       },
-       _fix: function(sidebar) {
-         var _this = this;
-         if ($("body").hasClass('layout-boxed')) {
-           sidebar.css('position', 'absolute');
-           sidebar.height($(".wrapper").height());
-           $(window).resize(function() {
-             _this._fix(sidebar);
-           });
-         } else {
-           sidebar.css({
-             'position': 'fixed',
-             'height': 'auto'
-           });
-         }
-       },
-       _fixForFixed: function(sidebar) {
-         sidebar.css({
-           'position': 'fixed',
-           'max-height': '100%',
-           'overflow': 'auto',
-           'padding-bottom': '50px'
-         });
-       },
-       _fixForContent: function(sidebar) {
-         $(".content-wrapper, .right-side").css('min-height', sidebar.height());
-       }
-     };
-
-     /* BoxWidget
-      * =========
-      * BoxWidget is a plugin to handle collapsing and
-      * removing boxes from the screen.
-      *
-      * @type Object
-      * @usage $.AdminLTE.boxWidget.activate()
-      *        Set all your options in the main $.AdminLTE.options object
-      */
-     this.boxWidget = {
-       selectors: options.boxWidgetOptions.boxWidgetSelectors,
-       icons: options.boxWidgetOptions.boxWidgetIcons,
-       animationSpeed: options.animationSpeed,
-       activate: function(_box) {
-         var _this = this;
-         if (!_box) {
-           _box = document; // activate all boxes per default
-         }
-         //Listen for collapse event triggers
-         $(_box).on('click', _this.selectors.collapse, function(e) {
-           e.preventDefault();
-           _this.collapse($(this));
-         });
-
-         //Listen for remove event triggers
-         $(_box).on('click', _this.selectors.remove, function(e) {
-           e.preventDefault();
-           _this.remove($(this));
-         });
-       },
-       collapse: function(element) {
-         var _this = this;
-         //Find the box parent
-         var box = element.parents(".box").first();
-         //Find the body and the footer
-         var box_content = box.find("> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer");
-         if (!box.hasClass("collapsed-box")) {
-           //Convert minus into plus
-           element.children(":first")
-             .removeClass(_this.icons.collapse)
-             .addClass(_this.icons.open);
-           //Hide the content
-           box_content.slideUp(_this.animationSpeed, function() {
-             box.addClass("collapsed-box");
-           });
-         } else {
-           //Convert plus into minus
-           element.children(":first")
-             .removeClass(_this.icons.open)
-             .addClass(_this.icons.collapse);
-           //Show the content
-           box_content.slideDown(_this.animationSpeed, function() {
-             box.removeClass("collapsed-box");
-           });
-         }
-       },
-       remove: function(element) {
-         //Find the box parent
-         var box = element.parents(".box").first();
-         box.slideUp(this.animationSpeed);
-       }
-     };
+    
    });
 
  }());

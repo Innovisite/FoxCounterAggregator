@@ -45,8 +45,8 @@ var cssSources = [ "node_modules/ionicons/dist/css/ionicons.css",
 		   "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css",
 		   "node_modules/bootstrap-daterangepicker/daterangepicker.css",
 		   "node_modules/nvd3/build/nv.d3.css",
-		   "node_modules/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.css",
-		   "lib/Styles/*.css"];
+		   "node_modules/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.css"];
+		   //"lib/Styles/*.css"];
 
 var scssSources = ["app/assets/scss/src/**/*.scss"];
 

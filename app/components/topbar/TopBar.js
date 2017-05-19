@@ -3,35 +3,40 @@
  * @memberOf FSCounterAggregatorApp
  * @description Manage the topbar data
  */
-(function() {
 
-    require('../services/UserService');
-    
-    angular.module('FSCounterAggregatorApp')
-	.directive('fcaTopBar', 
-		   ['UserService',
-		    function(
-			UserService
-		    ) {
-			return {
-			    link: function(scope, element, attr) {
-				scope.params = UserService;
-				scope.user = undefined;
-				
-				UserService.getSettings()
-				    .then(function(ret) {
-					scope.user = ret.user;
-				    });
+require('../services/UserService');
 
-				scope.$watch('params.currentUserData', function(newVal, oldVal) {
-				    if(oldVal != newVal) {
-					scope.user = newVal.user;
-				    }
-				});
+angular.module('FSCounterAggregatorApp')
+	.directive('fcaTopBar', function () {
+		return {			
+			controller: [
+				'$scope',
+				'LayoutService',
+				'UserService',
+				function (
+					$scope,
+					LayoutService,
+					UserService
+				) {
+					$scope.params = UserService;
+					$scope.user = undefined;
 
-			    },
-			    templateUrl: 'build/html/TopBarView.html'
-			};
-	}]);
-    
-}());
+					UserService.getSettings()
+						.then(function (ret) {
+							$scope.user = ret.user;
+						});
+
+					$scope.toggleSideBar = () => {
+						LayoutService.sideBarCollapsed = !LayoutService.sideBarCollapsed;
+					};
+
+					$scope.$watch('params.currentUserData', function (newVal, oldVal) {
+						if (oldVal != newVal) {
+							$scope.user = newVal.user;
+						}
+					});
+				}
+			],
+			templateUrl: 'build/html/TopBarView.html'
+		};
+	});

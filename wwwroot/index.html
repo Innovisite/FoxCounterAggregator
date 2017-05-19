@@ -1,49 +1,60 @@
 <!DOCTYPE html>
 <html ng-app="FSCounterAggregatorApp">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Audience / Overview - FoxCounterAggregator</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Favicon for FCA-->
-    <link rel="shortcut icon"  type="image/png" href="assets/img/favicon.png" />
-    <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" /><![endif]-->
-    <!-- Theme style -->
-    <link rel="stylesheet" href="build/css/style.min.css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Audience / Overview - FoxCounterAggregator</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Favicon for FCA-->
+  <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png" />
+  <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" /><![endif]-->
+  <!-- Theme style -->
+  <link rel="stylesheet" href="build/css/style.min.css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-  </head>
-  <body class="hold-transition skin-foxstream sidebar-mini">
-    
-    <div class="wrapper">
+</head>
 
-      <fca-top-bar></fca-top-bar>
-      
-      <fca-side-menu></fca-side-menu> 
-      
-      <!-- Content is dynamically determined by using ui-router mechanism -->
-      <div ui-view></div>      
-      
-      <!-- /.content-wrapper -->
-      <footer class="main-footer">
-	<div class="pull-right hidden-xs">
-	  <!-- <b>Version</b> 0.1 -->
-	</div>
-	<strong>Copyright &copy; 2016 <a href="http://www.foxstream.us.com" target="_blank">Foxstream</a>.</strong> All rights
-	reserved.
-      </footer>
-      
+<body>
+
+
+  <div class="flex-column">
+
+    <fca-top-bar></fca-top-bar>
+
+    <div class="flex-row flex-nowrap">
+
+      <fca-side-menu></fca-side-menu>
+
+      <div class="flex-column flex-grow-1">
+
+
+        <!-- Content is dynamically determined by using ui-router mechanism -->
+        <div ui-view></div>
+
+        <!-- /.content-wrapper -->
+        <footer>
+          <div class="pull-right hidden-xs">
+            <!-- <b>Version</b> 0.1 -->
+          </div>
+          <strong>Copyright &copy; 2016 <a href="http://www.foxstream.us.com" target="_blank">Foxstream</a>.</strong> All
+          rights reserved.
+        </footer>
+      </div>
       <!-- Add the sidebar's background. This div must be placed
 	   immediately after the control sidebar -->
       <!--<div class="control-sidebar-bg"></div>-->
-      
     </div>
-    <script src="build/js/lib.min.js"></script>
-    <script src="build/js/fca.min.js"></script>
-  </body>
+
+  </div>
+
+  <script src="build/js/lib.min.js"></script>
+  <script src="build/js/fca.min.js"></script>
+</body>
+
 </html>

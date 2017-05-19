@@ -1,56 +1,51 @@
-<header class="main-header">
-  <!-- Logo -->
-  <div  class="logo">
-    <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><img src="assets/img/foxstream_icon.png" class="image" alt="Foxstream icon"></span>
-    <!-- logo for regular state and mobile devices -->
-    <div class="logos"><img src="assets/img/foxstream_text_icon.png" class="image" alt="Foxstream icon"></div>
-  </div>
-  <!-- Header Navbar: style can be found in header.less -->
-  <nav class="navbar navbar-static-top" role="navigation">
-    <!-- Sidebar toggle button-->
-    <a ng-click="toggleSideBar()" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-      <span class="sr-only">Toggle navigation</span>
-    </a>
-    <div class="navbar-custom-menu">
-      <ul class="nav navbar-nav">
+<md-toolbar>
+	<div class="md-toolbar-tools">
+		<!-- Logo -->
+		<div class="logo">
+			<!-- mini logo for sidebar mini 50x50 pixels -->
+			<!--<span class="logo-mini"><img src="assets/img/foxstream_icon.png" class="image" alt="Foxstream icon"></span>-->
+			<!-- logo for regular state and mobile devices -->
+			<div class="logos"><img src="assets/img/foxstream_text_icon.png" class="image" alt="Foxstream icon"></div>
+		</div>
 
-	<!-- Tasks: style can be found in dropdown.less -->
-	<li class="dropdown tasks-menu">
+		<md-button class="md-icon-button" ng-click="toggleSideBar()">
+			<md-icon>
+				<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 18 18" fit="" preserveAspectRatio="xMidYMid meet"
+				 focusable="false">
+					<path d="M0 0h18v18h-18z" fill="none"></path>
+					<path d="M2 13.5h14v-1.5h-14v1.5zm0-4h14v-1.5h-14v1.5zm0-5.5v1.5h14v-1.5h-14z"></path>
+				</svg>
+			</md-icon>
+		</md-button>		
 
-	  <!-- User Account: style can be found in dropdown.less -->
-	<li class="dropdown user user-menu">
-	  <a class="dropdown-toggle" data-toggle="dropdown">
-	    <i class="fa fa-user" style="font-size: 1em;"></i>
-	    <span class="hidden-xs">{{user.name}}</span>
-	  </a>
-	  <ul class="dropdown-menu">
-	    <!-- User image -->
-	    <li class="user-header">
-	      <i class="fa fa-user" style="font-size: 6em;"></i>
-	      <p>
-		{{user.name}} - {{user.admin ? 'Administrator' : 'User' }}
-		<small>{{user.email}}</small>
-	      </p>
-	    </li>
-	    <!-- Menu Body -->
-	    <li class="user-body">
-	      <div class="row">
-	      </div>
-	      <!-- /.row -->
-	    </li>
-	    <!-- Menu Footer-->
-	    <li class="user-footer">
-	      <div class="pull-left">
-		<a href="#/current_user" class="btn btn-default btn-flat">Profile</a>
-	      </div>
-	      <div class="pull-right">
-		<a class="btn btn-default btn-flat" href="/logout">Sign out</a>
-	      </div>
-	    </li>
-	  </ul>
-	</li>
-      </ul>
-    </div>
-  </nav>
-</header>
+		<md-menu>
+
+			<md-button ng-click="$mdMenu.open($event)" class="md-icon-button">
+				<i class="fa fa-user" style="font-size: 1em;"></i><span class="hidden-xs">{{user.name}}</span><
+			</md-button>
+
+			<md-menu-content>
+				<md-card-header>
+				</md-card-header>
+				<md-card-content>
+					<i class="fa fa-user" style="font-size: 6em;"></i>
+						<p>
+							{{user.name}} - {{user.admin ? 'Administrator' : 'User' }}
+							<small>{{user.email}}</small>
+						</p>
+				</md-card-content>
+				<md-card-footer>
+					<div class="pull-left">
+							<a href="#/current_user" class="btn btn-default btn-flat">Profile</a>
+						</div>
+						<div class="pull-right">
+							<a class="btn btn-default btn-flat" href="/logout">Sign out</a>
+						</div>
+				</md-card-footer>
+			</md-menu-content>
+
+		</md-menu>
+
+	</div>
+
+</md-toolbar>

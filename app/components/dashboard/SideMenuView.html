@@ -1,10 +1,7 @@
-<!-- Left side column. contains the logo and sidebar -->
-<aside class="skin-foxstream sidebar-mini" ng-class="{ 'sidebar-collapse': layout.sideBarCollapsed }">
-	<!-- sidebar: style can be found in sidebar.less -->
-	<section class="main-sidebar sidebar">
-		<div class="logo-xs"><img src="assets/img/foxstream_text_icon.png" class="image" alt="Foxstream icon"></div>
-		<!-- /.search form -->
-		<!-- sidebar menu: : style can be found in sidebar.less -->
+<md-sidenav md-is-locked-open="true">
+
+	<md-content>
+
 		<ul class="sidebar-menu">
 			<li class="header">MAIN NAVIGATION</li>
 			<li class="active treeview">
@@ -40,8 +37,7 @@
 						</ul>
 						<li>
 							<li ng-show="hasAdminSites">
-								<a href="#"><i class="fa fa-share"></i> My Sites <i class="fa fa-angle-left pull-right"></i>
-	    </a>
+								<a href="#"><i class="fa fa-share"></i> My Sites <i class="fa fa-angle-left pull-right"></i></a>
 								<ul class="treeview-menu">
 									<li ui-sref-active="active"><a ui-sref="settings_site_items"><i class="fa fa-circle-o"></i> Cameras</a></li>
 									<li ui-sref-active="active"><a ui-sref="settings_site_members"><i class="fa fa-circle-o"></i> Members</a></li>
@@ -50,6 +46,8 @@
 				</ul>
 				</li>
 		</ul>
-	</section>
-	<!-- /.sidebar -->
-</aside>
+
+
+	</md-content>
+
+</md-sidenav>

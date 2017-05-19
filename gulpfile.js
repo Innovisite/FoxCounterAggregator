@@ -11,7 +11,7 @@ var LessPluginCleanCSS = require('less-plugin-clean-css');
 var minify_js = require("gulp-uglify");
 var duration = require('gulp-duration');
 var mkdirp = require('mkdirp');
-var jsdoc = require('gulp-jsdoc');
+//var jsdoc = require('gulp-jsdoc');
 var adminlteRoot = 'node_modules/admin-lte/';
 var cleancss = new LessPluginCleanCSS({ advanced: true });
 var sass = require('gulp-sass');
@@ -45,7 +45,9 @@ var cssSources = [ "node_modules/ionicons/dist/css/ionicons.css",
 		   "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css",
 		   "node_modules/bootstrap-daterangepicker/daterangepicker.css",
 		   "node_modules/nvd3/build/nv.d3.css",
-		   "node_modules/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.css"];
+		   "node_modules/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.css",
+		   "node_modules/angular-material/angular-material.css"
+		   ];
 		   //"lib/Styles/*.css"];
 
 var scssSources = ["app/assets/scss/src/**/*.scss"];
@@ -79,8 +81,11 @@ var externalJSSources = [ 'node_modules/moment/moment.js',
 			  'node_modules/codemirror/addon/lint/json-lint.js',
 			  'node_modules/codemirror/addon/lint/html-lint.js',
 			  'node_modules/angular/angular.js',
-			  'node_modules/angular-ui-router/release/angular-ui-router.js',			  
+			  'node_modules/@uirouter/angularjs/release/angular-ui-router.js',	
+			  'node_modules/angular-animate/angular-animate.js', 
+			  'node_modules/angular-aria/angular-aria.js', 
 			  'node_modules/angular-resource/angular-resource.js',
+			  'node_modules/angular-material/angular-material.js', 			  
 			  'node_modules/angular-datatables/dist/angular-datatables.js',
 			  'node_modules/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js',
 			  'node_modules/bootstrap/dist/js/bootstrap.js',
@@ -93,7 +98,7 @@ var externalJSSources = [ 'node_modules/moment/moment.js',
 			  'node_modules/angular-nvd3/dist/angular-nvd3.js',
 			  'node_modules/fastclick/lib/fastclick.js',
 			  'node_modules/angular-screenfull/dist/angular-screenfull.js',
-			  'node_modules/screenfull/dist/screenfull.js'
+			  'node_modules/screenfull/dist/screenfull.js'			  
 			  //'node_modules/three/build/three.js'
 			  //'node_modules/angular-ui-codemirror/src/ui-codemirror.js'
 			  ];

@@ -1,26 +1,11 @@
-<div class="pull-right">
-  <h3>
-    <a date-range-picker="date-range-picker"
-       class="btn btn-default daterange"
-       type="text"
-       ng-model="params.period"
-       options="periodOpts">
-      {{params.period.startDate.format('MMM D, YYYY')}} - {{params.period.endDate.format('MMM D,YYYY')}}
-      <i class="fa fa-calendar"></i></a>
-    <span> vs <a ng-click="comparisonRequired = true"
-		 ng-show="!comparisonRequired"
-		 href="">select a period </a>
+<md-button date-range-picker="date-range-picker" ng-model="params.period" options="periodOpts">
+  {{params.period.startDate.format('MMM D, YYYY')}} - {{params.period.endDate.format('MMM D,YYYY')}}
+  <i class="fa fa-calendar"></i></md-button>
+<span> vs <md-button ng-click="comparisonRequired = true"
+		 ng-show="!comparisonRequired">select a period </md-button>
     </span>
-    <a date-range-picker="date-range-picker"
-       class="btn btn-default daterange"
-       type="text"
-       ng-model="params.comparedPeriod"
-       ng-show="comparisonRequired"
-       options="singleDateOpts">
-      {{params.comparedPeriod.startDate.format('MMM D, YYYY')}} - {{params.comparedPeriod.endDate.format('MMM D,YYYY')}}
-      <i class="fa fa-calendar"></i></a>
-    <i class="fa fa-times-circle"
-       ng-click="comparisonRequired = false"
-       ng-show="comparisonRequired"></i>
-  </h3>
-</div>
+<md-button date-range-picker="date-range-picker" class="btn btn-default daterange" type="text" ng-model="params.comparedPeriod"
+  ng-show="comparisonRequired" options="singleDateOpts">
+  {{params.comparedPeriod.startDate.format('MMM D, YYYY')}} - {{params.comparedPeriod.endDate.format('MMM D,YYYY')}}
+  <i class="fa fa-calendar"></i></md-button>
+<md-button class="md-button-icon" ng-click="comparisonRequired = false" ng-show="comparisonRequired"><i class="fa fa-times-circle"></i></md-button>

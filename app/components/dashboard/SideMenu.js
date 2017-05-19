@@ -17,7 +17,8 @@ angular.module('FSCounterAggregatorApp')
 					$scope,
 					LayoutService,
 					UserService
-				) {
+				) {					
+
 					$scope.user = {};
 					$scope.hasAdminSites = false;
 					$scope.hasUserDashboard = false;

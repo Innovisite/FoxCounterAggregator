@@ -1,13 +1,12 @@
-<div class="box">
-
-  <div class="box-header with-border row">
-    <div class="col-md-7">
-      <i class="fa fa-table box-title"></i>
-      <h3 class="box-title">All Sites</h3>
-    </div>
-  </div>
-
-  <div class="box-body">
+<md-card>
+  <md-card-header>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <i class="fa fa-table box-title"></i>
+        <h3 class="box-title">All Sites</h3>
+      </div>
+  </md-card-header>
+  <md-card-content>
     <table datatable="ng" dt-options="dtOptions" class="table table-bordered table-striped table-hover {{periodComparisonSelected ? 'table-comparison' : ''}}">
       <thead>
         <tr>
@@ -30,6 +29,5 @@
         </tr>
       </tbody>
     </table>
-  </div>
-
-</div>
+  </md-card-content>
+</md-card>

@@ -38,6 +38,8 @@
   require('./components/settings/SettingsPerUser');
 
   // directives
+  require('./components/dashboard/DashboardHeader');
+  require('./components/dashboard/MenuToggle');
   require('./components/dashboard/SideMenu');
   require('./components/topbar/TopBar');
   require('./components/settings/MemberEditor');

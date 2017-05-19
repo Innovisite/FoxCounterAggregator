@@ -1,52 +1,73 @@
 <md-sidenav md-is-locked-open="true">
 
-	<md-content>
+	<md-content layout="column">
 
-		<ul class="sidebar-menu">
-			<li class="header">MAIN NAVIGATION</li>
-			<li class="active treeview">
-				<a><i class="fa fa-pie-chart"></i><span>Counters</span><i class="fa fa-angle-left pull-right"></i></a>
-				<ul class="treeview-menu">
-					<li ui-sref-active="active"><a ui-sref="dashboard"><i class="fa fa-circle-o"></i> Sites Overview</a></li>
-					<li ui-sref-active="active"><a ui-sref="generic"><i class="fa fa-circle-o"></i> Generic</a></li>
-					<li ui-sref-active="active" ng-show="hasUserDashboard"><a ui-sref="mydashboard"><i class="fa fa-circle-o"></i> MyDashboard</a></li>
-				</ul>
-			</li>
+		<h3>MAIN NAVIGATION</h3>
 
-			<li class="treeview">
-				<a><i class="fa fa-heartbeat"></i><span>Monitoring</span><i class="fa fa-angle-left pull-right"></i></a>
-				<ul class="treeview-menu">
-					<li ui-sref-active="active"><a ui-sref="monitoring"><i class="fa fa-circle-o"></i> Sites Overview</a></li>
-				</ul>
-			</li>
+		<fca-menu-toggle title="Counters" title-icon="fa-pie-chart">
+			<ul>
+				<li>
+					<md-button ui-sref="dashboard" ui-sref-active="active"><i class="fa fa-circle-o"></i> Sites Overview</md-button>
+				</li>
+				<li>
+					<md-button ui-sref-active="active" ui-sref="generic"><i class="fa fa-circle-o"></i> Generic</md-button>
+				</li>
+				<li>
+					<md-button ng-show="hasUserDashboard" ui-sref-active="active" ui-sref="mydashboard"><i class="fa fa-circle-o"></i> MyDashboard</md-button>
+				</li>
+			</ul>
+		</fca-menu-toggle>
 
-			<li class="treeview">
-				<a><i class="fa fa-book"></i><span>Settings</span><i class="fa fa-angle-left pull-right"></i></a>
-				<ul class="treeview-menu">
-					<li ui-sref-active="active"><a ui-sref="current_user"><i class="fa fa-circle-o"></i> Profile</a></li>
-					<li ng-show="user.admin">
-						<a href="#"><i class="fa fa-share"></i> Overall <i class="fa fa-angle-left pull-right"></i></a>
-						<ul class="treeview-menu">
-							<li ui-sref-active="active"><a ui-sref="settings_users"><i class="fa fa-circle-o"></i> Users management</a></li>
-							<li ui-sref-active="active"><a ui-sref="settings_sites"><i class="fa fa-circle-o"></i> Sites management</a></li>
-							<li ui-sref-active="active"><a ui-sref="settings_per_site"><i class="fa fa-circle-o"></i> Sites Associated Users</a></li>
+		<fca-menu-toggle title="Monitoring" title-icon="fa-heartbeat">
+			<ul>
+				<li>
+					<md-button ui-sref-active="active" ui-sref="monitoring"><i class="fa fa-circle-o"></i> Sites Overview</md-button>
+				</li>
+			</ul>
+		</fca-menu-toggle>
+
+		<fca-menu-toggle title="Settings" title-icon="fa-book">
+			<ul>
+				<li>
+					<md-button ui-sref-active="active" ui-sref="current_user"><i class="fa fa-circle-o"></i> Profile</md-button>
+				</li>
+				<li>
+					<fca-menu-toggle ng-show="user.admin" title="Overall" title-icon="fa-share">
+						<ul>
+							<li>
+								<md-button ui-sref-active="active" ui-sref="settings_users"><i class="fa fa-circle-o"></i> Users management</md-button>
+							</li>
+							<li>
+								<md-button ui-sref-active="active" ui-sref="settings_sites"><i class="fa fa-circle-o"></i> Sites management</md-button>
+							</li>
+							<li>
+								<md-button ui-sref-active="active" ui-sref="settings_per_site"><i class="fa fa-circle-o"></i> Sites Associated Users</md-button>
+							</li>
 							<div ng-show="false">
-								<li ui-sref-active="active"><a ui-sref="settings_users_sites"><i class="fa fa-circle-o"></i> Users - Sites management</a></li>
-								<li ui-sref-active="active"><a ui-sref="settings_per_user"><i class="fa fa-circle-o"></i> Per User management</a></li>
+								<li>
+									<md-button ui-sref-active="active" ui-sref="settings_users_sites"><i class="fa fa-circle-o"></i> Users - Sites management</md-button>
+								</li>
+								<li>
+									<md-button ui-sref-active="active" ui-sref="settings_per_user"><i class="fa fa-circle-o"></i> Per User management</md-button>
+								</li>
 							</div>
 						</ul>
-						<li>
-							<li ng-show="hasAdminSites">
-								<a href="#"><i class="fa fa-share"></i> My Sites <i class="fa fa-angle-left pull-right"></i></a>
-								<ul class="treeview-menu">
-									<li ui-sref-active="active"><a ui-sref="settings_site_items"><i class="fa fa-circle-o"></i> Cameras</a></li>
-									<li ui-sref-active="active"><a ui-sref="settings_site_members"><i class="fa fa-circle-o"></i> Members</a></li>
-								</ul>
-							</li>
-				</ul>
+					</fca-menu-toggle>
 				</li>
-		</ul>
-
+				<li>
+					<fca-menu-toggle ng-show="hasAdminSites" title="My Sites" title-icon="fa-share">
+						<ul>
+							<li>
+								<md-button ui-sref-active="active" ui-sref="settings_site_items"><i class="fa fa-circle-o"></i> Cameras</md-button>
+							</li>
+							<li>
+								<md-button ui-sref-active="active" ui-sref="settings_site_members"><i class="fa fa-circle-o"></i> Members</md-button>
+							</li>
+						</ul>
+					</fca-menu-toggle>
+				</li>
+			</ul>
+		</fca-menu-toggle>
 
 	</md-content>
 

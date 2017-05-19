@@ -4,8 +4,7 @@
 <span> vs <md-button ng-click="comparisonRequired = true"
 		 ng-show="!comparisonRequired">select a period </md-button>
     </span>
-<md-button date-range-picker="date-range-picker" class="btn btn-default daterange" type="text" ng-model="params.comparedPeriod"
-  ng-show="comparisonRequired" options="singleDateOpts">
+<md-button date-range-picker="date-range-picker" ng-model="params.comparedPeriod" ng-show="comparisonRequired" options="singleDateOpts">
   {{params.comparedPeriod.startDate.format('MMM D, YYYY')}} - {{params.comparedPeriod.endDate.format('MMM D,YYYY')}}
   <i class="fa fa-calendar"></i></md-button>
 <md-button class="md-button-icon" ng-click="comparisonRequired = false" ng-show="comparisonRequired"><i class="fa fa-times-circle"></i></md-button>

@@ -1,11 +1,7 @@
 <section layout="column">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h3><i class="fa fa-pie-chart"></i><span> Counters / Sites Overview</span></h3>
-      <md-button ng-click="switchTimeZone()">{{params.useTimeZone ? 'On Site Time': 'Local Time'}} <i class="fa fa-globe"></i></md-button>
-      <fca-calendar-picker params="params"></fca-calendar-picker>
-    </div>
-  </md-toolbar>
+
+  <fca-dashboard-header on-time-zone="switchTimeZone()" title="Counters / Sites Overview" title-icon="fa-pie-chart" params="params">
+  </fca-dashboard-header>
 
   <div layout="row" layout-align="space-around">
       <div ng-controller="KPISum as kpi">

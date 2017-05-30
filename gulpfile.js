@@ -23,6 +23,7 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var collapse = require('bundle-collapser/plugin');
 var tsify = require('tsify');
+var connect = require('gulp-connect');
 
 var usageCmd = '\nUsage: gulp build|release|docs|install [--local] [--dest]\n \
 \t--local\tUse fake data instead of retrieving them from the server.\n \
@@ -269,4 +270,19 @@ gulp.task('copy-files', function() {
 
 	return gulp.src("wwwroot/**/*")
 		.pipe(gulp.dest(argv.dest));
+});
+
+gulp.task('serve', function () {
+
+    gulp.watch(['app/**/*'], ['build']);
+    
+    gulp.watch('wwwroot/**/*').on('change', function(event) {
+         gulp.src(event.path, {read: false}).pipe(connect.reload());
+    });
+
+    connect.server({
+        livereload: true,
+        root: 'wwwroot',
+		port:4201
+    });
 });

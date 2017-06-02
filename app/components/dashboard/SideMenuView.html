@@ -1,9 +1,9 @@
-<md-sidenav md-is-locked-open="true">
+<md-sidenav md-component-id="left-side-menu" md-is-locked-open="$mdMedia('gt-sm') || ( ($mdMedia('xs') || $mdMedia('sm')) && !layout.sideBarCollapsed)">
 
+	<header layout="row" layout-align="center center">
+		<img src="http://res.cloudinary.com/codeffekt/image/upload/c_scale,w_350/v1496418063/logo_foxstream_xcq41x.png" class="sidemenu-header-logo"/>
+	</header>
 	<md-content layout="column">
-
-		<h3>MAIN NAVIGATION</h3>
-
 		<fca-menu-toggle title="Counters" title-icon="fa-pie-chart">
 			<ul>
 				<li>

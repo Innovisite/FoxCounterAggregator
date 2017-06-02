@@ -4,7 +4,7 @@
  (function() {
    angular.module('adminLTE', []).service('LayoutService', function() {
 
-    this.sideBarCollapsed = false;
+    this.sideBarCollapsed = true;
 
      /* --------------------
       * - AdminLTE Options -

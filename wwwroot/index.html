@@ -23,17 +23,15 @@
 
 <body>
 
+  <div layout="row">
+    
+    <fca-side-menu></fca-side-menu>
 
-  <div layout="column">
+    <div layout="column" flex>
 
-    <fca-top-bar></fca-top-bar>
+      <fca-top-bar></fca-top-bar>
 
-    <div layout="row" layout-nowrap>
-
-      <fca-side-menu></fca-side-menu>
-
-      <div layout="column" layout-fill>
-
+      <div layout="column">
 
         <!-- Content is dynamically determined by using ui-router mechanism -->
         <div ui-view></div>
@@ -51,7 +49,6 @@
 	   immediately after the control sidebar -->
       <!--<div class="control-sidebar-bg"></div>-->
     </div>
-
   </div>
 
   <script src="build/js/lib.min.js"></script>

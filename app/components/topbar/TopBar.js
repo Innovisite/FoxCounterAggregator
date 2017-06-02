@@ -8,19 +8,22 @@ require('../services/UserService');
 
 angular.module('FSCounterAggregatorApp')
 	.directive('fcaTopBar', function () {
-		return {			
+		return {
 			controller: [
 				'$scope',
 				'LayoutService',
 				'UserService',
+				'$state',
 				function (
 					$scope,
 					LayoutService,
-					UserService
+					UserService,
+					$state
 				) {
 					$scope.params = UserService;
+					$scope.state = $state;
 					$scope.user = undefined;
-
+				
 					UserService.getSettings()
 						.then(function (ret) {
 							$scope.user = ret.user;
@@ -28,6 +31,7 @@ angular.module('FSCounterAggregatorApp')
 
 					$scope.toggleSideBar = () => {
 						LayoutService.sideBarCollapsed = !LayoutService.sideBarCollapsed;
+
 					};
 
 					$scope.$watch('params.currentUserData', function (newVal, oldVal) {

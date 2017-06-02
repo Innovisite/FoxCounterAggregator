@@ -1,21 +1,11 @@
 <md-card class="fca-stat-box-card {{bgColor}}">
-
   <md-card-content>
-    <div class="layout-column small-box" title="{{description}}">
-
-      <!--<div flex="80" class="inner">-->
+    <div layout="column" title="{{description}}">
         <h3>{{value}} {{unit}}</h3>
         <p>{{label}}<span ng-show="period"><br/>{{period.startDate.format('MMM DD, YYYY')}} - {{period.endDate.format('MMM DD,YYYY')}}</span></p>
-      <!--</div>-->
-
     </div>
   </md-card-content>
-
   <div class="bg-icon">
     <md-icon aria-label="Menu" class="material-icons icon">{{icon}}</md-icon>
   </div>
 </md-card>
-
-
-
-<!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->

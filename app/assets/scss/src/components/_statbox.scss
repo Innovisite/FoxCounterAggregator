@@ -15,3 +15,28 @@
   background-color: $color-second-period;
   color:#fff!important;
 }
+
+.fca-stat-box-card {
+
+  position: relative;
+
+  .material-icons {
+    font-size: 58px;
+  }
+
+  .bg-icon {
+    position: absolute;
+    top:25%;
+    right:10px;
+  }
+  
+  md-icon {
+    width: auto;
+    height: auto;
+    margin: 0;
+  }
+
+  md-card-content {
+    z-index:1;
+  }
+}

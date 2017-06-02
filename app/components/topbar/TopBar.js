@@ -14,11 +14,13 @@ angular.module('FSCounterAggregatorApp')
 				'LayoutService',
 				'UserService',
 				'$state',
+				'$mdSidenav',
 				function (
 					$scope,
 					LayoutService,
 					UserService,
-					$state
+					$state,
+					$mdSidenav
 				) {
 					$scope.params = UserService;
 					$scope.state = $state;
@@ -31,7 +33,7 @@ angular.module('FSCounterAggregatorApp')
 
 					$scope.toggleSideBar = () => {
 						LayoutService.sideBarCollapsed = !LayoutService.sideBarCollapsed;
-
+							$mdSidenav('left-side-menu').toggle();
 					};
 
 					$scope.$watch('params.currentUserData', function (newVal, oldVal) {

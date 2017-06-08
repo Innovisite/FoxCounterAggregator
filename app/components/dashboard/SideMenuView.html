@@ -1,74 +1,39 @@
 <md-sidenav md-component-id="left-side-menu" md-is-locked-open="$mdMedia('gt-sm')">
 
 	<header layout="row" layout-align="center center">
-		<img src="http://res.cloudinary.com/codeffekt/image/upload/c_scale,w_350/v1496418063/logo_foxstream_xcq41x.png" class="sidemenu-header-logo"/>
+		<img src="http://res.cloudinary.com/codeffekt/image/upload/c_scale,w_350/v1496418063/logo_foxstream_xcq41x.png" class="sidemenu-header-logo"
+		/>
 	</header>
+
 	<md-content layout="column">
-		<fca-menu-toggle title="Counters" title-icon="fa-pie-chart">
-			<ul>
-				<li>
-					<md-button ui-sref="dashboard" ui-sref-active="active"><i class="fa fa-circle-o"></i>Sites Overview</md-button>
-				</li>
-				<li>
-					<md-button ui-sref-active="active" ui-sref="generic"><i class="fa fa-circle-o"></i> Generic</md-button>
-				</li>
-				<li>
-					<md-button ng-show="hasUserDashboard" ui-sref-active="active" ui-sref="mydashboard"><i class="fa fa-circle-o"></i> MyDashboard</md-button>
-				</li>
-			</ul>
+		<fca-menu-toggle title="Counters">
+			<md-button ui-sref="dashboard" ui-sref-active="active">Sites Overview</md-button>
+			<md-button ui-sref-active="active" ui-sref="generic"> Generic</md-button>
+			<md-button ng-show="hasUserDashboard" ui-sref-active="active" ui-sref="mydashboard"> MyDashboard</md-button>
 		</fca-menu-toggle>
 
-		<fca-menu-toggle title="Monitoring" title-icon="fa-heartbeat">
-			<ul>
-				<li>
-					<md-button ui-sref-active="active" ui-sref="monitoring"><i class="fa fa-circle-o"></i> Sites Overview</md-button>
-				</li>
-			</ul>
+		<fca-menu-toggle title="Monitoring">
+			<md-button ui-sref-active="active" ui-sref="monitoring"> Sites Overview</md-button>
 		</fca-menu-toggle>
 
-		<fca-menu-toggle title="Settings" title-icon="fa-book">
-			<ul>
-				<li>
-					<md-button ui-sref-active="active" ui-sref="current_user"><i class="fa fa-circle-o"></i> Profile</md-button>
-				</li>
-				<li>
-					<fca-menu-toggle ng-show="user.admin" title="Overall" title-icon="fa-share">
-						<ul>
-							<li>
-								<md-button ui-sref-active="active" ui-sref="settings_users"><i class="fa fa-circle-o"></i> Users management</md-button>
-							</li>
-							<li>
-								<md-button ui-sref-active="active" ui-sref="settings_sites"><i class="fa fa-circle-o"></i> Sites management</md-button>
-							</li>
-							<li>
-								<md-button ui-sref-active="active" ui-sref="settings_per_site"><i class="fa fa-circle-o"></i> Sites Associated Users</md-button>
-							</li>
-							<div ng-show="false">
-								<li>
-									<md-button ui-sref-active="active" ui-sref="settings_users_sites"><i class="fa fa-circle-o"></i> Users - Sites management</md-button>
-								</li>
-								<li>
-									<md-button ui-sref-active="active" ui-sref="settings_per_user"><i class="fa fa-circle-o"></i> Per User management</md-button>
-								</li>
-							</div>
-						</ul>
-					</fca-menu-toggle>
-				</li>
-				<li>
-					<fca-menu-toggle ng-show="hasAdminSites" title="My Sites" title-icon="fa-share">
-						<ul>
-							<li>
-								<md-button ui-sref-active="active" ui-sref="settings_site_items"><i class="fa fa-circle-o"></i> Cameras</md-button>
-							</li>
-							<li>
-								<md-button ui-sref-active="active" ui-sref="settings_site_members"><i class="fa fa-circle-o"></i> Members</md-button>
-							</li>
-						</ul>
-					</fca-menu-toggle>
-				</li>
-			</ul>
-		</fca-menu-toggle>
+		<fca-menu-toggle title="Settings">
+			<md-button ui-sref-active="active" ui-sref="current_user"> Profile</md-button>
 
+			<fca-menu-toggle ng-show="user.admin" title="Overall">
+				<md-button ui-sref-active="active" ui-sref="settings_users"> Users management</md-button>
+				<md-button ui-sref-active="active" ui-sref="settings_sites"> Sites management</md-button>
+				<md-button ui-sref-active="active" ui-sref="settings_per_site"> Sites Associated Users</md-button>
+				<div ng-show="false">
+					<md-button ui-sref-active="active" ui-sref="settings_users_sites"> Users - Sites management</md-button>
+					<md-button ui-sref-active="active" ui-sref="settings_per_user"> Per User management</md-button>
+				</div>
+			</fca-menu-toggle>
+
+			<fca-menu-toggle ng-show="hasAdminSites" title="My Sites">
+				<md-button ui-sref-active="active" ui-sref="settings_site_items"> Cameras</md-button>
+				<md-button ui-sref-active="active" ui-sref="settings_site_members"> Members</md-button>
+			</fca-menu-toggle>
+		</fca-menu-toggle>
 	</md-content>
 
 </md-sidenav>

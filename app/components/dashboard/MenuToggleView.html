@@ -1,8 +1,9 @@
-<div layout="column">
-    <md-button ng-click="toggle()">
-        <i class="fa {{title-icon}}"></i><span>{{title}}</span></i>
+<div layout="column" class="menuToggleView" ng-class="{opened: opened}">
+    <md-button ng-click="toggle()" layout="row" layout-align="space-between center">
+        <span>{{title}}</span>
+        <i class="material-icons icon">keyboard_arrow_up</i>
     </md-button>
-    <div ng-show="opened">
-        <ng-transclude></ng-transclude>
+    <div class="menuItems">
+        <ng-transclude layout="column"></ng-transclude>
     </div>
 </div>

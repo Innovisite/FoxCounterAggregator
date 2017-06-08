@@ -3,8 +3,8 @@
  * --------------------------------------------------
  * Custom style for stat box component
  */
-
 @import '../base/variables';
+
 
 .bg-period {
   background-color: $color-first-period;
@@ -16,10 +16,13 @@
   color:#fff!important;
 }
 
+.fca-statbox-kpi-container {
+  min-width: 250px;
+}
+
 .fca-stat-box-card {
 
   position: relative;
-
   .material-icons {
     font-size: 58px;
   }

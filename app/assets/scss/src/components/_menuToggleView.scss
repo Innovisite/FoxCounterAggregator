@@ -1,0 +1,42 @@
+
+fca-menu-toggle {
+    border-bottom: 1px solid lightgray;
+}
+
+fca-menu-toggle:first-of-type {
+    border-top: 1px solid lightgray;
+}
+
+.menuToggleView {
+     overflow: hidden; 
+     & > .md-button > i {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+        -webkit-transition: -webkit-transform 0.3s ease-in-out;
+        transition: -webkit-transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+     }
+}
+
+.menuToggleView.opened {
+    
+     & > .md-button > i {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    & > .menuItems {
+        max-height: 350px; 
+    }
+}
+
+.menuItems {
+    max-height: 0;
+    transition:max-height 0.5s ease;
+
+    & > ng-transclude > .md-button {
+        text-align: left;
+        margin-left: 20px;
+    }
+}

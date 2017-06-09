@@ -13,30 +13,28 @@
 		<h2>Counter / Dashboard</h2>
 
 		<md-menu>
-			<md-button ng-click="$mdMenu.open($event)">
+			<md-button ng-click="$mdMenu.open($event)" class="md-icon-button">
 				<md-icon class="material-icons icon">account_circle</md-icon>
 			</md-button>
-
-			<md-menu-content>
-				<md-card-header>
-				</md-card-header>
-				<md-card-content>
-					<i class="fa fa-user" style="font-size: 6em;"></i>
-					<p>
-						{{user.name}} - {{user.admin ? 'Administrator' : 'User' }}
+			<md-menu-content class="pad20">
+				<div>
+					<div><strong>{{user.name | uppercase}}</strong></div>
+					<div>{{user.admin ? 'Administrator' : 'User' }}</div>
+					<div>
 						<small>{{user.email}}</small>
-					</p>
-				</md-card-content>
-				<md-card-footer>
+					</div>
+					<md-button>Profile</md-button>
+					<md-button>Sign out</md-button>
+				</div>
+				<!--<md-card-footer>
 					<div class="pull-left">
 						<a href="#/current_user" class="btn btn-default btn-flat">Profile</a>
 					</div>
 					<div class="pull-right">
 						<a class="btn btn-default btn-flat" href="/logout">Sign out</a>
 					</div>
-				</md-card-footer>
+				</md-card-footer>-->
 			</md-menu-content>
-
 		</md-menu>
 
 	</div>

@@ -3,21 +3,21 @@
   <fca-dashboard-header on-time-zone="switchTimeZone()" title="Counters / Sites Overview" title-icon="fa-pie-chart" params="params">
   </fca-dashboard-header>
 
-  <div layout-align="center" layout-wrap layout="row">
-    <div class="fca-stat-box-kpi-container" ng-controller="KPISum as kpi" flex="auto" >
+  <div  layout-wrap layout="row">
+    <div class="fca-stat-box-kpi-container" ng-controller="KPISum as kpi"  >
       <fca-stat-box-kpi kpi="kpi" params="params" indicator="in" label="Total In" icon="input" unit='ent' description="Total number of entries over the selected perdiod.">
       </fca-stat-box-kpi>
     </div>
-    <div class="fca-stat-box-kpi-container" ng-controller="KPIMax as kpi" flex="auto">
+    <div class="fca-stat-box-kpi-container" ng-controller="KPIMax as kpi" >
       <fca-stat-box-kpi params="params" kpi="kpi" indicator="occ" label="Max Occupancy" icon="assessment" unit='ppl' description="Largest occupancy of all sites over the selected period">
       </fca-stat-box-kpi>
     </div>
-    <div class="fca-stat-box-kpi-container" ng-controller="KPIMaxPeriod as kpi" flex="auto">
+    <div class="fca-stat-box-kpi-container" ng-controller="KPIMaxPeriod as kpi" >
       <fca-stat-box-kpi params="params" kpi="kpi" indicator="occ" display-filters="Hour12h" label="Max Period of Occupancy" icon="restore"
         description="The time of the day with the highest occupencay over all sites">
       </fca-stat-box-kpi>
     </div>
-    <div class="fca-stat-box-kpi-container" ng-controller="KPIMaxSiteRatio as kpi" flex="auto"> 
+    <div class="fca-stat-box-kpi-container" ng-controller="KPIMaxSiteRatio as kpi" > 
       <fca-stat-box-kpi params="params" kpi="kpi" indicator="in" display-filters="SiteName" label="Most active site" icon="pie_chart"
         description="The site having the largest occupancy">
       </fca-stat-box-kpi>

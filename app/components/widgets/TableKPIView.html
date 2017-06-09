@@ -1,11 +1,10 @@
 <md-card>
-  <md-card-header>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <i class="fa fa-table box-title"></i>
-        <h3 class="box-title">All Sites</h3>
-      </div>
-  </md-card-header>
+  <md-toolbar>
+    <div class="md-toolbar-tools" md-colors="{'background-color': 'primary-100'}">
+      <i class="fa fa-table box-title"></i>
+      <h3 class="box-title">All Sites</h3>
+    </div>
+  </md-toolbar>
   <md-card-content>
     <table datatable="ng" dt-options="dtOptions" class="table table-bordered table-striped table-hover {{periodComparisonSelected ? 'table-comparison' : ''}}">
       <thead>

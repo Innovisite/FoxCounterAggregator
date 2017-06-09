@@ -77,6 +77,17 @@
     .config(['$locationProvider', function ($locationProvider) {
       $locationProvider.hashPrefix('');
     }])
+    .config(function ($mdThemingProvider) {
+      var foxRedMap = $mdThemingProvider.extendPalette('red', {
+        '500': '#E0412A',
+      });
+      // Register the new color palette map with the name <code>neonRed</code>
+      $mdThemingProvider.definePalette('foxRed', foxRedMap);
+
+      $mdThemingProvider.theme('default')
+        .primaryPalette('grey')
+        .accentPalette('foxRed');
+    })
     .config(['$urlRouterProvider', '$stateProvider',
       function ($urlRouterProvider, $stateProvider) {
 

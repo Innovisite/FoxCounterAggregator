@@ -1,7 +1,6 @@
 <md-card>
-  <md-card-header>
     <md-toolbar>
-      <div class="md-toolbar-tools">
+      <div class="md-toolbar-tools" md-colors="{'background-color': 'primary-100'}">
 
         <md-select ng-model="indicatorSelected" ng-change="update()" ng-model-options="{trackBy: '$value.id'}">
           <i class="fa fa-line-chart box-title"></i>
@@ -36,7 +35,6 @@
 
       </div>
     </md-toolbar>
-  </md-card-header>
 
   <md-card-content>
     <div class="box-body">

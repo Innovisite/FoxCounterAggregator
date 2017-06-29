@@ -1,124 +1,119 @@
 {
-  "user": {
-    "_id": "5677d75af5fcf1641fa2dbbd",
-    "name": "ionel",
-    "email": "admin@foxstream.fr",
-    "admin": true,
-    "enabled": true,
-    "password": "pbkdf2$10000$443bec5faba84084a67496c39873159fdaff82179cef657f320a4b2e590bbead5e91db0cb5dc6097f392b572bacbe305b336394f2e74cf0889aed6ea9a3a0dee$e3bdc25058a9aa30d6d9d65431591e0179f0c05b2a478109362b0f9fe46fd6d4cb5261e1c0dbe805db0056a1333ae3121059e824c87f127cf33adcd986b33165",
-    "userInfo": {
-      "dashboard": "<div class='row'>\n<section class='col-md-12'>\n<fca-heat-map-kpi params='params'></fca-heat-map-kpi>\n</section>\n<section class='col-md-12'>\n<div ng-controller='KPIPeriodGeneric as kpi'>\n<fca-graph-kpi params='params' kpi='kpi'>\n</fca-graph-kpi>\n</div>\n</section>\n</div>"
-    }
-  },
-  "sites": [
-    {
-      "_id": "568a495b78af992414ef675b",
-      "name": "Foxstream France",
-      "siteInfo": {
-        "timezone": "Europe/Paris",
-        "occupancyTimeReset": "1500",
-        "heatmap": { 
-          "map": "assets/img/map_01.jpg",
-          "data": "assets/heatmap_01.json"        
-        },
-        "transforms": [
-          {
-            "_id": "568a49ae78af992414ef675d",
-            "matrix": [ 1, 0, 0, 0, 
-                        0, 1, 0, 0, 
-                        0, 0, 1, 0, 
-                        0, 0, 0, 1 ]
-          },
-          {
-            "_id": "568a49b078af992414ef675e",
-            "matrix": [ 1, 0, 0, 0, 
-                        0, 1, 0, 0, 
-                        0, 0, 1, 0, 
-                        -100, -300, 0, 1 ]
-          },
-          {
-            "_id": "568a49b178af992414ef675f",
-            "matrix": [ 1, 0, 0, 0, 
-                        0, 1, 0, 0, 
-                        0, 0, 1, 0, 
-                        0, 0, 0, 1 ]
-          }
-        ]
-      },
-      "isadmin": true,
-      "items": [
-        {
-          "_id": "568a49ae78af992414ef675d",
-          "name": "Foxstream north"
-        },
-        {
-          "_id": "568a49b078af992414ef675e",
-          "name": "Foxstream south"
-        },
-        {
-          "_id": "568a49b178af992414ef675f",
-          "name": "Foxstream main"
+    "user": {
+        "_id": "5677d75af5fcf1641fa2dbbd",
+        "name": "ionel",
+        "email": "admin@foxstream.fr",
+        "admin": true,
+        "enabled": true,
+        "password": "pbkdf2$10000$443bec5faba84084a67496c39873159fdaff82179cef657f320a4b2e590bbead5e91db0cb5dc6097f392b572bacbe305b336394f2e74cf0889aed6ea9a3a0dee$e3bdc25058a9aa30d6d9d65431591e0179f0c05b2a478109362b0f9fe46fd6d4cb5261e1c0dbe805db0056a1333ae3121059e824c87f127cf33adcd986b33165",
+        "userInfo": {
+            "dashboard": "<div class='row'>\n<section class='col-md-12'>\n<fca-heat-map-kpi params='params'></fca-heat-map-kpi>\n</section>\n<section class='col-md-12'>\n<div ng-controller='KPIPeriodGeneric as kpi'>\n<fca-graph-kpi params='params' kpi='kpi'>\n</fca-graph-kpi>\n</div>\n</section>\n</div>"
         }
-      ]
     },
-    {
-      "_id": "568a497d78af992414ef675c",
-      "name": "BEV",
-      "siteInfo": {        
-        "heatmap": {
-          "map": "assets/img/map_02.jpg",
-          "data": "assets/heatmap_02.json"
+    "sites": [{
+            "_id": "568a495b78af992414ef675b",
+            "name": "Foxstream France",
+            "siteInfo": {
+                "timezone": "Europe/Paris",
+                "occupancyTimeReset": "1500",
+                "heatmap": {
+                    "map": "assets/img/map_01.jpg",
+                    "data": "assets/heatmap_01.json",
+                    "transforms": [{
+                            "_id": "568a49ae78af992414ef675d",
+                            "matrix": [1, 0, 0, 0,
+                                0, 1, 0, 0,
+                                0, 0, 1, 0,
+                                0, 0, 0, 1
+                            ]
+                        },
+                        {
+                            "_id": "568a49b078af992414ef675e",
+                            "matrix": [1, 0, 0, 0,
+                                0, 1, 0, 0,
+                                0, 0, 1, 0, -100, -300, 0, 1
+                            ]
+                        },
+                        {
+                            "_id": "568a49b178af992414ef675f",
+                            "matrix": [1, 0, 0, 0,
+                                0, 1, 0, 0,
+                                0, 0, 1, 0,
+                                0, 0, 0, 1
+                            ]
+                        }
+                    ]
+                }
+            },
+            "isadmin": true,
+            "items": [{
+                    "_id": "568a49ae78af992414ef675d",
+                    "name": "Foxstream north"
+                },
+                {
+                    "_id": "568a49b078af992414ef675e",
+                    "name": "Foxstream south"
+                },
+                {
+                    "_id": "568a49b178af992414ef675f",
+                    "name": "Foxstream main"
+                }
+            ]
         },
-        "transforms": [
-          {
-            "_id": "568a49b378af992414ef6760",
-            "matrix": [ 1, 0, 0, 0, 
-                        0, 1, 0, 0, 
-                        0, 0, 1, 0, 
-                        0, 0, 0, 1 ]
-          },
-          {
-            "_id": "568a49b678af992414ef6761",
-            "matrix": [ 1, 0, 0, 0, 
-                        0, 1, 0, 0, 
-                        0, 0, 1, 0, 
-                        0, -300, 0, 1 ]
-          }          
-        ]
-      },
-      "isadmin": true,
-      "items": [
         {
-          "_id": "568a49b378af992414ef6760",
-          "name": "BEV 1"
+            "_id": "568a497d78af992414ef675c",
+            "name": "BEV",
+            "siteInfo": {
+                "heatmap": {
+                    "map": "assets/img/map_02.jpg",
+                    "data": "assets/heatmap_02.json",
+                    "transforms": [{
+                            "_id": "568a49b378af992414ef6760",
+                            "matrix": [1, 0, 0, 0,
+                                0, 1, 0, 0,
+                                0, 0, 1, 0,
+                                0, 0, 0, 1
+                            ]
+                        },
+                        {
+                            "_id": "568a49b678af992414ef6761",
+                            "matrix": [1, 0, 0, 0,
+                                0, 1, 0, 0,
+                                0, 0, 1, 0,
+                                0, -300, 0, 1
+                            ]
+                        }
+                    ]
+                }
+            },
+            "isadmin": true,
+            "items": [{
+                    "_id": "568a49b378af992414ef6760",
+                    "name": "BEV 1"
+                },
+                {
+                    "_id": "568a49b678af992414ef6761",
+                    "name": "BEV 2"
+                }
+            ]
         },
         {
-          "_id": "568a49b678af992414ef6761",
-          "name": "BEV 2"
-        }
-      ]
-    },
-    {
-      "_id": "568e2a6928054e901522106b",
-      "name": "vaulx-en-velin",      
-      "isadmin": true,
-      "items": [
+            "_id": "568e2a6928054e901522106b",
+            "name": "vaulx-en-velin",
+            "isadmin": true,
+            "items": [{
+                "_id": "568e2ba728054e901522106c",
+                "name": "Entree 1"
+            }]
+        },
         {
-          "_id": "568e2ba728054e901522106c",
-          "name": "Entree 1"
+            "_id": "568e2f3928054e9015221074",
+            "name": "Foxstream Miami",
+            "isadmin": true,
+            "items": [{
+                "_id": "568e31e528054e9015221078",
+                "name": "In 1"
+            }]
         }
-      ]
-    },
-    {
-      "_id": "568e2f3928054e9015221074",
-      "name": "Foxstream Miami",      
-      "isadmin": true,
-      "items": [
-        {
-          "_id": "568e31e528054e9015221078",
-          "name": "In 1"
-        }
-      ]
-    }
-  ]
+    ]
 }

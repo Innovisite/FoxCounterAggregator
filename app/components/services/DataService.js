@@ -137,13 +137,7 @@
                 }
             };
 
-            /**
-             * @function getRawDataForSitesInInterval
-             * @memberOf FSCounterAggregatorApp.DataService
-             * @description retrieve data for a set of sites
-             * within a period of time
-             */
-            this.getRawDataForSitesInInterval = function(sites, period) {
+            this.getPromisesForSitesInInterval = function(sites, period) {
                 let promises = [];
                 sites.forEach((site) => {
                     promises.push(this.getRawDataForSiteInInterval(site, period));
@@ -151,7 +145,17 @@
                         promises.push(this.getCountDataForItemInInterval(item._id, period))
                     });
                 });
-                return $q.all(promises);
+                return promises;
+            };
+
+            /**
+             * @function getRawDataForSitesInInterval
+             * @memberOf FSCounterAggregatorApp.DataService
+             * @description retrieve data for a set of sites
+             * within a period of time
+             */
+            this.getRawDataForSitesInInterval = function(sites, period) {                
+                return $q.all(this.getPromisesForSitesInInterval(sites, period));
             };
 
             /**
@@ -160,14 +164,11 @@
              * @description retrieve data for a set of sites
              * each with a specific period of time
              */
-            this.getRawDataForSitesInIntervals = function(sites, periods) {
+            this.getRawDataForSitesInIntervals = function(sites, periods) {                
                 let promises = [];
-                for (let i = 0; i < sites.length; ++i) {
-                    promises.push(this.getRawDataForSiteInInterval(sites[i], periods[i]));
-                    site.items.forEach((item) => {
-                        promises.push(this.getCountDataForItemInInterval(item._id, periods[i]))
-                    });
-                }
+                periods.forEach((period) => {
+                    promises = promises.concat(this.getPromisesForSitesInInterval(sites, period));
+                });              
                 return $q.all(promises);
             };
 

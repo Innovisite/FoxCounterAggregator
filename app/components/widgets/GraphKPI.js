@@ -38,25 +38,7 @@ angular.module('FSCounterAggregatorApp').
             '<ul>' +
             '<li ng-repeat="option in parent.kpi.options.indicators"> {{option.name}}</li>' +
             '</ul>'
-          );*/
-                    function buildItemsList(sites, showItems) {
-                        if (showItems) {
-                            let items = [];
-                            sites.forEach((site) => {
-                                items.push(site);
-                                site.items.forEach((item) => {
-                                    items.push({
-                                        id: item._id,
-                                        name: site.name + " - " + item.name
-                                    });
-                                });
-                            });
-                            return items;
-                        } else {
-                            return sites;
-                        }
-                    }
-
+          );*/                   
 
                     $scope.widgetId = "GraphKPIWidget";
                     $scope.itemsSelected = [undefined, undefined];
@@ -66,7 +48,7 @@ angular.module('FSCounterAggregatorApp').
                     $scope.$watch("params.sites", function (newSites, oldSites) {
                         if (newSites !== undefined && newSites.length) {
                             $scope.itemsSelected[0] = $scope.params.sites[0];
-                            $scope.itemsList = buildItemsList($scope.params.sites, $scope.showItems);
+                            $scope.itemsList = WidgetStyleService.buildItemsList($scope.params.sites, $scope.showItems);
                         }
                     });
 

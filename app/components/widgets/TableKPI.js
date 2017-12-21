@@ -41,25 +41,7 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
                     // loadedDT.dataTable is the jQuery Object
                     // See http://datatables.net/manual/api#Accessing-the-API
                     loadedDT.dataTable.rowGrouping();
-                });
-                
-                function buildItemsList(sites, showItems) {
-                    if (showItems) {
-                        let items = [];
-                        sites.forEach((site) => {
-                            items.push(site);
-                            site.items.forEach((item) => {
-                                items.push({
-                                    id: item._id,
-                                    name: site.name + " - " + item.name
-                                });
-                            });
-                        });
-                        return items;
-                    } else {
-                        return sites;
-                    }
-                }
+                });                          
 
                 $scope.$watch('params.data', function(newData, oldData) {
                     if (newData !== undefined && newData.length && newData !== oldData) {                        
@@ -69,7 +51,7 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
 
                 $scope.$watch("params.sites", function (newSites, oldSites) {
                     if (newSites !== undefined && newSites.length) {                        
-                        $scope.itemsList = buildItemsList(newSites, $scope.showItems);
+                        $scope.itemsList = WidgetStyleService.buildItemsList(newSites, $scope.showItems);
                     }
                 });
 

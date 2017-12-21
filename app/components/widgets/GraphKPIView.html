@@ -6,35 +6,31 @@
       <div class="btn-group" uib-dropdown>
         <button id="btn-append-to-single-button" type="button" class="btn btn-box" uib-dropdown-toggle>
           <i class="fa fa-line-chart box-title"></i>
-          {{kpi.getIndicatorName(indicatorSelected.id)}} <span class="caret"></span>
+          {{kpi.getIndicatorName(indicatorSelected.id)}}
+          <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu" uib-dropdown-menu role="menu"
-	    aria-labelledby="btn-append-to-single-button">
-          <li class="indicator-value"
-	      ng-repeat="indicator in kpi.indicators"
-	      ng-click="indicatorSelected.id=indicator.id; update();"
-	      ng-class="{'indicator-value-active':indicator.id==indicatorSelected.id}">
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+          <li class="indicator-value" ng-repeat="indicator in kpi.indicators" ng-click="indicatorSelected.id=indicator.id; update();"
+            ng-class="{'indicator-value-active':indicator.id==indicatorSelected.id}">
             {{indicator.name || indicator.id}}
           </li>
         </ul>
       </div>
 
       <h3 class="box-title">
-        <select class="form-control"
-                ng-model="sitesSelected[0]"
-                ng-options="option.name disable when (sitesSelected[1] && option.id == sitesSelected[1].id) for option in params.sites track by option.id"
-                ng-change="update()">
+        <select class="form-control" ng-model="itemsSelected[0]" ng-options="option.name disable when (itemsSelected[1] && option.id == itemsSelected[1].id) for option in itemsList track by option.id"
+          ng-change="update()">
         </select>
       </h3>
-      <h3 class="box-title" ng-show="showsitecomparing"><span ng-show="params.sites.length > 1"> vs <a ng-click="params.sites.length > 1 && toggleSiteComparison(true)"
-												       ng-show="sitesSelected[1] === undefined"
-												       href="">select a site </a></span></h3>
-      <div class="box-title" ng-show="sitesSelected[1] !== undefined">
+      <h3 class="box-title" ng-show="showsitecomparing">
+        <span ng-show="params.sites.length > 1"> vs
+          <a ng-click="params.sites.length > 1 && toggleSiteComparison(true)" ng-show="itemsSelected[1] === undefined" href="">{{showItems ? 'select an item' : 'select a site'}} </a>
+        </span>
+      </h3>
+      <div class="box-title" ng-show="itemsSelected[1] !== undefined">
         <h3 class="box-title">
-          <select class="form-control"
-                  ng-model="sitesSelected[1]"
-                  ng-options="option.name disable when option.id == sitesSelected[0].id for option in params.sites track by option.id"
-                  ng-change="update()">
+          <select class="form-control" ng-model="itemsSelected[1]" ng-options="option.name disable when option.id == itemsSelected[0].id for option in itemsList track by option.id"
+            ng-change="update()">
           </select>
         </h3>
         <i class="fa fa-times-circle" ng-click="toggleSiteComparison(false)"></i>
@@ -42,38 +38,36 @@
     </div>
     <div class="col-md-5 col-xs-12 text-right">
       <div class="btn-group">
-        <button type="button" ng-repeat="range in kpi.options.ranges" class="btn btn-default btn-sm"
-                ng-model="rangeSelected.id"
-		ng-disabled="!rangesEnabled[range.id]"
-                uib-btn-radio="'{{range.id}}'">{{range.name}}</button>
+        <button type="button" ng-repeat="range in kpi.options.ranges" class="btn btn-default btn-sm" ng-model="rangeSelected.id"
+          ng-disabled="!rangesEnabled[range.id]" uib-btn-radio="'{{range.id}}'">{{range.name}}</button>
       </div>
     </div>
   </div>
   <div class="box-body">
     <div class="row left45">
       <div class="col-md-12">
-	<div class="caption caption-date" ng-show="periodComparisonSelected">
-	  <strong>{{params.period.startDate.format('MMM DD, YYYY')}} - {{params.period.endDate.format('MMM DD,YYYY')}}</strong>
-	</div>
-	<div ng-repeat="elt in chartLegends">
+        <div class="caption caption-date" ng-show="periodComparisonSelected">
+          <strong>{{params.period.startDate.format('MMM DD, YYYY')}} - {{params.period.endDate.format('MMM DD,YYYY')}}</strong>
+        </div>
+        <div ng-repeat="elt in chartLegends">
           <div class="caption">
             <div class="circle" ng-style="{'background': elt.color}"></div>
             <strong>{{elt.label}}</strong> ({{ indicatorSelected.id !== 'occ' ? 'Total' : 'Mean'}} {{elt.total}})
           </div>
-	</div>
+        </div>
       </div>
     </div>
     <div class="row left45" ng-show="periodComparisonSelected">
       <div class="col-md-12">
-	<div class="caption caption-date">
-	  <strong>{{params.comparedPeriod.startDate.format('MMM DD, YYYY')}} - {{params.comparedPeriod.endDate.format('MMM DD,YYYY')}}</strong>
-	</div>
-	<div ng-repeat="elt in chartLegendsCompared">
+        <div class="caption caption-date">
+          <strong>{{params.comparedPeriod.startDate.format('MMM DD, YYYY')}} - {{params.comparedPeriod.endDate.format('MMM DD,YYYY')}}</strong>
+        </div>
+        <div ng-repeat="elt in chartLegendsCompared">
           <div class="caption">
             <div class="circle" ng-style="{'background': elt.color}"></div>
             <strong>{{elt.label}}</strong> ({{ indicatorSelected.id !== 'occ' ? 'Total' : 'Mean'}} {{elt.total}})
           </div>
-	</div>
+        </div>
       </div>
     </div>
     <nvd3 options="countingChartOptions" data="countingChartData"></nvd3>

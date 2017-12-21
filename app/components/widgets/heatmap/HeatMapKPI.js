@@ -129,7 +129,7 @@ directive('fcaHeatMapKpi', function() {
                         let hmIdx = _.findIndex(data[idx].heatmap, { id: item._id });
 
                         data[idx].heatmap[hmIdx].data.forEach((heatmapDataElt) => {
-                            heatmap.addHeatMapData(heatmapDataElt.heatmap, site.siteInfo.heatmap.transforms[trIdx].matrix);
+                            heatmap.addHeatMapData(heatmapDataElt.data, site.siteInfo.heatmap.transforms[trIdx].matrix);
                         });
 
                     });

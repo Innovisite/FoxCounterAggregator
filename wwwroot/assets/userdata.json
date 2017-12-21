@@ -7,7 +7,7 @@
         "enabled": true,
         "password": "pbkdf2$10000$443bec5faba84084a67496c39873159fdaff82179cef657f320a4b2e590bbead5e91db0cb5dc6097f392b572bacbe305b336394f2e74cf0889aed6ea9a3a0dee$e3bdc25058a9aa30d6d9d65431591e0179f0c05b2a478109362b0f9fe46fd6d4cb5261e1c0dbe805db0056a1333ae3121059e824c87f127cf33adcd986b33165",
         "userInfo": {
-            "dashboard": "<div class='row'>\n<section class='col-md-12'>\n<fca-heat-map-kpi params='params'></fca-heat-map-kpi>\n</section>\n<section class='col-md-12'>\n<div ng-controller='KPIPeriodGeneric as kpi'>\n<fca-graph-kpi params='params' kpi='kpi'>\n</fca-graph-kpi>\n</div>\n</section>\n</div>"
+            "dashboard": "<div class='row'>\n<section class='col-md-12'>\n<fca-heat-map-kpi params='params'></fca-heat-map-kpi>\n</section>\n<section class='col-md-12'>\n<div ng-controller='KPIPeriodGeneric as kpi'>\n<fca-graph-kpi params='params' kpi='kpi' show-items='true'>\n</fca-graph-kpi>\n</div>\n</section>\n</div>"
         }
     },
     "sites": [{

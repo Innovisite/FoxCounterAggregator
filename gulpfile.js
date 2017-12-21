@@ -52,7 +52,7 @@ var cssSources = ["node_modules/ionicons/dist/css/ionicons.css",
 
 var scssSources = ["app/assets/scss/src/**/*.scss"];
 
-var localJSSources = [];
+var localJSSources = ["lib/polyfill.js"];
 
 var browserEntries = [
     './app/app.js',
@@ -101,7 +101,7 @@ var externalJSSources = ['node_modules/moment/moment.js',
     //'node_modules/angular-ui-codemirror/src/ui-codemirror.js'
 ];
 
-var jsSources = externalJSSources.concat(localJSSources);
+var jsSources = localJSSources.concat(externalJSSources);
 
 mkdirp('docs');
 mkdirp('wwwroot/build/fonts');

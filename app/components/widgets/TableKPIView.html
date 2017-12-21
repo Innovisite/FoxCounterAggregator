@@ -3,7 +3,7 @@
   <div class="box-header with-border row">
     <div class="col-md-7">
       <i class="fa fa-table box-title"></i>
-      <h3 class="box-title">All Sites</h3>
+      <h3 class="box-title">{{showItems ? 'All Items' : 'All Sites'}}</h3>
     </div>
   </div>
 
@@ -12,7 +12,7 @@
       <thead>
         <tr>
           <th ng-show="periodComparisonSelected">Period</th>
-          <th>Site name</th>
+          <th>{{showItems ? 'Item name' : 'Site name'}}</th>
           <th ng-repeat="indicator in indicators">{{indicator.name}}</th>
         </tr>
       </thead>

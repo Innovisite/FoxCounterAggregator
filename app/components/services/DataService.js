@@ -17,7 +17,22 @@
             myconfig
         ) {
 
-            this.getCountDataForSiteInInterval = function(site, period) {
+            function get_items_api_period_feature(itemId, period, feature) {
+                return $http.get("/items/" + itemId + "/" + feature, {
+                    params: {
+                        start: period.startDate.unix(),
+                        end: period.endDate.unix()
+                    }
+                }).
+                then(function(ret) {
+                    return {
+                        id: itemId,
+                        data: ret.data
+                    };
+                });
+            }; 
+
+            this.getCountDataForItemInInterval = function(itemId, period) {
                 if (myconfig.debug) {
                     return $q.when({}).
                     then(function() {
@@ -26,7 +41,7 @@
                         var getData = Math.random();
                         if (getData > 1) { // to enabled random use value inside [0;1[
                             return {
-                                id: site.id,
+                                id: itemId,
                                 data: []
                             };
                         }
@@ -41,23 +56,12 @@
                             });
                         }
                         return {
-                            id: site.id,
+                            id: itemId,
                             data: retData
                         };
                     });
                 } else {
-                    return $http.get("/items/" + site.id + "/countdata", {
-                        params: {
-                            start: period.startDate.unix(),
-                            end: period.endDate.unix()
-                        }
-                    }).
-                    then(function(ret) {
-                        return {
-                            id: site.id,
-                            data: ret.data
-                        };
-                    });
+                    return get_items_api_period_feature(itemId, period, "countdata");
                 }
             };
 
@@ -88,20 +92,9 @@
                             }
                         });
                 } else {
-                    return $http.get("/items/" + itemId + "/rawdata", {
-                            params: {
-                                start: period.startDate.unix(),
-                                end: period.endDate.unix()
-                            }
-                        })
-                        .then(function(ret) {
-                            return {
-                                id: itemId,
-                                data: ret.data
-                            };
-                        });
+                    return get_items_api_period_feature(itemId, period, "rawdata");
                 }
-            };
+            };            
 
             /**
              * @function getHeatMapDataForSiteInInterval
@@ -130,7 +123,7 @@
             this.getRawDataForSiteInInterval = function(site, period) {
                 if (UserService.isSiteHaveHeatmap(site)) {
                     return $q.all([
-                        this.getCountDataForSiteInInterval(site, period),
+                        this.getCountDataForItemInInterval(site.id, period),
                         this.getHeatmapDataForSiteInInterval(site, period)
                     ]).then((dataElts) => {
                         return {
@@ -140,7 +133,7 @@
                         };
                     });
                 } else {
-                    return this.getCountDataForSiteInInterval(site, period);
+                    return this.getCountDataForItemInInterval(site.id, period);
                 }
             };
 
@@ -154,6 +147,9 @@
                 let promises = [];
                 sites.forEach((site) => {
                     promises.push(this.getRawDataForSiteInInterval(site, period));
+                    site.items.forEach((item) => {
+                        promises.push(this.getCountDataForItemInInterval(item._id, period))
+                    });
                 });
                 return $q.all(promises);
             };
@@ -168,6 +164,9 @@
                 let promises = [];
                 for (let i = 0; i < sites.length; ++i) {
                     promises.push(this.getRawDataForSiteInInterval(sites[i], periods[i]));
+                    site.items.forEach((item) => {
+                        promises.push(this.getCountDataForItemInInterval(item._id, periods[i]))
+                    });
                 }
                 return $q.all(promises);
             };

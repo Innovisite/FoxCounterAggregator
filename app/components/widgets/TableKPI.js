@@ -11,7 +11,8 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
         scope: {
             params: '=',
             kpi: '=',
-            kpiOptions: '=?'
+            kpiOptions: '=?',
+            showItems: '@'
         },
         controller: [
             '$scope',
@@ -24,8 +25,9 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
                 $scope.indicators = $scope.kpi.options.indicators;
                 $scope.rows = [];
                 $scope.total = {};
-
+                $scope.showItems = $scope.showItems === "true";
                 $scope.periodComparisonSelected = false;
+                $scope.itemsList = [];
 
                 $scope.dtOptions = DTOptionsBuilder.newOptions().withBootstrap();
 
@@ -41,9 +43,33 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
                     loadedDT.dataTable.rowGrouping();
                 });
                 
+                function buildItemsList(sites, showItems) {
+                    if (showItems) {
+                        let items = [];
+                        sites.forEach((site) => {
+                            items.push(site);
+                            site.items.forEach((item) => {
+                                items.push({
+                                    id: item._id,
+                                    name: site.name + " - " + item.name
+                                });
+                            });
+                        });
+                        return items;
+                    } else {
+                        return sites;
+                    }
+                }
+
                 $scope.$watch('params.data', function(newData, oldData) {
                     if (newData !== undefined && newData.length && newData !== oldData) {                        
                         $scope.update();
+                    }
+                });
+
+                $scope.$watch("params.sites", function (newSites, oldSites) {
+                    if (newSites !== undefined && newSites.length) {                        
+                        $scope.itemsList = buildItemsList(newSites, $scope.showItems);
                     }
                 });
 
@@ -57,8 +83,8 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
                 });
 
                 $scope.updateIndicators = function() {
-                    if ($scope.params.sites.length > 0 && $scope.kpi.updateIndicators !== undefined) {
-                        var idx = _.findIndex($scope.params.data, {"id": $scope.params.sites[0].id});
+                    if ($scope.itemsList.length > 0 && $scope.kpi.updateIndicators !== undefined) {
+                        var idx = _.findIndex($scope.params.data, {"id": $scope.itemsList[0].id});
                         $scope.kpi.updateIndicators($scope.params.data[idx]);
                     }
                 };
@@ -72,6 +98,8 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
                             "sitedata": {
                                 "id": "total",
                                 "data": $scope.rows
+                                            .filter(row => $scope.params.sites
+                                                .find(site => row.id === site.id))
                             }
                         });
                         newTotal[indicators[i].id] = res.value;
@@ -85,27 +113,27 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
                     var idx,
                         res,
                         j;
-                    for (var i = 0; i < $scope.params.sites.length; ++i) {
+                    for (var i = 0; i < $scope.itemsList.length; ++i) {
                         var rowSite = {
-                            "name": $scope.params.sites[i].name,
+                            "name": $scope.itemsList[i].name,
                             "period": $scope.params.period,
-                            "id": $scope.params.sites[i].id
+                            "id": $scope.itemsList[i].id
                         };
                         for (j = 0; j < indicators.length; ++j) {
-                            idx = _.findIndex($scope.params.data, {"id": $scope.params.sites[i].id});
+                            idx = _.findIndex($scope.params.data, {"id": $scope.itemsList[i].id});
                             res = $scope.kpi.compute({"indicator": indicators[j].id, "sitedata": $scope.params.data[idx]});
                             rowSite[indicators[j].id] = res.value;
                         }
                         newTableRows.push(rowSite);
                         if ($scope.periodComparisonSelected) {
                             rowSite = {
-                                "name": $scope.params.sites[i].name,
+                                "name": $scope.itemsList[i].name,
                                 "period": $scope.params.comparedPeriod,
-                                "id": $scope.params.sites[i].id,
+                                "id": $scope.itemsList[i].id,
                                 "comparedPeriod": true
                             };
                             for (j = 0; j < indicators.length; ++j) {
-                                idx = _.findIndex($scope.params.comparedData, {"id": $scope.params.sites[i].id});
+                                idx = _.findIndex($scope.params.comparedData, {"id": $scope.itemsList[i].id});
                                 res = $scope.kpi.compute({"indicator": indicators[j].id, "sitedata": $scope.params.comparedData[idx]});
                                 rowSite[indicators[j].id] = res.value;
                             }

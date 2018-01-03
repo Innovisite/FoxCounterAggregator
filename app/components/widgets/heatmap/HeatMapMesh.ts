@@ -40,8 +40,7 @@ export class HeatMapMesh extends Mesh {
     }
 
     public clear(): void {
-        this.fbScene.children.forEach((mesh: Mesh) => {
-            mesh.material.dispose();
+        this.fbScene.children.forEach((mesh: Mesh) => {            
             mesh.geometry.dispose();
             this.fbScene.remove(mesh);
         });

@@ -5,6 +5,8 @@ const MAX_ZOOM_FACTOR = 0.5;
 
 export class HeatMapControls extends MouseControlsBase {
 
+    private cachedVector = new Vector2();
+
     private scopeMove: boolean;
     // bounds of the viewport area which represents the area we want to look at
     private bounds: Box2 = new Box2();
@@ -50,7 +52,7 @@ export class HeatMapControls extends MouseControlsBase {
         // for example if we want to move up then we project the viewport top coordinate and check if the point is visible         
         this.point.set(px, py, 0).project(this.camera);
 
-        const bSize = this.bounds.getSize(); // todo: check for allocation optimization
+        const bSize = this.bounds.getSize(this.cachedVector); // todo: check for allocation optimization
 
         // a point outside the container means abs(coords) > 1  
         if (Math.abs(this.point.x) > 1) {
@@ -122,7 +124,7 @@ export class HeatMapControls extends MouseControlsBase {
         this.bounds.max.x = x1;
         this.bounds.max.y = y1;
 
-        const bSize = this.bounds.getSize();
+        const bSize = this.bounds.getSize(this.cachedVector);
 
         const ratioW = (bSize.x / this.params.scope.offsetWidth);
         const ratioH = (bSize.y / this.params.scope.offsetHeight);

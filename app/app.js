@@ -58,12 +58,15 @@
   require('./components/kpis/KPIMean');
   require('./components/kpis/KPISum');
 
+  const WidgetContainer = require('./components/widgets/WidgetContainer');
+
   angular.module('FSCounterAggregatorApp')
     .controller('KPISumGeneric', require('./components/kpis/KPISumGeneric'))
     .controller('KPISumMax', require('./components/kpis/KPISumMax'))
     .controller('KPIPeriodGeneric', require('./components/kpis/KPIPeriodGeneric'))
     .controller('KPISitesPeriod', require('./components/kpis/KPISitesPeriod'))
-    .controller('KPITypicalDay', require('./components/kpis/KPITypicalDay'));
+    .controller('KPITypicalDay', require('./components/kpis/KPITypicalDay'))
+    .component('WidgetContainer', new WidgetContainer());
 
   // filters
   require('./components/pipes/HourFormatPipe');

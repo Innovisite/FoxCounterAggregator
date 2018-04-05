@@ -11,7 +11,7 @@ var LessPluginCleanCSS = require('less-plugin-clean-css');
 var minify_js = require("gulp-uglify");
 var duration = require('gulp-duration');
 var mkdirp = require('mkdirp');
-var jsdoc = require('gulp-jsdoc');
+//var jsdoc = require('gulp-jsdoc');
 var adminlteRoot = 'node_modules/admin-lte/';
 var cleancss = new LessPluginCleanCSS({ advanced: true });
 var sass = require('gulp-sass');
@@ -127,10 +127,10 @@ gulp.task('release', ['common', 'prepare-css-release',
 
 gulp.task('common', [ /*'lint'*/ 'prepare-assets', 'prepare-html']);
 
-gulp.task('docs', function() {
+/* gulp.task('docs', function() {
     return gulp.src(localJSSources.concat(['README.md']))
         .pipe(jsdoc('./docs'));
-});
+}); */
 
 gulp.task('lint', function() {
     return gulp.src(lintSources)

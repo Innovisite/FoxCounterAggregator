@@ -6,7 +6,7 @@
 
 require('../services/ComputeService');
 
-function KPIPeriodGeneric(ComputeService) {
+function KPIPeriodGeneric(ComputeService) {  
 
   this.computeFuncs = {
     'KPISum': {

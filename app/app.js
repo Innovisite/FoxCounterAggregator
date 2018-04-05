@@ -66,7 +66,8 @@
     .controller('KPIPeriodGeneric', require('./components/kpis/KPIPeriodGeneric'))
     .controller('KPISitesPeriod', require('./components/kpis/KPISitesPeriod'))
     .controller('KPITypicalDay', require('./components/kpis/KPITypicalDay'))
-    .component('WidgetContainer', new WidgetContainer());
+    .controller('SiteNavigationController', require('./components/widgets/SiteNavigationController'))
+    .component('fcaWidgetContainer', new WidgetContainer());
 
   // filters
   require('./components/pipes/HourFormatPipe');

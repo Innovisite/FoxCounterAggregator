@@ -3,23 +3,41 @@ class WidgetContainerImpl {
 
     static $inject = ["$scope"];
 
+    onNextSite: Function;
+
     constructor(private $scope: any) {
+
+        $scope.getChildren = function(params:any) {
+            debugger
+            return params;
+        }
 
     }
 
     $onInit(): void {
     }
+   
+    goNextSite() {        
+        this.onNextSite();
+    }    
 
 }
 
 
-export default class WidgetContainer {
+class WidgetContainer {
 
-    private bindings: any = {
-        params: '='
+    bindings: any = {
+        params: '=',
+        onNextSite: '&'
     };
-    private controller = WidgetContainerImpl;
-    private templateUrl = "build/html/WidgetContainerView.html";
-    private transclude: true;    
+    controller = WidgetContainerImpl;
+    templateUrl = "build/html/WidgetContainerView.html";
+    transclude = true;    
+
+    constructor() {
+
+    }
 
 }
+
+export = WidgetContainer;

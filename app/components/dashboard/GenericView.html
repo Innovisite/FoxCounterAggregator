@@ -4,32 +4,38 @@
   <section class="content-header">
     <nav class="navbar">
       <div class="pull-left">
-        <h3><i class="fa fa-pie-chart"></i><span> Counters / Generic</span></h3>
+        <h3>
+          <i class="fa fa-pie-chart"></i>
+          <span> Counters / Generic</span>
+        </h3>
       </div>
       <fca-calendar-picker params="params"></fca-calendar-picker>
       <div class="pull-right">
-	<h3>
-	  <a ng-click="switchTimeZone()" class="btn btn-default" type="text">{{params.useTimeZone ? 'On Site Time': 'Local Time'}} <i class="fa fa-globe"></i></a>
-	</h3>
+        <h3>
+          <a ng-click="switchTimeZone()" class="btn btn-default" type="text">{{params.useTimeZone ? 'On Site Time': 'Local Time'}}
+            <i class="fa fa-globe"></i>
+          </a>
+        </h3>
       </div>
     </nav>
   </section>
   <!-- Main content -->
   <section class="content">
     <!-- row -->
-    <div class="row">
+    <div class="row" ng-controller="SiteNavigationController as nav" ng-init="init(params)">
       <section class="col-md-12">
-	<div ng-controller="KPIPeriodGeneric as kpi">	  
-    <fca-graph-kpi params="params" kpi="kpi">
-    </fca-graph-kpi>
-	</div>
+        <div ng-controller="KPIPeriodGeneric as kpi">
+          <fca-widget-container params="nav.params" on-next-site="nav.test()">            
+            <fca-graph-kpi params="nav.params" kpi="kpi">                            
+            </fca-graph-kpi>
+          </fca-widget-container>
+        </div>
       </section>
       <section class="col-md-12">
-	<div ng-controller="KPISumGeneric as kpi">
-	  <fca-table-kpi params="params" kpi="kpi"
-			 kpi-options="{indicators: [{id:'in',name:'In'},{id:'out',name:'Out'},{id:'occ',name:'Max Occupancy',func:'KPIMax'}]}">
-	  </fca-table-kpi>
-	</div>
+        <div ng-controller="KPISumGeneric as kpi">
+          <fca-table-kpi params="nav.params" kpi="kpi" kpi-options="{indicators: [{id:'in',name:'In'},{id:'out',name:'Out'},{id:'occ',name:'Max Occupancy',func:'KPIMax'}]}">
+          </fca-table-kpi>
+        </div>
       </section>
     </div>
     <!-- /.row -->

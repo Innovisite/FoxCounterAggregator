@@ -25,7 +25,7 @@
 
     <div class="row" ng-controller="SiteNavigationController as nav" ng-init="init(params)">
       <section class="col-md-12">
-        <fca-widget-container params="params" on-next-site="nav.test()">
+        <fca-widget-container params="params" on-next-site="nav.test($event)">
         </fca-widget-container>
       </section>
       <section class="col-md-12">

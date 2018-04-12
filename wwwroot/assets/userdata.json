@@ -10,7 +10,8 @@
             "dashboard": "<div class='row'>\n<section class='col-md-12'>\n<fca-heat-map-kpi params='params'></fca-heat-map-kpi>\n</section>\n<section class='col-md-12'>\n<div ng-controller='KPIPeriodGeneric as kpi'>\n<fca-graph-kpi params='params' kpi='kpi' show-items='true'>\n</fca-graph-kpi>\n</div>\n</section>\n</div>"
         }
     },
-    "sites": [{
+    "sites": [
+        {
             "_id": "568a495b78af992414ef675b",
             "name": "Foxstream France",
             "siteInfo": {
@@ -19,36 +20,88 @@
                 "heatmap": {
                     "map": "assets/img/map_01.jpg",
                     "data": "assets/heatmap_01.json",
-                    "transforms": [{
+                    "transforms": [
+                        {
                             "_id": "568a49ae78af992414ef675d",
-                            "matrix": [1, 0, 0, 0,
-                                0, 1, 0, 0,
-                                0, 0, 1, 0,
-                                0, 0, 0, 1
+                            "matrix": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1
                             ]
                         },
                         {
                             "_id": "568a49b078af992414ef675e",
-                            "matrix": [1, 0, 0, 0,
-                                0, 1, 0, 0,
-                                0, 0, 1, 0, -100, -300, 0, 1
+                            "matrix": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                -100,
+                                -300,
+                                0,
+                                1
                             ]
                         },
                         {
                             "_id": "568a49b178af992414ef675f",
-                            "matrix": [1, 0, 0, 0,
-                                0, 1, 0, 0,
-                                0, 0, 1, 0,
-                                0, 0, 0, 1
+                            "matrix": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1
                             ]
                         }
                     ]
                 }
             },
             "isadmin": true,
-            "items": [{
+            "items": [
+                {
                     "_id": "568a49ae78af992414ef675d",
-                    "name": "Foxstream north"
+                    "name": "Foxstream north",
+                    "items": [
+                        {
+                            "_id": "568a49b378af992414ef6760",
+                            "name": "BEV 1"
+                        },
+                        {
+                            "_id": "568a49b678af992414ef6761",
+                            "name": "BEV 2"
+                        }
+                    ]
                 },
                 {
                     "_id": "568a49b078af992414ef675e",
@@ -56,7 +109,31 @@
                 },
                 {
                     "_id": "568a49b178af992414ef675f",
-                    "name": "Foxstream main"
+                    "name": "Foxstream main",
+                    "items": [
+                        {
+                            "_id": "568a49ae78af992414ef675d",
+                            "name": "Foxstream north",
+                            "items": [
+                                {
+                                    "_id": "568a49b378af992414ef6760",
+                                    "name": "BEV 1"
+                                },
+                                {
+                                    "_id": "568a49b678af992414ef6761",
+                                    "name": "BEV 2"
+                                }
+                            ]
+                        },
+                        {
+                            "_id": "568a49b078af992414ef675e",
+                            "name": "Foxstream south"
+                        },
+                        {
+                            "_id": "568a49b178af992414ef675f",
+                            "name": "Foxstream main"
+                        }
+                    ]
                 }
             ]
         },
@@ -67,29 +144,81 @@
                 "heatmap": {
                     "map": "assets/img/map_02.jpg",
                     "data": "assets/heatmap_02.json",
-                    "transforms": [{
+                    "transforms": [
+                        {
                             "_id": "568a49b378af992414ef6760",
-                            "matrix": [1, 0, 0, 0,
-                                0, 1, 0, 0,
-                                0, 0, 1, 0,
-                                0, 0, 0, 1
+                            "matrix": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1
                             ]
                         },
                         {
                             "_id": "568a49b678af992414ef6761",
-                            "matrix": [1, 0, 0, 0,
-                                0, 1, 0, 0,
-                                0, 0, 1, 0,
-                                0, -300, 0, 1
+                            "matrix": [
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                -300,
+                                0,
+                                1
                             ]
                         }
                     ]
                 }
             },
             "isadmin": true,
-            "items": [{
+            "items": [
+                {
                     "_id": "568a49b378af992414ef6760",
-                    "name": "BEV 1"
+                    "name": "BEV 1",
+                    "items": [
+                        {
+                            "_id": "568a49ae78af992414ef675d",
+                            "name": "Foxstream north",
+                            "items": [
+                                {
+                                    "_id": "568a49b378af992414ef6760",
+                                    "name": "BEV 1"
+                                },
+                                {
+                                    "_id": "568a49b678af992414ef6761",
+                                    "name": "BEV 2"
+                                }
+                            ]
+                        },
+                        {
+                            "_id": "568a49b078af992414ef675e",
+                            "name": "Foxstream south"
+                        },
+                        {
+                            "_id": "568a49b178af992414ef675f",
+                            "name": "Foxstream main"
+                        }
+                    ]
                 },
                 {
                     "_id": "568a49b678af992414ef6761",
@@ -101,19 +230,23 @@
             "_id": "568e2a6928054e901522106b",
             "name": "vaulx-en-velin",
             "isadmin": true,
-            "items": [{
-                "_id": "568e2ba728054e901522106c",
-                "name": "Entree 1"
-            }]
+            "items": [
+                {
+                    "_id": "568e2ba728054e901522106c",
+                    "name": "Entree 1"
+                }
+            ]
         },
         {
             "_id": "568e2f3928054e9015221074",
             "name": "Foxstream Miami",
             "isadmin": true,
-            "items": [{
-                "_id": "568e31e528054e9015221078",
-                "name": "In 1"
-            }]
+            "items": [
+                {
+                    "_id": "568e31e528054e9015221078",
+                    "name": "In 1"
+                }
+            ]
         }
     ]
 }

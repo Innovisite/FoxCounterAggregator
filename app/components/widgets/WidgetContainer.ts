@@ -35,6 +35,7 @@ angular.module('FSCounterAggregatorApp').
                     };
                 
                     $scope.threePos = this.three;
+                    $scope.navPos = this.threePos;
 
                     $scope.$watch("params.sites", function (newSites: any, oldSites: any) {                                              
 
@@ -50,7 +51,7 @@ angular.module('FSCounterAggregatorApp').
                             sites.filter(s => s.items && s.items.length).forEach(site => {
                                 const child: ThreeNode = {
                                     name: site.name,
-                                    path: threePos.path + "/" + site.id,
+                                    path: threePos.path.length ? threePos.path + "/" + site.id : site.id,
                                     parent: threePos,
                                     childs: []
                                 };
@@ -60,121 +61,32 @@ angular.module('FSCounterAggregatorApp').
                         }
 
                         $scope.three.childs = [];
-                        $scope.threePos = this.three;
+                        $scope.threePos = this.three;                        
                         fill_tree_rec($scope.threePos, sites);
                     };
 
-                    $scope.goParent = function($event: Event) {
+                    $scope.navParent = function($event: Event) {
                         $event.stopPropagation();                        
-                        if($scope.threePos.parent) {
-                            $scope.threePos = $scope.threePos.parent;
+                        if($scope.navPos.parent) {
+                            $scope.navPos = $scope.navPos.parent;
                         }
                     };
 
-                    $scope.goChild = function($event: Event, child: ThreeNode) {
+                    $scope.navChild = function($event: Event, child: ThreeNode) {
                         $event.stopPropagation();                        
-                        $scope.threePos = child;
+                        $scope.navPos = child;
+                    };
+
+                    $scope.initNav = function() {
+                        $scope.navPos = $scope.threePos;
+                    };
+
+                    $scope.goNav = function(item: ThreeNode) {
+                        $scope.threePos = item;
+                        $scope.onNextSite({$event: item});
                     };
 
                 }],
             templateUrl: "build/html/WidgetContainerView.html"
         };
     });
-
-/* class WidgetContainerImpl {
-
-    static $inject = ["$scope"];
-
-    onNextSite: Function;
-
-    three: ThreeNode = {
-        name: "All",
-        path: "",
-        parent: undefined,
-        childs: []
-    };
-
-    threePos: ThreeNode = this.three;
-
-    params: any;
-
-    constructor(private $scope: any) {        
-
-        debugger
-
-        $scope.getChildren = function (params: any) {
-            debugger
-            return params;
-        };
-
-        $scope.$watch("params.sites", function (newSites: any, oldSites: any) {
-
-            debugger
-
-            if (newSites !== undefined && newSites.length) {
-                this.updateTree(newSites);
-            }
-
-        });
-
-    }
-
-    $onInit(): void {        
-        debugger
-
-        console.log(this.$scope);
-    }
-
-    $onChanges(changesObj: any) {
-        debugger
-    }
-
-    detectChange() {
-        debugger
-    }
-
-    goNextSite() {
-        this.onNextSite();
-    }
-
-    updateTree(sites: SiteItem[]) {
-
-        debugger
-
-        this.three.childs = [];
-        this.threePos = this.three;
-        this.fill_tree_rec(this.threePos, sites);
-    }
-
-    private fill_tree_rec(threePos: ThreeNode, sites: SiteItem[]) {
-        sites.filter(s => s.items && s.items.length).forEach(site => {
-            const child: ThreeNode = {
-                name: site.name,
-                path: threePos.path + "/" + site.id,
-                parent: threePos,
-                childs: []
-            };
-            this.fill_tree_rec(child, site.items);
-            threePos.childs.push(child);
-        });
-    }
-}
-
-
-class WidgetContainer {
-
-    bindings: any = {
-        params: '=',
-        onNextSite: '&'
-    };
-    controller = WidgetContainerImpl;
-    templateUrl = "build/html/WidgetContainerView.html";
-    transclude = true;
-
-    constructor() {
-
-    }
-
-}
-
-export = WidgetContainer; */

@@ -1,3 +1,25 @@
-<h1>Multiple widgets</h1>
-<button ng-click="$ctrl.goNextSite()">Next site</button>
-<ng-transclude></ng-transclude>
+<div>
+    <span>{{threePos.name}}</span>
+    <div class="btn-group" uib-dropdown>
+        <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+            <li role="menuitem">
+                <button ng-if="threePos.parent" type="button" class="btn" ng-click="goParent($event)">
+                    <i class="fa fa-angle-left"></i>
+                </button>
+                <span>{{threePos.name}}</span>
+            </li>
+            <li class="divider"></li>
+            <li ng-repeat="entry in threePos.childs" role="menuitem">
+                <span>{{entry.name}}</span>
+                <button type="button" class="btn" ng-click="goChild($event, entry)">
+                    <i class="fa fa-angle-right"></i>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- <button ng-click="goNextSite()">Next site</button>
+<ng-transclude></ng-transclude> -->

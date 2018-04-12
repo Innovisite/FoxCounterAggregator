@@ -45,7 +45,7 @@ function SiteNavigationController($scope, $controller) {
             } else {
                 that.params.comparedData = newData;
             }
-        });
+        });        
 
         return that.params;
     };
@@ -55,7 +55,10 @@ function SiteNavigationController($scope, $controller) {
         const curSite = this.originalSites[that.curIdx];
         this.params.sites = [curSite];
         this.params.data = [this.originalData.find(e => e.id == curSite.id)];
-        this.params.comparedData = [this.originalCompData.find(e => e.id == curSite.id)];
+
+        if (this.params.comparedData) {
+            this.params.comparedData = [this.originalCompData.find(e => e.id == curSite.id)];
+        }
     };
 
 }

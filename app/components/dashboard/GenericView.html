@@ -22,13 +22,16 @@
   <!-- Main content -->
   <section class="content">
     <!-- row -->
+
     <div class="row" ng-controller="SiteNavigationController as nav" ng-init="init(params)">
       <section class="col-md-12">
+        <fca-widget-container params="params" on-next-site="nav.test()">
+        </fca-widget-container>
+      </section>
+      <section class="col-md-12">
         <div ng-controller="KPIPeriodGeneric as kpi">
-          <fca-widget-container params="nav.params" on-next-site="nav.test()">            
-            <fca-graph-kpi params="nav.params" kpi="kpi">                            
-            </fca-graph-kpi>
-          </fca-widget-container>
+          <fca-graph-kpi params="nav.params" kpi="kpi">
+          </fca-graph-kpi>
         </div>
       </section>
       <section class="col-md-12">

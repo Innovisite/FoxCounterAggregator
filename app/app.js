@@ -50,6 +50,7 @@
   require('./components/widgets/StatBoxKPI');
   require('./components/widgets/TableKPI');
   require('./components/widgets/UserDashboard');
+  require('./components/widgets/WidgetContainer');
 
   // kpis
   require('./components/kpis/KPIMax');
@@ -58,7 +59,7 @@
   require('./components/kpis/KPIMean');
   require('./components/kpis/KPISum');
 
-  const WidgetContainer = require('./components/widgets/WidgetContainer');
+  
 
   angular.module('FSCounterAggregatorApp')
     .controller('KPISumGeneric', require('./components/kpis/KPISumGeneric'))
@@ -66,8 +67,7 @@
     .controller('KPIPeriodGeneric', require('./components/kpis/KPIPeriodGeneric'))
     .controller('KPISitesPeriod', require('./components/kpis/KPISitesPeriod'))
     .controller('KPITypicalDay', require('./components/kpis/KPITypicalDay'))
-    .controller('SiteNavigationController', require('./components/widgets/SiteNavigationController'))
-    .component('fcaWidgetContainer', new WidgetContainer());
+    .controller('SiteNavigationController', require('./components/widgets/SiteNavigationController'));    
 
   // filters
   require('./components/pipes/HourFormatPipe');

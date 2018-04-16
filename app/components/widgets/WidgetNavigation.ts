@@ -1,69 +1,30 @@
-
 declare const angular: any;
 
-interface SiteItem {
-    _id: string;
-    items?: SiteItem[];
-    name: string;
-}
-
-interface ThreeNode {
-    name: string;
-    path: string;
-    parent: ThreeNode;
-    childs: ThreeNode[];
-}
+import { SiteItem, SiteNavItem } from "../types/site";
 
 angular.module('FSCounterAggregatorApp').
     directive('fcaWidgetNavigation', function () {
         return {
-            scope: {
-                params: '=',
+            scope: {                
+                three: '=',
+                threePos: '=',
                 onNextSite: '&'
             },
             controller: [
                 '$scope',
                 function (
                     $scope: any
-                ) {
+                ) {                    
+                                    
+                    $scope.navPos = this.threePos;                                                    
 
-                    $scope.three = {
-                        name: "All",
-                        path: "",
-                        parent: undefined,
-                        childs: []
-                    };
-                
-                    $scope.threePos = this.three;
-                    $scope.navPos = this.threePos;
+                    $scope.$watch("threePos", function(newPos: SiteNavItem, oldPos: SiteNavItem) {
 
-                    $scope.$watch("params.sites", function (newSites: any, oldSites: any) {                                              
-
-                        if (newSites !== undefined && newSites.length) {
-                            $scope.updateTree(newSites);
+                        if(newPos !== undefined) {
+                            $scope.initNav();
                         }
 
                     });
-
-                    $scope.updateTree = function(sites: SiteItem[]) {
-
-                        function fill_tree_rec(threePos: ThreeNode, sites: SiteItem[]) {
-                            sites.filter(s => s.items && s.items.length).forEach(site => {
-                                const child: ThreeNode = {
-                                    name: site.name,
-                                    path: threePos.path.length ? threePos.path + "/" + site._id : site._id,
-                                    parent: threePos,
-                                    childs: []
-                                };
-                                fill_tree_rec(child, site.items);
-                                threePos.childs.push(child);
-                            });
-                        }
-
-                        $scope.three.childs = [];
-                        $scope.threePos = this.three;                        
-                        fill_tree_rec($scope.threePos, sites);
-                    };
 
                     $scope.navParent = function($event: Event) {
                         $event.stopPropagation();                        
@@ -72,7 +33,7 @@ angular.module('FSCounterAggregatorApp').
                         }
                     };
 
-                    $scope.navChild = function($event: Event, child: ThreeNode) {
+                    $scope.navChild = function($event: Event, child: SiteNavItem) {
                         $event.stopPropagation();                        
                         $scope.navPos = child;
                     };
@@ -81,8 +42,7 @@ angular.module('FSCounterAggregatorApp').
                         $scope.navPos = $scope.threePos;
                     };
 
-                    $scope.goNav = function(item: ThreeNode) {
-                        $scope.threePos = item;
+                    $scope.goNav = function(item: SiteNavItem) {                        
                         $scope.onNextSite({$event: item});
                     };
 

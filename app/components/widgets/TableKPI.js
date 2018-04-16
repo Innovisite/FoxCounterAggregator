@@ -12,7 +12,8 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
             params: '=',
             kpi: '=',
             kpiOptions: '=?',
-            showItems: '@'
+            showItems: '@',
+            onNextItem: '&'
         },
         controller: [
             '$scope',
@@ -96,26 +97,29 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
                         res,
                         j;
                     for (var i = 0; i < $scope.itemsList.length; ++i) {
+                        const curItem = $scope.itemsList[i];
                         var rowSite = {
-                            "name": $scope.itemsList[i].name,
+                            "name": curItem.name,
                             "period": $scope.params.period,
-                            "id": $scope.itemsList[i].id
+                            "id": curItem.id,
+                            "haveItems": curItem.items && curItem.items.length
                         };
                         for (j = 0; j < indicators.length; ++j) {
-                            idx = _.findIndex($scope.params.data, {"id": $scope.itemsList[i].id});
+                            idx = _.findIndex($scope.params.data, {"id": curItem.id});
                             res = $scope.kpi.compute({"indicator": indicators[j].id, "sitedata": $scope.params.data[idx]});
                             rowSite[indicators[j].id] = res.value;
                         }
                         newTableRows.push(rowSite);
                         if ($scope.periodComparisonSelected) {
                             rowSite = {
-                                "name": $scope.itemsList[i].name,
+                                "name": curItem.name,
                                 "period": $scope.params.comparedPeriod,
-                                "id": $scope.itemsList[i].id,
+                                "id": curItem.id,
+                                "haveItems": curItem.items && curItem.items.length,
                                 "comparedPeriod": true
-                            };
+                            };                            
                             for (j = 0; j < indicators.length; ++j) {
-                                idx = _.findIndex($scope.params.comparedData, {"id": $scope.itemsList[i].id});
+                                idx = _.findIndex($scope.params.comparedData, {"id": curItem.id});
                                 res = $scope.kpi.compute({"indicator": indicators[j].id, "sitedata": $scope.params.comparedData[idx]});
                                 rowSite[indicators[j].id] = res.value;
                             }
@@ -141,6 +145,10 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
                     if (style.json !== undefined && style.json.dtOptions !== undefined) {
                         //$scope.dtOptions = $q.when(style.json.dtOptions);
                     }
+                };
+
+                $scope.goChild = function(id) {                        
+                    $scope.onNextItem({$event: id});
                 };
             }
         ],

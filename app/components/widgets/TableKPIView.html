@@ -25,7 +25,8 @@
       <tbody>
         <tr ng-repeat="row in rows">
           <td class="{{periodComparisonSelected ? (row.comparedPeriod ? 'cell-compared-period' : 'cell-period') : ''}}" ng-show="periodComparisonSelected">{{row.period.startDate.format('MMM DD, YYYY')}} - {{row.period.endDate.format('MMM DD,YYYY')}}</td>
-          <td class="{{periodComparisonSelected ? (row.comparedPeriod ? 'cell-compared-period' : 'cell-period') : ''}}">{{row.name}}</td>
+          <td ng-if="!row.haveItems" class="{{periodComparisonSelected ? (row.comparedPeriod ? 'cell-compared-period' : 'cell-period') : ''}}">{{row.name}}</td>
+          <td ng-if="row.haveItems" class="{{periodComparisonSelected ? (row.comparedPeriod ? 'cell-compared-period' : 'cell-period') : ''}}"><a class="cell-link" ng-click="goChild(row.id)">{{row.name}}</a></td>
           <td class="{{periodComparisonSelected ? (row.comparedPeriod ? 'cell-compared-period' : 'cell-period') : ''}}" ng-repeat="indicator in indicators">{{row[indicator.id]}}</td>
         </tr>
       </tbody>

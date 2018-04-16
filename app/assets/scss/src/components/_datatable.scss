@@ -23,3 +23,11 @@ table.table-comparison.dataTable td {
 .table-comparison > tbody > tr > td.cell-compared-period {
     border-left: solid $color-second-period;
 }
+
+a.cell-link {
+    color: $color-cell-link;
+}
+
+a.cell-link:hover {
+    cursor: pointer;    
+}

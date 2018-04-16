@@ -25,7 +25,7 @@
 
     <div class="row" ng-controller="SiteNavigationController as nav" ng-init="init(params)">
       <section class="col-md-12">
-        <fca-widget-navigation params="params" on-next-site="nav.goNav($event)">
+        <fca-widget-navigation three="nav.three" three-pos="nav.threePos" on-next-site="nav.goNav($event)">
         </fca-widget-navigation>
       </section>
       <section class="col-md-12">
@@ -36,7 +36,7 @@
       </section>
       <section class="col-md-12">
         <div ng-controller="KPISumGeneric as kpi">
-          <fca-table-kpi params="nav.params" kpi="kpi" kpi-options="{indicators: [{id:'in',name:'In'},{id:'out',name:'Out'},{id:'occ',name:'Max Occupancy',func:'KPIMax'}]}">
+          <fca-table-kpi params="nav.params" on-next-item="nav.goChildFromId($event)" kpi="kpi" kpi-options="{indicators: [{id:'in',name:'In'},{id:'out',name:'Out'},{id:'occ',name:'Max Occupancy',func:'KPIMax'}]}">
           </fca-table-kpi>
         </div>
       </section>

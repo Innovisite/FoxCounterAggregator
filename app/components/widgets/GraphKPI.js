@@ -40,6 +40,8 @@ angular.module('FSCounterAggregatorApp').
             '</ul>'
           );*/                   
 
+                    $scope.siteComparisonSelected = undefined;
+
                     $scope.widgetId = "GraphKPIWidget";
                     $scope.itemsSelected = [undefined, undefined];
                     /* $scope.chartData = [ {}, {} ]; */
@@ -49,10 +51,11 @@ angular.module('FSCounterAggregatorApp').
                         if (newSites !== undefined && newSites.length) {
                             $scope.itemsSelected[0] = $scope.params.sites[0];
                             $scope.itemsList = WidgetStyleService.buildItemsList($scope.params.sites, $scope.showItems);
+                            $scope.itemsSelected[1] = undefined;                            
                         }
                     });
 
-                    $scope.siteComparisonSelected = undefined;
+                    
                     $scope.periodComparisonSelected = false;
                     $scope.periodComparisonMoments = [];
                     $scope.periodComparisonLabels = {};

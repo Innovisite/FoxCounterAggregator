@@ -1,3 +1,10 @@
+export interface SiteInfo {
+    _id: string;
+    heatmap?: any;
+    occupancyTimeReset?: string;
+    timezone?: string;
+};
+
 export interface SiteItem {
     _id: string;
     id?: string;

@@ -1,4 +1,5 @@
 import { SiteItem, SiteNavItem, SITE_NAV_EMPTY_ROOT } from "../types/site";
+import { DataItem } from "../types/data";
 
 /**
  * @class SiteNavigationController
@@ -6,55 +7,45 @@ import { SiteItem, SiteNavItem, SITE_NAV_EMPTY_ROOT } from "../types/site";
  */
 function SiteNavigationController($scope: any, $controller: any, $paramsService: any) {
 
-    this.params = undefined;
+    this.params = { sites: [], data: [] };
     this.three = Object.assign({}, SITE_NAV_EMPTY_ROOT);
     this.threePos = this.three;
-    this.originalSites = undefined;
-    this.originalData = undefined;
-    this.originalCompData = undefined;
+    this.originalSites = undefined;    
 
     const that = this;
 
-    $scope.init = function (params: any) {
+    $scope.init = function (params: any) {        
 
         that.params = Object.assign({}, params);
 
-        $scope.$watch("params.sites", function (newSites: any[], oldSites: any[]) {
+        $scope.$watch("params.sites", function (newSites: SiteItem[], oldSites: SiteItem[]) {
             if (newSites !== undefined && newSites.length) {
                 that.originalSites = newSites.slice(0);
                 that.params.sites = that.originalSites;
                 that.updateTree(newSites);
-            } else {
-                that.params.sites = newSites;
             }
         });
 
-        $scope.$watch('params.data', function (newData: any[], oldData: any[]) {
-            if (newData !== undefined && newData.length) {
-                that.originalData = newData.slice(0);
-                that.params.data = that.originalData;
-            } else {
-                that.params.data = newData;
+        $scope.$watch('params.data', function (newData: DataItem[], oldData: DataItem[]) {                   
+            if (newData !== undefined && newData.length) {                
+                that.goNav(that.threePos);
             }
         });
 
-        $scope.$watch('params.comparedData', function (newData: any[], oldData: any[]) {
-            if (newData != undefined && newData.length) {
-                that.originalCompData = newData.slice(0);
-                that.params.comparedData = that.originalCompData;
-            } else {
-                that.params.comparedData = newData;
-            }
-        });
+        $scope.$watch('params.comparedData', function (newData: DataItem[], oldData: DataItem[]) {
+            if(newData == undefined) {
+                that.params.comparedData = undefined;
+            }            
+        });        
 
         return that.params;
     };
 
-    this.goNav = function ($event: SiteNavItem) {
+    this.goNav = function (nav: SiteNavItem) {
 
-        if ($event.path.length) {
+        if (nav.path.length) {
             let subPart = { items: this.originalSites };
-            $event.path.split("/")
+            nav.path.split("/")
                 .forEach(elt => {
                     subPart = subPart.items.find((item: SiteItem) => (item.id == elt) || (item._id == elt));
                 });
@@ -64,6 +55,12 @@ function SiteNavigationController($scope: any, $controller: any, $paramsService:
             this.params.sites = this.originalSites;
         }
 
+        this.uploadData();
+
+        this.threePos = nav;
+    };
+
+    this.uploadData = function() {
         $paramsService.loadDataForSites(this.params.sites)
             .then((res: any[]) => {
                 this.params.data = res[0];
@@ -71,28 +68,26 @@ function SiteNavigationController($scope: any, $controller: any, $paramsService:
                     this.params.comparedData = res[1];
                 }
             });
-
-        this.threePos = $event;
     };
 
-    this.goUp = function() {
+    this.goUp = function () {
 
-        if(this.threePos.parent) {
+        if (this.threePos.parent) {
             this.threePos = this.threePos.parent;
         }
 
     };
 
-    this.goChildFromId = function(id: string) {        
-        
-        const path = this.threePos.path.length ? this.threePos.path + "/" + id : id;
-        const child: SiteNavItem = (<SiteNavItem> this.threePos).childs.find(c => c.path == path);
+    this.goChildFromId = function (id: string) {
 
-        if(child) {
+        const path = this.threePos.path.length ? this.threePos.path + "/" + id : id;
+        const child: SiteNavItem = (<SiteNavItem>this.threePos).childs.find(c => c.path == path);
+
+        if (child) {
             this.goNav(child);
         }
 
-    };    
+    };
 
     this.updateTree = function (sites: SiteItem[]) {
 

@@ -50,7 +50,7 @@
   require('./components/widgets/StatBoxKPI');
   require('./components/widgets/TableKPI');
   require('./components/widgets/UserDashboard');
-  require('./components/widgets/WidgetContainer');
+  require('./components/widgets/WidgetNavigation');
 
   // kpis
   require('./components/kpis/KPIMax');

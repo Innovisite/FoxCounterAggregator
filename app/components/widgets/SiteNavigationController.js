@@ -2,7 +2,7 @@
  * @class SiteNavigationController
  * @memberOf FSCounterAggregatorApp
  */
-function SiteNavigationController($scope, $controller) {
+function SiteNavigationController($scope, $controller, $paramsService) {
 
     this.params = undefined;
     this.originalSites = undefined;
@@ -24,7 +24,7 @@ function SiteNavigationController($scope, $controller) {
             }
         });
 
-        $scope.$watch('params.data', function (newData, oldData) {
+        $scope.$watch('params.data', function (newData, oldData) {        
             if (newData !== undefined && newData.length) {
                 that.originalData = newData.slice(0);
                 that.params.data = that.originalData;
@@ -45,23 +45,32 @@ function SiteNavigationController($scope, $controller) {
         return that.params;
     };
 
-    this.test = function ($event) {
-
+    this.goNav = function ($event) {
+        
         if ($event.path.length) {
-            let subPart = this.originalSites;
+            let subPart = { items: this.originalSites };
             $event.path.split("/")
                 .forEach(elt => {
-                    subPart = subPart.find(item => item.id == elt);
+                    subPart = subPart.items.find(item => (item.id == elt) || (item._id == elt));
                 });
-            this.params.sites = subPart.items;
+            // fab: TODO replace/add id with _id everywhere in order to simplify services APIs
+            this.params.sites = subPart.items.map(site => Object.assign(site, { id: site._id }));
         } else {
             this.params.sites = this.originalSites;
-        }
+        }        
+
+        $paramsService.loadDataForSites(this.params.sites)
+            .then(res => {                
+                this.params.data = res[0];
+                if(res[1]) {
+                    this.params.comparedData = res[1];
+                }
+            });
 
     };
 
 }
 
-SiteNavigationController.$inject = ["$scope", "$controller"];
+SiteNavigationController.$inject = ["$scope", "$controller", "DashboardParamsService"];
 
 module.exports = SiteNavigationController;

@@ -1,0 +1,28 @@
+<div class="box">
+    <div class="box-header with-border row">
+        <div class="col-md-7">
+            <i class="fa fa-search box-title"></i>
+            <h3 class="box-title">{{threePos.name}}</h3>
+            <div class="btn-group" uib-dropdown>
+                <button id="single-button" type="button" class="btn" uib-dropdown-toggle ng-click="initNav()" ng-disabled="disabled">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                    <li role="menuitem">
+                        <button ng-if="navPos.parent" type="button" class="btn" ng-click="navParent($event)">
+                            <i class="fa fa-angle-left"></i>
+                        </button>
+                        <button ng-click="goNav(navPos)">{{navPos.name}}</button>
+                    </li>
+                    <li class="divider"></li>
+                    <li ng-repeat="entry in navPos.childs" role="menuitem">
+                        <button ng-click="goNav(entry)">{{entry.name}}</button>
+                        <button type="button" class="btn" ng-click="navChild($event, entry)">
+                            <i class="fa fa-angle-right"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

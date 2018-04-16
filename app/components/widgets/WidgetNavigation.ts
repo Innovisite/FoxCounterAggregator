@@ -2,7 +2,7 @@
 declare const angular: any;
 
 interface SiteItem {
-    id: string;
+    _id: string;
     items?: SiteItem[];
     name: string;
 }
@@ -15,7 +15,7 @@ interface ThreeNode {
 }
 
 angular.module('FSCounterAggregatorApp').
-    directive('fcaWidgetContainer', function () {
+    directive('fcaWidgetNavigation', function () {
         return {
             scope: {
                 params: '=',
@@ -51,7 +51,7 @@ angular.module('FSCounterAggregatorApp').
                             sites.filter(s => s.items && s.items.length).forEach(site => {
                                 const child: ThreeNode = {
                                     name: site.name,
-                                    path: threePos.path.length ? threePos.path + "/" + site.id : site.id,
+                                    path: threePos.path.length ? threePos.path + "/" + site._id : site._id,
                                     parent: threePos,
                                     childs: []
                                 };

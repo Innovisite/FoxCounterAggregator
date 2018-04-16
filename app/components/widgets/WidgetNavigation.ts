@@ -44,9 +44,9 @@ angular.module('FSCounterAggregatorApp').
 
                     $scope.goNav = function(item: SiteNavItem) {                        
                         $scope.onNextSite({$event: item});
-                    };
+                    };                    
 
                 }],
-            templateUrl: "build/html/WidgetContainerView.html"
+            templateUrl: "build/html/WidgetNavigationView.html"
         };
     });

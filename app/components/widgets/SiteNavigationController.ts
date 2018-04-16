@@ -91,17 +91,17 @@ function SiteNavigationController($scope: any, $controller: any, $paramsService:
 
     this.updateTree = function (sites: SiteItem[]) {
 
-        function fill_tree_rec(threePos: SiteNavItem, sites: SiteItem[]) {
+        function fill_tree_rec(threePos: SiteNavItem, sites: SiteItem[]) {            
             sites.filter(s => s.items && s.items.length).forEach(site => {
                 const child: SiteNavItem = {
                     name: site.name,
                     path: threePos.path.length ? threePos.path + "/" + site._id : site._id,
                     parent: threePos,
-                    childs: []
+                    childs: []                    
                 };
-                fill_tree_rec(child, site.items);
+                fill_tree_rec(child, site.items);                
                 threePos.childs.push(child);
-            });
+            });            
         }
 
         this.three.childs = [];

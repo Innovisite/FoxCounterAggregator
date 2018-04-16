@@ -14,7 +14,7 @@
                         </button>
                         <button ng-click="goNav(navPos)">{{navPos.name}}</button>
                     </li>
-                    <li class="divider"></li>
+                    <li class="divider"></li>                    
                     <li ng-repeat="entry in navPos.childs" role="menuitem">
                         <button ng-click="goNav(entry)">{{entry.name}}</button>
                         <button type="button" class="btn" ng-click="navChild($event, entry)">

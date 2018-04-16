@@ -16,12 +16,12 @@ export interface SiteNavItem {
     name: string;
     path: string;
     parent: SiteNavItem;
-    childs: SiteNavItem[];
+    childs: SiteNavItem[];   
 };
 
 export const SITE_NAV_EMPTY_ROOT: SiteNavItem = {
     name: "All",
     path: "",
     parent: undefined,
-    childs: []
+    childs: []    
 };

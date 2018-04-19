@@ -18,13 +18,13 @@
     .entry {
         display: flex;
         justify-content: space-between;
-        margin: 10px -$spacing;
+        margin: 15px -$spacing;
         
         button:first-child {
             flex-grow: 1;
             text-align: start;
         }
-        
+
         button:hover {
             background: lighten($color-primary,15);
             cursor: pointer;

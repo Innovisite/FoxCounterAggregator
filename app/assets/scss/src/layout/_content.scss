@@ -32,3 +32,13 @@
 .content-wrapper {
   height: 100%;
 }
+
+.section-group {
+  margin: 0px;
+  background: #f9f9f9;
+
+  .header {
+    margin: 0;
+    padding: 0;
+  }
+}

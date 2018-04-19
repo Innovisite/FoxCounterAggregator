@@ -14,4 +14,10 @@ button {
             opacity: 1;
         }
     }
+
+    &.no-decoration {
+        border: none;
+        background: transparent;
+        &:focus { outline:0; }
+    }
 }

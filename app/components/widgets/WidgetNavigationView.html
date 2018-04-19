@@ -1,4 +1,4 @@
-<div class="box">
+<div class="box widget-nav">
     <div class="box-header with-border row">
         <div class="col-md-7">
             <i class="fa fa-search box-title"></i>
@@ -8,16 +8,16 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu">
-                    <li role="menuitem">
-                        <button ng-if="navPos.parent" type="button" class="btn" ng-click="navParent($event)">
+                    <li role="menuitem" class="top-entry">
+                        <button class="no-decoration" ng-if="navPos.parent" type="button" ng-click="navParent($event)">
                             <i class="fa fa-angle-left"></i>
                         </button>
-                        <button ng-click="goNav(navPos)">{{navPos.name}}</button>
+                        <button class="no-decoration" ng-click="goNav(navPos)"><strong>{{navPos.name}}</strong></button>
                     </li>
                     <li class="divider"></li>                    
-                    <li ng-repeat="entry in navPos.childs" role="menuitem">
-                        <button ng-click="goNav(entry)">{{entry.name}}</button>
-                        <button type="button" class="btn" ng-click="navChild($event, entry)">
+                    <li ng-repeat="entry in navPos.childs" role="menuitem" class="entry">
+                        <button class="no-decoration" ng-click="goNav(entry)">{{entry.name}}</button>
+                        <button type="button" class="btn no-decoration" ng-click="navChild($event, entry)">
                             <i class="fa fa-angle-right"></i>
                         </button>
                     </li>

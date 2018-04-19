@@ -3,6 +3,10 @@
 .widget-nav {
 
     $spacing: 10px;
+    
+    i.box-title {
+        margin-right:10px;
+    }
 
     .dropdown-menu {
         min-width:200px;

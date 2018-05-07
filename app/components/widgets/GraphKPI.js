@@ -169,7 +169,7 @@ angular.module('FSCounterAggregatorApp').
                         var idx = _.findIndex($scope.itemsList, {
                             "id": id
                         });
-                        return idx != -1 ? $scope.itemsList[idx].name : undefined;
+                        return idx != -1 ? $scope.itemsList[idx].display_name : undefined;
                     };
 
                     function updateOnPeriod(period, data, chartsDataStyle, chartsData, chartsLegends, preKey) {

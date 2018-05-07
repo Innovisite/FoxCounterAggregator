@@ -1,0 +1,68 @@
+[
+  {
+    "id": "rawIn",
+    "key": "in",
+    "time": { "type": "range" },
+    "type": "int",
+    "measure": true,
+    "defaultValue": 0
+  },
+  {
+    "id": "rawOut",
+    "key": "out",
+    "time": { "type": "range" },
+    "type": "int",
+    "measure": true,
+    "defaultValue": 0
+  },
+  {
+    "id": "rawCount",
+    "key": "count",
+    "time": { "type": "range" },
+    "type": "int",
+    "measure": "true",
+    "defaultValue": 0
+  },
+  {
+    "id": "summedIn",
+    "key": "In",
+    "time": {
+      "type": "periods",
+      "period": {
+        "start": "2017-07-06T08:00:00Z",
+        "end": "2017-07-06T08:05:00Z"
+      }
+    },
+    "type": "int",
+    "measure": false,
+    "defaultValue": 0
+  },
+  {
+    "id": "summedOut",
+    "key": "Out",
+    "time": {
+      "type": "periods",
+      "period": {
+        "start": "2017-07-06T08:00:00Z",
+        "end": "2017-07-06T08:05:00Z"
+      }
+    },
+    "type": "int",
+    "measure": false,
+    "defaultValue": 0
+  },
+  {
+    "id": "waitingTime",
+    "key": "WaitingTime",
+    "time": {
+      "type": "periods",
+      "period": {
+        "start": "2017-07-06T08:00:00Z",
+        "end": "2017-07-06T08:05:00Z"
+      }
+    },
+    "type": "int",
+    "measure": false,
+    "defaultValue": -1
+  }
+]

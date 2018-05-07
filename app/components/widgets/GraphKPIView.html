@@ -18,18 +18,18 @@
       </div>
 
       <h3 class="box-title">
-        <select class="form-control" ng-model="itemsSelected[0]" ng-options="option.name disable when (itemsSelected[1] && option.id == itemsSelected[1].id) for option in itemsList track by option.id"
+        <select class="form-control" ng-model="itemsSelected[0]" ng-options="option.display_name disable when (itemsSelected[1] && option.id == itemsSelected[1].id) for option in itemsList track by option.id"
           ng-change="update()">
         </select>
       </h3>
       <h3 class="box-title" ng-show="showsitecomparing">
-        <span ng-show="params.sites.length > 1"> vs
+        <span ng-show="params.sites.length > 1 && kpi.isPeriodComparable(rangeSelected.id)"> vs
           <a ng-click="params.sites.length > 1 && toggleSiteComparison(true)" ng-show="itemsSelected[1] === undefined" href="">{{showItems ? 'select an item' : 'select a site'}} </a>
         </span>
       </h3>
       <div class="box-title" ng-show="itemsSelected[1] !== undefined">
         <h3 class="box-title">
-          <select class="form-control" ng-model="itemsSelected[1]" ng-options="option.name disable when option.id == itemsSelected[0].id for option in itemsList track by option.id"
+          <select class="form-control" ng-model="itemsSelected[1]" ng-options="option.display_name disable when option.id == itemsSelected[0].id for option in itemsList track by option.id"
             ng-change="update()">
           </select>
         </h3>

@@ -67,11 +67,19 @@
     .controller('KPIPeriodGeneric', require('./components/kpis/KPIPeriodGeneric'))
     .controller('KPISitesPeriod', require('./components/kpis/KPISitesPeriod'))
     .controller('KPITypicalDay', require('./components/kpis/KPITypicalDay'))
-    .controller('SiteNavigationController', require('./components/widgets/SiteNavigationController'));    
+    .controller('KPIServerGeneric', require('./components/kpis/KPIServerGeneric'))
+    .controller('SiteNavigationController', require('./components/widgets/SiteNavigationController'))
+    .controller('DashboardControllerV2', require('./components/dashboard/DashboardControllerV2'));
 
   // filters
   require('./components/pipes/HourFormatPipe');
-  require('./components/pipes/SiteNamePipe');
+  require('./components/pipes/SiteNamePipe');  
+
+  // services
+  angular.module('FSCounterAggregatorApp')
+    .service('UserServiceV2', require('./components/services/UserServiceV2').UserServiceV2)    
+    .service('DashboardParamsServiceV2', require('./components/services/DashboardParamsServiceV2').DashboardParamsServiceV2)
+    .service('DataServiceV2', require('./components/services/DataServiceV2').DataServiceV2);
 
   // Configure routes
   angular.module('FSCounterAggregatorApp').config(['$urlRouterProvider', '$stateProvider',
@@ -91,7 +99,7 @@
         state('generic', {
           url: '/generic', 
           templateUrl: 'build/html/GenericView.html',
-          controller: 'DashboardController',
+          controller: 'DashboardControllerV2',
           pageName: 'Counters / Generic',
           category: 'Counters'
         }).

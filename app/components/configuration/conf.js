@@ -1,2 +1,4 @@
 angular.module('FSCounterAggregatorApp')
-    .value('myconfig', {debug: false});
+    .value('myconfig', {
+        debug: false        
+    });

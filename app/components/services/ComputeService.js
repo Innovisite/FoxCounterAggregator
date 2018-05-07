@@ -80,7 +80,7 @@
 		 return (date.year()*12 + date.month()) -
 		     (dateStart.year()*12 + dateStart.month());
 	     }}
-     };
+     };	 
 
      /**
       * @function getTimeIndex

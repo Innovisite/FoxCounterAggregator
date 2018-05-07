@@ -1,6 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   <section class="content-header">
     <nav class="navbar">
       <div class="pull-left">
@@ -19,29 +17,20 @@
       </div>
     </nav>
   </section>
-  <!-- Main content -->
-  <section class="content">
-    <!-- row -->
 
+  <section class="content">
     <div class="row section-group" ng-controller="SiteNavigationController as nav" ng-init="init(params)">
       <section class="col-md-12 header">
         <fca-widget-navigation three="nav.three" three-pos="nav.threePos" on-next-site="nav.goNav($event)">
         </fca-widget-navigation>
       </section>
       <section class="col-md-12">
-        <div ng-controller="KPIPeriodGeneric as kpi">
-          <fca-graph-kpi params="nav.params" kpi="kpi">
+        <div ng-controller="KPIServerGeneric as kpi" ng-init="init(params)">
+          <fca-graph-kpi ng-if="kpi.kpis.length" params="nav.params" kpi="kpi">
           </fca-graph-kpi>
         </div>
       </section>
-      <section class="col-md-12">
-        <div ng-controller="KPISumGeneric as kpi">
-          <fca-table-kpi params="nav.params" on-next-item="nav.goChildFromId($event)" kpi="kpi" kpi-options="{indicators: [{id:'in',name:'In'},{id:'out',name:'Out'},{id:'occ',name:'Max Occupancy',func:'KPIMax'}]}">
-          </fca-table-kpi>
-        </div>
-      </section>
     </div>
-    <!-- /.row -->
   </section>
-  <!-- /.content -->
+
 </div>

@@ -1,0 +1,1201 @@
+${SRV} peut contenir un prefix (du style /api/v1/)
+
+
+User information request:
+GET http://${SRV}/self
+
+Response:
+{
+    "type": "user",
+    "id": "5ad4b8775d82803a28f342d1",
+    "display_name": "Ionel",
+    "email": "i.pop@foxstream.fr",
+    "is_enabled": true,
+    "is_global_administrator": false,
+    "app_data": {},//user specific data
+    "viewable_nodes": [      
+        {
+            "id": "5ad4bfe25d82803a28f342f8",
+            "parent_id": null,
+            "type": "compound-node",
+            "display_name": "Omaha",
+            "app_data": {}
+        },
+        {
+            "id": "5ad4bfe35d82803a28f342fa",
+            "parent_id": "5ad4bfe25d82803a28f342f8",
+            "type": "compound-node",
+            "display_name": "LaneA",
+            "app_data": {}
+        },
+        {
+            "id": "5ad4bfe35d82803a28f342fb",
+            "parent_id": "5ad4bfe25d82803a28f342f8",
+            "type": "compound-node",
+            "display_name": "LaneB",
+            "app_data": {}
+        },
+        {
+            "id": "5ad4bfe35d82803a28f342fc",
+            "parent_id": "5ad4bfe35d82803a28f342fb",
+            "type": "raw-node",
+            "display_name": "B2",
+            "app_data": {}
+        },
+        {
+            "id": "5ad4bfe35d82803a28f342fd",
+            "parent_id": "5ad4bfe35d82803a28f342fb",
+            "type": "raw-node",
+            "display_name": "B3",
+            "app_data": {}
+        },
+        {
+            "id": "5ad4bfe35d82803a28f342fe",
+            "parent_id": "5ad4bfe35d82803a28f342fb",
+            "type": "raw-node",
+            "display_name": "B1",
+            "app_data": {}
+        },
+        {
+            "id": "5ad4bfe35d82803a28f342ff",
+            "parent_id": "5ad4bfe35d82803a28f342fa",
+            "type": "raw-node",
+            "display_name": "A2",
+            "app_data": {}
+        },
+        {
+            "id": "5ad4bfe35d82803a28f34300",
+            "parent_id": "5ad4bfe35d82803a28f342fa",
+            "type": "raw-node",
+            "display_name": "A1",
+            "app_data": {}
+        },
+        {
+            "id": "5ad4bfe35d82803a28f34301",
+            "parent_id": "5ad4bfe35d82803a28f342fb",
+            "type": "raw-node",
+            "display_name": "DenB",
+            "app_data": {}
+        },
+        {
+            "id": "5ad4bfe35d82803a28f34302",
+            "parent_id": "5ad4bfe35d82803a28f342fa",
+            "type": "raw-node",
+            "display_name": "A3",
+            "app_data": {}
+        },
+        {
+            "id": "5ad4bfe35d82803a28f34303",
+            "parent_id": "5ad4bfe35d82803a28f342fa",
+            "type": "raw-node",
+            "display_name": "DenA",
+            "app_data": {}
+        }
+    ]
+}
+
+
+Data-request (for each node)
+GET http://${SRV}/data_nodes/5ad4bfe35d82803a28f342fa/query?start_time=1518044400&end_time=1518045400
+
+Response:
+[
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T22:59:00.000Z",
+            "end": "2018-02-08T23:00:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:00:00.000Z",
+            "end": "2018-02-08T23:01:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:01:00.000Z",
+            "end": "2018-02-08T23:02:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:02:00.000Z",
+            "end": "2018-02-08T23:03:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:03:00.000Z",
+            "end": "2018-02-08T23:04:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:04:00.000Z",
+            "end": "2018-02-08T23:05:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:05:00.000Z",
+            "end": "2018-02-08T23:06:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:06:00.000Z",
+            "end": "2018-02-08T23:07:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:07:00.000Z",
+            "end": "2018-02-08T23:08:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:08:00.000Z",
+            "end": "2018-02-08T23:09:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:09:00.000Z",
+            "end": "2018-02-08T23:10:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:10:00.000Z",
+            "end": "2018-02-08T23:11:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:11:00.000Z",
+            "end": "2018-02-08T23:12:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:12:00.000Z",
+            "end": "2018-02-08T23:13:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:13:00.000Z",
+            "end": "2018-02-08T23:14:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:14:00.000Z",
+            "end": "2018-02-08T23:15:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:15:00.000Z",
+            "end": "2018-02-08T23:16:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:16:00.000Z",
+            "end": "2018-02-08T23:17:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:17:00.000Z",
+            "end": "2018-02-08T23:18:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:18:00.000Z",
+            "end": "2018-02-08T23:19:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:19:00.000Z",
+            "end": "2018-02-08T23:20:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:20:00.000Z",
+            "end": "2018-02-08T23:21:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:21:00.000Z",
+            "end": "2018-02-08T23:22:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:22:00.000Z",
+            "end": "2018-02-08T23:23:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:23:00.000Z",
+            "end": "2018-02-08T23:24:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:24:00.000Z",
+            "end": "2018-02-08T23:25:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:25:00.000Z",
+            "end": "2018-02-08T23:26:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:26:00.000Z",
+            "end": "2018-02-08T23:27:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:27:00.000Z",
+            "end": "2018-02-08T23:28:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:28:00.000Z",
+            "end": "2018-02-08T23:29:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:29:00.000Z",
+            "end": "2018-02-08T23:30:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:30:00.000Z",
+            "end": "2018-02-08T23:31:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:31:00.000Z",
+            "end": "2018-02-08T23:32:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:32:00.000Z",
+            "end": "2018-02-08T23:33:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:33:00.000Z",
+            "end": "2018-02-08T23:34:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:34:00.000Z",
+            "end": "2018-02-08T23:35:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:35:00.000Z",
+            "end": "2018-02-08T23:36:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:36:00.000Z",
+            "end": "2018-02-08T23:37:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:37:00.000Z",
+            "end": "2018-02-08T23:38:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:38:00.000Z",
+            "end": "2018-02-08T23:39:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:39:00.000Z",
+            "end": "2018-02-08T23:40:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:40:00.000Z",
+            "end": "2018-02-08T23:41:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:41:00.000Z",
+            "end": "2018-02-08T23:42:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:42:00.000Z",
+            "end": "2018-02-08T23:43:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:43:00.000Z",
+            "end": "2018-02-08T23:44:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:44:00.000Z",
+            "end": "2018-02-08T23:45:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:45:00.000Z",
+            "end": "2018-02-08T23:46:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:46:00.000Z",
+            "end": "2018-02-08T23:47:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:47:00.000Z",
+            "end": "2018-02-08T23:48:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:48:00.000Z",
+            "end": "2018-02-08T23:49:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:49:00.000Z",
+            "end": "2018-02-08T23:50:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:50:00.000Z",
+            "end": "2018-02-08T23:51:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:51:00.000Z",
+            "end": "2018-02-08T23:52:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:52:00.000Z",
+            "end": "2018-02-08T23:53:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:53:00.000Z",
+            "end": "2018-02-08T23:54:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:54:00.000Z",
+            "end": "2018-02-08T23:55:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:55:00.000Z",
+            "end": "2018-02-08T23:56:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:56:00.000Z",
+            "end": "2018-02-08T23:57:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:57:00.000Z",
+            "end": "2018-02-08T23:58:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:58:00.000Z",
+            "end": "2018-02-08T23:59:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "in",
+        "time": {
+            "start": "2018-02-08T23:59:00.000Z",
+            "end": "2018-02-09T00:00:00.000Z"
+        },
+        "value": 5
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T22:59:00.000Z",
+            "end": "2018-02-08T23:00:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:00:00.000Z",
+            "end": "2018-02-08T23:01:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:01:00.000Z",
+            "end": "2018-02-08T23:02:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:02:00.000Z",
+            "end": "2018-02-08T23:03:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:03:00.000Z",
+            "end": "2018-02-08T23:04:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:04:00.000Z",
+            "end": "2018-02-08T23:05:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:05:00.000Z",
+            "end": "2018-02-08T23:06:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:06:00.000Z",
+            "end": "2018-02-08T23:07:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:07:00.000Z",
+            "end": "2018-02-08T23:08:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:08:00.000Z",
+            "end": "2018-02-08T23:09:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:09:00.000Z",
+            "end": "2018-02-08T23:10:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:10:00.000Z",
+            "end": "2018-02-08T23:11:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:11:00.000Z",
+            "end": "2018-02-08T23:12:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:12:00.000Z",
+            "end": "2018-02-08T23:13:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:13:00.000Z",
+            "end": "2018-02-08T23:14:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:14:00.000Z",
+            "end": "2018-02-08T23:15:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:15:00.000Z",
+            "end": "2018-02-08T23:16:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:16:00.000Z",
+            "end": "2018-02-08T23:17:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:17:00.000Z",
+            "end": "2018-02-08T23:18:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:18:00.000Z",
+            "end": "2018-02-08T23:19:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:19:00.000Z",
+            "end": "2018-02-08T23:20:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:20:00.000Z",
+            "end": "2018-02-08T23:21:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:21:00.000Z",
+            "end": "2018-02-08T23:22:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:22:00.000Z",
+            "end": "2018-02-08T23:23:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:23:00.000Z",
+            "end": "2018-02-08T23:24:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:24:00.000Z",
+            "end": "2018-02-08T23:25:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:25:00.000Z",
+            "end": "2018-02-08T23:26:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:26:00.000Z",
+            "end": "2018-02-08T23:27:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:27:00.000Z",
+            "end": "2018-02-08T23:28:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:28:00.000Z",
+            "end": "2018-02-08T23:29:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:29:00.000Z",
+            "end": "2018-02-08T23:30:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:30:00.000Z",
+            "end": "2018-02-08T23:31:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:31:00.000Z",
+            "end": "2018-02-08T23:32:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:32:00.000Z",
+            "end": "2018-02-08T23:33:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:33:00.000Z",
+            "end": "2018-02-08T23:34:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:34:00.000Z",
+            "end": "2018-02-08T23:35:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:35:00.000Z",
+            "end": "2018-02-08T23:36:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:36:00.000Z",
+            "end": "2018-02-08T23:37:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:37:00.000Z",
+            "end": "2018-02-08T23:38:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:38:00.000Z",
+            "end": "2018-02-08T23:39:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:39:00.000Z",
+            "end": "2018-02-08T23:40:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:40:00.000Z",
+            "end": "2018-02-08T23:41:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:41:00.000Z",
+            "end": "2018-02-08T23:42:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:42:00.000Z",
+            "end": "2018-02-08T23:43:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:43:00.000Z",
+            "end": "2018-02-08T23:44:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:44:00.000Z",
+            "end": "2018-02-08T23:45:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:45:00.000Z",
+            "end": "2018-02-08T23:46:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:46:00.000Z",
+            "end": "2018-02-08T23:47:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:47:00.000Z",
+            "end": "2018-02-08T23:48:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:48:00.000Z",
+            "end": "2018-02-08T23:49:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:49:00.000Z",
+            "end": "2018-02-08T23:50:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:50:00.000Z",
+            "end": "2018-02-08T23:51:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:51:00.000Z",
+            "end": "2018-02-08T23:52:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:52:00.000Z",
+            "end": "2018-02-08T23:53:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:53:00.000Z",
+            "end": "2018-02-08T23:54:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:54:00.000Z",
+            "end": "2018-02-08T23:55:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:55:00.000Z",
+            "end": "2018-02-08T23:56:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:56:00.000Z",
+            "end": "2018-02-08T23:57:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:57:00.000Z",
+            "end": "2018-02-08T23:58:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:58:00.000Z",
+            "end": "2018-02-08T23:59:00.000Z"
+        },
+        "value": 1
+    },
+    {
+        "nodeId": "5ad4bfe35d82803a28f342fa",
+        "key": "out",
+        "time": {
+            "start": "2018-02-08T23:59:00.000Z",
+            "end": "2018-02-09T00:00:00.000Z"
+        },
+        "value": 1
+    }
+]

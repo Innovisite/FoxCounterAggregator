@@ -18,7 +18,7 @@ function KPIPeriodGeneric(ComputeService) {
         };
 
         var sumPeriod = ComputeService.cSumForPeriod(query.sitedata, query.period, query.groupBy, query.indicator);
-        res.data = sumPeriod;
+        res.data = sumPeriod;        
         res.value = ComputeService.cSum(sumPeriod, function(elt) {
           return elt.y;
         });

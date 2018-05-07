@@ -67,6 +67,7 @@
 											id: site._id,
 											_id: site._id,
 											name: site.name,
+											display_name: site.name,
 											siteInfo: site.siteInfo,
 											items: site.items
 										};
@@ -82,6 +83,7 @@
 											id: site._id,
 											_id: site._id,
 											name: site.name,
+											display_name: site.name,
 											siteInfo: site.siteInfo,
 											items: site.items
 										});

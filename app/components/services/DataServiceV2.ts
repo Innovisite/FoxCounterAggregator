@@ -52,10 +52,10 @@ export class DataServiceV2 {
     getDataNodes(siteId: string, period: QueryPeriod): Promise<DataEltV2[]> {
         let promise = this.myconfig.debug ?
             this.get_fake_data_nodes(siteId, period) :
-            this.$http.get("/data_nodes/" + siteId + "/query", {
+            this.$http.get("/api/v1/data_nodes/" + siteId + "/query", {
                 params: {
-                    start: period.startDate.unix(),
-                    end: period.endDate.unix()
+                    start_time: period.startDate.unix(),
+                    end_time: period.endDate.unix()
                 }
             });
         return promise.then((ret: any) => ret.data);

@@ -28,12 +28,12 @@ export class DataServiceV2 {
             value: value,
             time: {
                 start: timeStart.format(),
-                end: timeStart.add(duration, 'm').format()
+                end: timeStart.clone().add(duration, 'm').format()
             }
         };
     }
 
-    private get_fake_data_nodes(siteId: string, period: QueryPeriod): Promise<any> {        
+    private get_fake_data_nodes(siteId: string, period: QueryPeriod): Promise<any> {   
         const duration = 15;
         const retData: DataEltV2[] = [];
         for (let ts = period.startDate.clone(); ts.unix() < period.endDate.unix(); ts.add(duration, "m")) {
@@ -49,7 +49,7 @@ export class DataServiceV2 {
         return Promise.resolve({ data: retData });
     }
 
-    getDataNodes(siteId: string, period: QueryPeriod): Promise<DataEltV2[]> {
+    getDataNodes(siteId: string, period: QueryPeriod): Promise<DataEltV2[]> {        
         let promise = this.myconfig.debug ?
             this.get_fake_data_nodes(siteId, period) :
             this.$http.get("/api/v1/data_nodes/" + siteId + "/query", {

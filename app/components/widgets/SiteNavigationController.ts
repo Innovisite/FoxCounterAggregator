@@ -1,5 +1,5 @@
 import { SiteItem, SiteNavItem, SITE_NAV_EMPTY_ROOT, ViewableNode } from "../types/site";
-import { DataItem } from "../types/data";
+import { DataItem, QueryPeriod } from "../types/data";
 import { DashboardParamsServiceV2 } from '../services/DashboardParamsServiceV2';
 
 /**
@@ -39,6 +39,18 @@ function SiteNavigationController($scope: any, $controller: any, $paramsService:
                 that.params.comparedData = undefined;
             }            
         });        
+
+        $scope.$watch('params.period', function(newData: QueryPeriod, oldData: QueryPeriod) {
+            if(newData !== undefined) {
+                that.params.period = newData;
+            }
+        });
+
+        $scope.$watch('params.comparedPeriod', function(newData: QueryPeriod, oldData: QueryPeriod) {
+            if(newData !== undefined) {
+                that.params.comparedPeriod = newData;
+            }
+        });
 
         return that.params;
     };

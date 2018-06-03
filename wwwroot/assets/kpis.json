@@ -5,7 +5,8 @@
     "time": { "type": "range" },
     "type": "int",
     "measure": true,
-    "defaultValue": 0
+    "defaultValue": 0,
+    "func": "KPISum"
   },
   {
     "id": "rawOut",
@@ -13,7 +14,8 @@
     "time": { "type": "range" },
     "type": "int",
     "measure": true,
-    "defaultValue": 0
+    "defaultValue": 0,
+    "func": "KPISum"
   },
   {
     "id": "rawCount",
@@ -21,7 +23,8 @@
     "time": { "type": "range" },
     "type": "int",
     "measure": "true",
-    "defaultValue": 0
+    "defaultValue": 0,
+    "func": "KPIMean"
   },
   {
     "id": "summedIn",
@@ -35,7 +38,8 @@
     },
     "type": "int",
     "measure": false,
-    "defaultValue": 0
+    "defaultValue": 0,
+    "func": "KPISum"
   },
   {
     "id": "summedOut",
@@ -49,7 +53,8 @@
     },
     "type": "int",
     "measure": false,
-    "defaultValue": 0
+    "defaultValue": 0,
+    "func": "KPISum"
   },
   {
     "id": "waitingTime",
@@ -63,6 +68,7 @@
     },
     "type": "int",
     "measure": false,
-    "defaultValue": -1
+    "defaultValue": -1,
+    "func": "KPIMean"
   }
 ]

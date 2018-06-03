@@ -1,4 +1,5 @@
 import { SiteInfo, ViewableNode } from "./site";
+import { MomentDate } from "./kpi";
 
 export interface DataElt {
     duration: number;
@@ -20,9 +21,14 @@ export interface QueryCompute {
     period: QueryPeriod;
 }
 
+export interface DataResElt {
+    x: MomentDate;
+    y: number;
+}
+
 export interface ComputeRes {
     query: QueryCompute;
-    data: any[];
+    data: DataResElt[];
     value: number;
 }
 

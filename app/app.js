@@ -53,21 +53,18 @@
   require('./components/widgets/WidgetNavigation');
 
   // kpis
-  require('./components/kpis/KPIMax');
-  require('./components/kpis/KPIMaxPeriod');
-  require('./components/kpis/KPIMaxSiteRatio');
-  require('./components/kpis/KPIMean');
-  require('./components/kpis/KPISum');
-
-  
-
   angular.module('FSCounterAggregatorApp')
     .controller('KPISumGeneric', require('./components/kpis/KPISumGeneric'))
-    .controller('KPISumMax', require('./components/kpis/KPISumMax'))
-    .controller('KPIPeriodGeneric', require('./components/kpis/KPIPeriodGeneric'))
+    .controller('KPISumMax', require('./components/kpis/KPISumMax'))    
+    .controller('KPIPeriodGeneric', require('./components/kpis/KPIPeriodGeneric').default)
     .controller('KPISitesPeriod', require('./components/kpis/KPISitesPeriod'))
     .controller('KPITypicalDay', require('./components/kpis/KPITypicalDay'))
     .controller('KPIServerGeneric', require('./components/kpis/KPIServerGeneric'))
+    .controller('KPIMax', require('./components/kpis/KPIMax'))
+    .controller('KPISum', require('./components/kpis/KPISum'))
+    .controller('KPIMean', require('./components/kpis/KPIMean'))
+    .controller('KPIMaxSiteRatio', require('./components/kpis/KPIMaxSiteRatio'))
+    .controller('KPIMaxPeriod', require('./components/kpis/KPIMaxPeriod'))
     .controller('SiteNavigationController', require('./components/widgets/SiteNavigationController'))
     .controller('DashboardControllerV2', require('./components/dashboard/DashboardControllerV2'));
 
@@ -92,7 +89,7 @@
         state('dashboard', {
           url: '/dashboard', 
           templateUrl: 'build/html/DashboardView.html',
-          controller: 'DashboardController',
+          controller: 'DashboardControllerV2',
           pageName: 'Counters / Sites Overview',
           category: 'Counters'
         }).
@@ -106,7 +103,7 @@
         state('mydashboard', {
           url: '/mydashboard', 
           templateUrl: 'build/html/MyDashboardView.html',
-          controller: 'DashboardController',
+          controller: 'DashboardControllerV2',
           pageName: 'Counters / MyDashboard',
           category: 'Counters'
         }).

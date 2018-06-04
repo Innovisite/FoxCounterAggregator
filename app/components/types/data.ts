@@ -1,5 +1,5 @@
 import { SiteInfo, ViewableNode } from "./site";
-import { MomentDate } from "./kpi";
+import { MomentDate, KPIServerParams } from "./kpi";
 
 export interface DataElt {
     duration: number;
@@ -15,6 +15,8 @@ export interface QueryPeriod {
 }
 
 export interface QueryCompute {
+    kpis?: KPIServerParams[];
+    allsitedata?: DataEltV2[][]
     sitedata: DataEltV2[];
     groupBy: string;
     indicator: string;
@@ -22,7 +24,7 @@ export interface QueryCompute {
 }
 
 export interface DataResElt {
-    x: MomentDate;
+    x?: MomentDate;
     y: number;
 }
 

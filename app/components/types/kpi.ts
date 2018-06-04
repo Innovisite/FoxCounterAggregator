@@ -1,4 +1,4 @@
-import { DataResElt } from "./data";
+import { DataResElt, QueryPeriod } from "./data";
 
 export interface KPIServerParams {
     id: string;
@@ -44,7 +44,7 @@ export const EMPTY_KPI_OPTIONS: KPIOptions = {
 export type MomentDate = any;
 
 export type RangeInitFunc = (date: MomentDate) => MomentDate;
-export type RangeStepFunc = (date: MomentDate) => MomentDate;
+export type RangeStepFunc = (date: MomentDate, period?: QueryPeriod) => MomentDate;
 export type RangeDistFunc = (date: MomentDate, dateStart: MomentDate) => number;
 
 export interface RangeFunc {

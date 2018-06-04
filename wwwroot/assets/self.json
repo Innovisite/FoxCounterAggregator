@@ -85,6 +85,13 @@
             "type": "raw-node",
             "display_name": "DenA",
             "app_data": {}
+        },
+        {
+            "id": "ffffffffffffffff",
+            "parent_id": null,
+            "type": "compound-node",
+            "display_name": "NewYork",
+            "app_data": {}
         }
     ]
 }

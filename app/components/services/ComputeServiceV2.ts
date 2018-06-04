@@ -1,6 +1,6 @@
 declare const moment: any;
 
-import { DataEltV2, QueryPeriod, DataResElt } from '../types/data';
+import { DataEltV2, QueryPeriod, DataResElt, QueryCompute, ComputeRes } from '../types/data';
 import { MomentDate, RangeFunc, RangeInitFunc, RangeDistFunc, RangeStepFunc, ResMapFunc } from '../types/kpi';
 
 const NSEC_5MIN = 300;
@@ -51,6 +51,105 @@ const rangeFunc: RangeFuncMap = {
         init: (date) => date.date(1),
         step: (date) => date.add(1, "M"),
         dist: (date, dateStart) => (date.year() * 12 + date.month()) - (dateStart.year() * 12 + dateStart.month())
+    },
+    'all': {
+        init: (date) => date,
+        step: (date, period) => date = period.endDate.clone(),
+        dist: (data, dateStart) => 0
+    }
+};
+
+export const DEFAULT_RANGE_PARAMS = {
+    '15min': {
+        hourMode: true,
+        comparable: false,
+        label: function (d: string, p: any) {
+            return moment(d).format("dddd, MMMM Do YYYY, HH:mm").concat(moment(d).add(15, "m").format(" - HH:mm"));
+        },
+        isPeriodComputable: function (period: QueryPeriod) {
+            return period.endDate.diff(period.startDate, "days") <= 15;
+        }
+    },
+    'hours': {
+        hourMode: true,
+        comparable: true,
+        label: function (d: string, p: any) {
+            return moment(d).format("dddd, MMMM Do YYYY, HH:00");
+        },
+        isPeriodComputable: function (period: QueryPeriod) {
+            return period.endDate.diff(period.startDate, "months") <= 6;
+        }
+    },
+    'days': {
+        hourMode: false,
+        comparable: true,
+        label: function (d: string, p: any) {
+            return moment(d).format("dddd, MMMM Do YYYY");
+        },
+        isPeriodComputable: function (period: QueryPeriod) {
+            return period.endDate.diff(period.startDate, "years") <= 2;
+        }
+    },
+    'week': {
+        hourMode: false,
+        comparable: true,
+        label: function (d: string, p: any) {
+            return moment.max(p.startDate, moment(d)).format("MMM DD YYYY").concat(moment.min(moment(d).add(1, "w"), p.endDate).format(" - MMM DD YYYY"));
+        },
+        isPeriodComputable: function (period: QueryPeriod) {
+            return period.endDate.diff(period.startDate, "weeks") >= 1;
+        }
+    },
+    'month': {
+        hourMode: false,
+        comparable: true,
+        label: function (d: string, p: any) {
+            return moment.max(p.startDate, moment(d)).format("MMM DD YYYY").concat(moment.min(moment(d).add(1, "M"), p.endDate).format(" - MMM DD YYYY"));
+        },
+        isPeriodComputable: function (period: QueryPeriod) {
+            return period.endDate.diff(period.startDate, "months") >= 1;
+        }
+    }
+};
+
+export const DEFAULT_COMPUTE_FUNCS = {
+    'KPISum': {
+        compute: function (query: QueryCompute): ComputeRes {                
+            const res: ComputeRes = {
+                query: query,
+                data: [],
+                value: undefined
+            };
+
+            const sumPeriod = cSumForPeriod(
+                query.sitedata.filter(_ => _.key == query.indicator),
+                query.period,
+                query.groupBy,
+                "value"
+            );
+            res.data = sumPeriod;
+            res.value = cSum(sumPeriod, (elt: DataResElt) => elt.y);
+            return res;
+        }
+    },
+    'KPIMean': {
+        compute: function (query: QueryCompute): ComputeRes {
+            const res: ComputeRes = {
+                query: query,
+                data: [],
+                value: undefined
+            };
+
+            const meanPeriod = cMeanForPeriod(
+                query.sitedata.filter(_ => _.key == query.indicator),
+                query.period,
+                query.groupBy,
+                "value"
+            );
+            res.data = meanPeriod;
+            res.value = Math.round(cMean(meanPeriod, (elt) => elt.y));
+            return res;
+        }
     }
 };
 
@@ -73,7 +172,7 @@ function createTimeIndex(period: QueryPeriod, initFunc: RangeInitFunc, stepFunc:
     let ts = initFunc(period.startDate.clone());
     for (let i = 0; ts.unix() < period.endDate.unix(); ++i) {
         index.push({ x: ts.clone(), y: idxFuncValue(i, ts) });
-        ts = stepFunc(ts);
+        ts = stepFunc(ts, period);
     }
     return index;
 }
@@ -168,7 +267,7 @@ export function cSum(data: DataResElt[], fsum: ResMapFunc) {
 * @description Returns the mean of all elements in a array
 */
 export function cMean(data: DataResElt[], fsum: ResMapFunc) {
-    return data.length === 0 ? 0 : this.cSum(data, fsum) / data.length;
+    return data.length === 0 ? 0 : cSum(data, fsum) / data.length;
 }
 
 /**

@@ -65,7 +65,7 @@ angular.module('FSCounterAggregatorApp').
 
 					function getValue(data, period, indicator) {
 						var res = $scope.kpi.compute({
-							allsitedata: data,
+							allsitedata: data.map(_ => _.data),
 							period: period,
 							indicator: indicator,
 							omitTable: true

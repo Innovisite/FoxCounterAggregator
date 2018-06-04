@@ -7,99 +7,9 @@ import * as ComputeService from "../services/ComputeServiceV2";
 
 function KPIServerGeneric($scope: any, $controller: any) {
 
-    this.rangeParams = {
-        '15min': {
-            hourMode: true,
-            comparable: false,
-            label: function (d: string, p: any) {
-                return moment(d).format("dddd, MMMM Do YYYY, HH:mm").concat(moment(d).add(15, "m").format(" - HH:mm"));
-            },
-            isPeriodComputable: function (period: QueryPeriod) {
-                return period.endDate.diff(period.startDate, "days") <= 15;
-            }
-        },
-        'hours': {
-            hourMode: true,
-            comparable: true,
-            label: function (d: string, p: any) {
-                return moment(d).format("dddd, MMMM Do YYYY, HH:00");
-            },
-            isPeriodComputable: function (period: QueryPeriod) {
-                return period.endDate.diff(period.startDate, "months") <= 6;
-            }
-        },
-        'days': {
-            hourMode: false,
-            comparable: true,
-            label: function (d: string, p: any) {
-                return moment(d).format("dddd, MMMM Do YYYY");
-            },
-            isPeriodComputable: function (period: QueryPeriod) {
-                return period.endDate.diff(period.startDate, "years") <= 2;
-            }
-        },
-        'week': {
-            hourMode: false,
-            comparable: true,
-            label: function (d: string, p: any) {
-                return moment.max(p.startDate, moment(d)).format("MMM DD YYYY").concat(moment.min(moment(d).add(1, "w"), p.endDate).format(" - MMM DD YYYY"));
-            },
-            isPeriodComputable: function (period: QueryPeriod) {
-                return period.endDate.diff(period.startDate, "weeks") >= 1;
-            }
-        },
-        'month': {
-            hourMode: false,
-            comparable: true,
-            label: function (d: string, p: any) {
-                return moment.max(p.startDate, moment(d)).format("MMM DD YYYY").concat(moment.min(moment(d).add(1, "M"), p.endDate).format(" - MMM DD YYYY"));
-            },
-            isPeriodComputable: function (period: QueryPeriod) {
-                return period.endDate.diff(period.startDate, "months") >= 1;
-            }
-        }
-    };
+    this.rangeParams = ComputeService.DEFAULT_RANGE_PARAMS;
 
-    this.computeFuncs = {
-        'KPISum': {
-            compute: function (query: QueryCompute): ComputeRes {
-                const res: ComputeRes = {
-                    query: query,
-                    data: [],
-                    value: undefined
-                };
-
-                const sumPeriod = ComputeService.cSumForPeriod(
-                    query.sitedata.filter(_ => _.key == query.indicator),
-                    query.period,
-                    query.groupBy,
-                    "value"
-                );
-                res.data = sumPeriod;
-                res.value = ComputeService.cSum(sumPeriod, (elt: DataResElt) => elt.y);
-                return res;
-            }
-        },
-        'KPIMean': {
-            compute: function (query: QueryCompute): ComputeRes {
-                const res: ComputeRes = {
-                    query: query,
-                    data: [],
-                    value: undefined
-                };
-
-                const meanPeriod = ComputeService.cMeanForPeriod(
-                    query.sitedata.filter(_ => _.key == query.indicator),
-                    query.period,
-                    query.groupBy,
-                    "value"
-                );
-                res.data = meanPeriod;
-                res.value = Math.round(ComputeService.cMean(meanPeriod, (elt) => elt.y));
-                return res;
-            }
-        }
-    };
+    this.computeFuncs = ComputeService.DEFAULT_COMPUTE_FUNCS;
 
     this.defaultFunc = 'KPISum';
 
@@ -155,6 +65,7 @@ function KPIServerGeneric($scope: any, $controller: any) {
                 }
             }
         });
+        this.setOptions({indicators: this.indicators});
     };
 
     this.getRangeParams = function (id: string) {

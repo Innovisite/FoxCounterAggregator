@@ -33,7 +33,14 @@ export class DashboardParamsServiceV2 {
         endDate: this.period.endDate.clone().subtract(1, 'days')
     };
 
-    sites: ViewableNode[] = [];
+    /**
+     * Contains only root sites list (sites that have no parent)
+     */
+    sites: ViewableNode[] = [];    
+    /**
+     * Contains all sites including childs
+     */
+    sitesWithChilds: ViewableNode[] = [];
 
     data: DataItemV2[] = [];
 
@@ -60,7 +67,8 @@ export class DashboardParamsServiceV2 {
 
         return this.UserService.getSettings().
             then((data) => {
-                this.sites = data.viewable_nodes;
+                this.sitesWithChilds = data.viewable_nodes;
+                this.sites = this.sitesWithChilds.filter(site => !site.parent_id);
                 return this.getKPIs();
             })
             .then(kpis => {
@@ -99,7 +107,7 @@ export class DashboardParamsServiceV2 {
     }
 
     loadData() {
-        return this.loadDataOnPeriod(this.sites.filter(site => !site.parent_id), this.period)
+        return this.loadDataOnPeriod(this.sites, this.period)
             .then((data) => {
                 this.data = data;
                 return this;
@@ -107,7 +115,7 @@ export class DashboardParamsServiceV2 {
     }
 
     loadDataCompared() {
-        return this.loadDataOnPeriod(this.sites.filter(site => !site.parent_id), this.comparedPeriod)
+        return this.loadDataOnPeriod(this.sites, this.comparedPeriod)
             .then((data) => {
                 this.comparedData = data;
                 return this.loadData();

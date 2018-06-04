@@ -19,7 +19,7 @@ function SiteNavigationController($scope: any, $controller: any, $paramsService:
 
         that.params = Object.assign({}, params);
 
-        $scope.$watch("params.sites", function (newSites: ViewableNode[], oldSites: ViewableNode[]) {                        
+        $scope.$watch("params.sitesWithChilds", function (newSites: ViewableNode[], oldSites: ViewableNode[]) {                        
 
             if (newSites !== undefined && newSites.length) {
                 that.originalSites = newSites.slice(0);

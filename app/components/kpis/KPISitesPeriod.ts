@@ -4,11 +4,11 @@
 * @description Compute the sum of data for each range within a period of time
 */
 
-var KPIPeriodGeneric = require('./KPIPeriodGeneric');
+import KPIPeriodGeneric from "./KPIPeriodGeneric";
 
-function KPISitesPeriod(ComputeService) {
+function KPISitesPeriod() {
 
-  KPIPeriodGeneric.call(this, ComputeService);
+  KPIPeriodGeneric.call(this);
 
   this.setOptions({
     indicators: [
@@ -21,6 +21,4 @@ function KPISitesPeriod(ComputeService) {
   });
 }
 
-KPISitesPeriod.$inject = [ "ComputeService" ];
-
-module.exports = KPISitesPeriod;
+export = KPISitesPeriod;

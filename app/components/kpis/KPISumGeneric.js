@@ -11,7 +11,7 @@ function KPISumGeneric($scope, $controller) {
   this.kpis = {
   };
 
-  this.avoid = [ "duration", "time" ];
+  this.avoid = [ "duration", "time", "nodeId", "key", "value" ];
 
   this.options = {
     indicators: [

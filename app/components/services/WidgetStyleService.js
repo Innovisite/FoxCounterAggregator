@@ -65,12 +65,14 @@
 						let items = [];
 						sites.forEach((site) => {
 							items.push(site);
-							site.items.forEach((item) => {
-								items.push({
-									id: item._id,
-									name: site.name + " - " + item.name
+							if (site.items) {
+								site.items.forEach((item) => {
+									items.push({
+										id: item._id,
+										name: site.name + " - " + item.name
+									});
 								});
-							});
+							}
 						});
 						return items;
 					} else {

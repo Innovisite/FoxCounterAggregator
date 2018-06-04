@@ -63,6 +63,10 @@ export class UserServiceV2 {
         return this.currentUserData;
     }
 
+    getSites() {
+        return this.getCachedSettings().viewable_nodes;
+    }
+
     getResource() {
         if (this.myconfig.debug) {
 

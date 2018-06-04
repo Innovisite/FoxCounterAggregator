@@ -13,8 +13,8 @@ function KPISitesPeriod() {
   this.setOptions({
     indicators: [
       { id: 'in', name: 'In', func: 'KPISum' },
-      { id: 'out', name: 'Out', func: 'KPISum' },
-      { id: 'occ', name: 'Occupancy', func: 'KPIMean' }
+      { id: 'out', name: 'Out', func: 'KPISum' },      
+      { id: 'count', name: 'Occupancy', func: 'KPIMean' }
     ],
     defaultIndicatorId: 'in',
     defaultRangeId: 'hours'

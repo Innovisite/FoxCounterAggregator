@@ -13,14 +13,14 @@ function KPISumMax($scope, $controller) {
     this.kpis = {
 	"in": $controller("KPISum", { "$scope": $scope }),
 	"out": $controller("KPISum", { "$scope": $scope }),
-	"occ": $controller("KPIMax", { "$scope": $scope })
+	"count": $controller("KPIMax", { "$scope": $scope })
     };
 
     this.options = {
 	indicators: [
 	    { id: 'in', name: 'In' },
 	    { id: 'out', name: 'Out' },
-	    { id: 'occ', name: 'Max Occupancy' }
+	    { id: 'count', name: 'Max Occupancy' }
 	]
     };
 

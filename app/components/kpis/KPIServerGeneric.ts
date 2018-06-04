@@ -56,7 +56,8 @@ function KPIServerGeneric($scope: any, $controller: any) {
         this.options = Object.assign(this.options, options);
     };
 
-    this.updateIndicators = function (sitedata: DataItemV2) {
+    this.updateIndicators = (sitedata: DataItemV2) => {
+        this.indicators = [];
         sitedata.data.forEach(elt => {
             if (!this.indicators.find((_: any) => _.name == elt.key)) {
                 const kpi = this.kpis.find((_: any) => _.key == elt.key);
@@ -66,6 +67,7 @@ function KPIServerGeneric($scope: any, $controller: any) {
             }
         });
         this.setOptions({indicators: this.indicators});
+        return this.indicators;
     };
 
     this.getRangeParams = function (id: string) {

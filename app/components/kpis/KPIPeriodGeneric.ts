@@ -9,7 +9,7 @@ import { QueryPeriod, QueryCompute, ComputeRes, DataItemV2 } from '../types/data
 
 declare const moment: any;
 
-export default function KPIPeriodGeneric() {  
+export default function KPIPeriodGeneric() {
 
   this.computeFuncs = ComputeService.DEFAULT_COMPUTE_FUNCS;
 
@@ -19,7 +19,19 @@ export default function KPIPeriodGeneric() {
 
   this.indicators = [];
 
-  this.avoid = [ "duration", "time", "nodeId", "key", "value" ];
+  this.kpis = [
+    {      
+      key: "in"            
+    },
+    {      
+      key: "out"           
+    },
+    {      
+      key: "count"      
+    }
+  ];
+
+  this.avoid = [];
 
   this.options = {
 
@@ -48,7 +60,7 @@ export default function KPIPeriodGeneric() {
 
     defaultRangeId: 'hours',
 
-    getLabel: function(id: string) {
+    getLabel: function (id: string) {
       return id;
     }
   };
@@ -74,7 +86,7 @@ export default function KPIPeriodGeneric() {
   * @description return whether or not we can compute the KPI
   * for a specific period size
   */
-  this.isPeriodComputable = function(period: QueryPeriod, rangeId: string) {
+  this.isPeriodComputable = function (period: QueryPeriod, rangeId: string) {
     return this.getRangeParams(rangeId).isPeriodComputable(period);
   };
 
@@ -84,7 +96,7 @@ export default function KPIPeriodGeneric() {
   * @description return whether or not this range period
   * could be used for comparisons between multiple sets of data
   */
-  this.isPeriodComparable = function(rangeId: string) {
+  this.isPeriodComparable = function (rangeId: string) {
     return this.getRangeParams(rangeId).comparable;
   };
 
@@ -93,7 +105,7 @@ export default function KPIPeriodGeneric() {
   * @memberOf FSCounterAggregator.KPISitesPeriod
   * @description returns the parameters for a specific period id
   */
-  this.getRangeParams = function(id: string) {
+  this.getRangeParams = function (id: string) {
     return this.rangeParams[id];
   };
 
@@ -102,7 +114,7 @@ export default function KPIPeriodGeneric() {
   * @memberOf FSCounterAggregator.KPISitesPeriod
   * @description returns the appropriate function which set the date format
   */
-  this.getRangeTimeFormat = function(rangeId: string) {
+  this.getRangeTimeFormat = function (rangeId: string) {
     return this.getRangeParams(rangeId).label;
   };
 
@@ -111,7 +123,7 @@ export default function KPIPeriodGeneric() {
   * @memberOf FSCounterAggregator.KPISitesPeriod
   * @description returns the displayed indicator label
   */
-  this.getIndicatorName = function(indicatorId: string) {
+  this.getIndicatorName = function (indicatorId: string) {
     var elt = this.getIndicatorElt(indicatorId);
     if (elt !== undefined) {
       return elt.name || elt.id;
@@ -119,7 +131,7 @@ export default function KPIPeriodGeneric() {
     return undefined;
   };
 
-  this.getIndicatorFunc = function(id: string) {
+  this.getIndicatorFunc = function (id: string) {
     var elt = this.getIndicatorElt(id);
     if (elt !== undefined) {
       return elt.func || this.defaultFunc;
@@ -127,54 +139,41 @@ export default function KPIPeriodGeneric() {
     return undefined;
   };
 
-  this.getIndicatorElt = function(id: string) {
-    return this.indicators.find((elt:any) => elt.id === id);  
+  this.getIndicatorElt = function (id: string) {
+    return this.indicators.find((elt: any) => elt.id === id);
   };
 
-  this.getOptionIndicatorElt = function(id: string) {
-    return this.options.indicators.find((elt:any) => elt.id === id);
+  this.getOptionIndicatorElt = function (id: string) {
+    return this.options.indicators.find((elt: any) => elt.id === id);
   };
 
-  this.setOptions = function(options: any) {
+  this.setOptions = function (options: any) {
     this.options = Object.assign(this.options, options);
   };
 
-  this.addIndicatorElt = function(elt: any) {
+  this.addIndicatorElt = function (elt: any) {
     this.indicators.push(elt);
   };
 
-  this.updateIndicators = function(sitedata: DataItemV2) {
-
-    // reset the indicators list
+  this.updateIndicators = function (sitedata: DataItemV2) {
     this.indicators = [];
-
-    if (sitedata.data.length) {
-      var elt = sitedata.data[0];
-      for (var key in elt) {
-        if (this.avoid.indexOf(key) === -1) {
-          if (this.options.defaultIndicatorId === undefined) {
-            this.options.defaultIndicatorId = key;
-          }
-
-          if (this.getIndicatorElt(key) === undefined) {
-            var option = this.getOptionIndicatorElt(key);
-            if(option !== undefined) {
-              this.addIndicatorElt(option);
-            } else {
-              this.addIndicatorElt({ id: key });
-            }
-          }
+    sitedata.data.forEach(elt => {
+      if (!this.indicators.find((_: any) => _.name == elt.key)) {
+        const kpi = this.kpis.find((_: any) => _.key == elt.key);
+        if (kpi) {
+          this.indicators.push({ id: kpi.key, name: elt.key });
         }
       }
-    }
-
+    });
+    this.setOptions({ indicators: this.indicators });
+    return this.indicators;
   };
 
   /**
   * @function haveKPI
   * @description return whether or not an indicator exist for this kpi
   */
-  this.haveIndicator = function(id: string) {
+  this.haveIndicator = function (id: string) {
     return this.getIndicatorElt(id) !== undefined;
   };
 
@@ -183,9 +182,9 @@ export default function KPIPeriodGeneric() {
   * @memberOf FSCounterAggregatorApp.KPISitesPeriod
   * @description Compute the sum of data for each range within a period of time
   */
-  this.compute = function(query: QueryCompute) {
+  this.compute = function (query: QueryCompute) {
     var func = this.getIndicatorFunc(query.indicator);
-    if(func !== undefined) {
+    if (func !== undefined) {
       return this.computeFuncs[func].compute(query);
     }
     return undefined;

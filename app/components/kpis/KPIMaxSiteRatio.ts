@@ -1,5 +1,5 @@
 import * as ComputeService from "../services/ComputeServiceV2";
-import { QueryCompute, DataResElt } from "../types/data";
+import { QueryCompute, DataResElt, ComputeRes } from "../types/data";
 
 declare const _: any;
 
@@ -20,14 +20,15 @@ function KPIMaxSiteRatio() {
 	 * @description Returns the site which have the biggest
 	 * amount of data
 	 */
-	this.compute = function (query: QueryCompute) {
+	this.compute = function (query: QueryCompute) {				
 
 		if (!query.indicator)
 			query.indicator = this.getDefaultIndicatorId();
 
-		const res = {
+		const res: ComputeRes = {
 			query: query,
-			value: 0
+			value: 0,
+			isSiteIndex: true
 		};
 
 		const siteSums = query.allsitedata.map(

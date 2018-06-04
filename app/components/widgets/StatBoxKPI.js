@@ -70,6 +70,9 @@ angular.module('FSCounterAggregatorApp').
 							indicator: indicator,
 							omitTable: true
 						});
+						if(res.isSiteIndex) {
+							res.value = $scope.params.sites[res.value].id;
+						}
 						return applyFilters(res.value);
 					}
 

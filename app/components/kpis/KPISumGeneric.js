@@ -69,6 +69,9 @@ function KPISumGeneric($scope, $controller) {
         }
       }
     }
+
+    return this.options.indicators;
+
   };
 
   /**

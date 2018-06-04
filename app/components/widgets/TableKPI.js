@@ -65,10 +65,10 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function () {
                     }
                 });
 
-                $scope.updateIndicators = function () {
+                $scope.updateIndicators = () => {
                     if ($scope.itemsList.length > 0 && $scope.kpi.updateIndicators !== undefined) {
                         var idx = _.findIndex($scope.params.data, { "id": $scope.itemsList[0].id });
-                        $scope.kpi.updateIndicators($scope.params.data[idx]);
+                        $scope.indicators = $scope.kpi.updateIndicators($scope.params.data[idx]);
                     }
                 };
 

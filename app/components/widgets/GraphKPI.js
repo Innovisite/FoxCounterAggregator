@@ -99,7 +99,7 @@ angular.module('FSCounterAggregatorApp').
 
                     // todo: update site list regarding the sites
                     // delivered by the data provider
-                    $scope.$watch('params.data', function (newData, oldData) {
+                    $scope.$watch('params.data', function (newData, oldData) {                        
                         if (newData !== undefined && newData.length) {
                             //$scope.updateSiteList();
                             $scope.updateSelectedRange();
@@ -133,7 +133,7 @@ angular.module('FSCounterAggregatorApp').
 
                             var idx = _.findIndex($scope.params.data, {
                                 "id": selSite.id
-                            });
+                            });                            
 
                             $scope.kpi.updateIndicators($scope.params.data[idx]);
 
@@ -238,7 +238,7 @@ angular.module('FSCounterAggregatorApp').
                     }
 
                     $scope.update = function () {
-
+                        
                         WidgetStyleService.getStyle($scope.widgetId).
                             then(function (style) {
 

@@ -165,7 +165,8 @@ export default function KPIPeriodGeneric() {
         }
       }
     });
-    this.setOptions({ indicators: this.indicators });
+    this.defaultIndicatorId = this.indicators.length ? this.indicators[0].id : undefined;
+    this.setOptions({ indicators: this.indicators, defaultIndicatorId: this.defaultIndicatorId });    
     return this.indicators;
   };
 
@@ -182,7 +183,7 @@ export default function KPIPeriodGeneric() {
   * @memberOf FSCounterAggregatorApp.KPISitesPeriod
   * @description Compute the sum of data for each range within a period of time
   */
-  this.compute = function (query: QueryCompute) {
+  this.compute = function (query: QueryCompute) {    
     var func = this.getIndicatorFunc(query.indicator);
     if (func !== undefined) {
       return this.computeFuncs[func].compute(query);

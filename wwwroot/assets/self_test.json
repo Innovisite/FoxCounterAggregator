@@ -1,0 +1,48 @@
+{
+    "type": "user",
+    "id": "5a69d0bfc2df633f6029563f",
+    "display_name": "User",
+    "email": "user@fox",
+    "is_enabled": true,
+    "is_global_administrator": false,
+    "app_data": {},
+    "viewable_nodes": [
+        {
+            "id": "5a69fded23a3af432424972f",
+            "parent_id": null,
+            "type": "compound-node",
+            "display_name": "Airport",
+            "app_data": {
+                "timezone": "UTC"
+            }
+        },
+        {
+            "id": "5a69fe0123a3af4324249730",
+            "parent_id": "5a69fded23a3af432424972f",
+            "type": "compound-node",
+            "display_name": "T1_checkin",
+            "app_data": {}
+        },
+        {
+            "id": "5a6aeab823a3af4324249733",
+            "parent_id": "5a69fe0123a3af4324249730",
+            "type": "raw-node",
+            "display_name": "count_top",
+            "app_data": {}
+        },
+        {
+            "id": "5a6aeac723a3af4324249734",
+            "parent_id": "5a69fe0123a3af4324249730",
+            "type": "raw-node",
+            "display_name": "count_bottom",
+            "app_data": {}
+        },
+        {
+            "id": "5a6aeace23a3af4324249735",
+            "parent_id": "5a69fe0123a3af4324249730",
+            "type": "raw-node",
+            "display_name": "pers_count",
+            "app_data": {}
+        }
+    ]
+}

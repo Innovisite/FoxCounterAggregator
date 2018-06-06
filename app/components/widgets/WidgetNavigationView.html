@@ -21,10 +21,11 @@
                     </li>
                     <li class="divider"></li>                    
                     <li ng-repeat="entry in navPos.childs" role="menuitem" class="entry">
-                        <button class="no-decoration" ng-click="goNav(entry)">{{entry.name}}</button>
-                        <button type="button" class="btn no-decoration" ng-click="navChild($event, entry)">
+                        <button ng-if="entry.childs && entry.childs.length" class="no-decoration" ng-click="goNav(entry)">{{entry.name}}</button>
+                        <button ng-if="entry.childs && entry.childs.length" type="button" class="btn no-decoration" ng-click="navChild($event, entry)">
                             <i class="fa fa-angle-right"></i>
                         </button>
+                        <span ng-if="!entry.childs || !entry.childs.length">{{entry.name}}</span>
                     </li>
                 </ul>
             </div>

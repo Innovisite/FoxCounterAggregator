@@ -28,7 +28,7 @@ function SiteNavigationController($scope: any, $controller: any, $paramsService:
             }
         });
 
-        $scope.$watch('params.data', function (newData: DataItem[], oldData: DataItem[]) {                   
+        $scope.$watch('params.data', function (newData: DataItem[], oldData: DataItem[]) {                               
             if (newData !== undefined && newData.length) {                
                 that.goNav(that.threePos);
             }

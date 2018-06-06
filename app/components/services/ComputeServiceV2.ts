@@ -241,7 +241,7 @@ export function cApplyLocalTimezone(data: DataEltV2[], tzSrc: string) {
   * @memberOf FSCounterAggregatorApp.ComputeService
   * @description aggregate data on a period grouped by step duration
   */
-function cFuncForPeriod(data: DataEltV2[], period: QueryPeriod, step: string, id: string, func: CumulFunc) {    
+function cFuncForPeriod(data: DataEltV2[], period: QueryPeriod, step: string, id: string, func: CumulFunc) {      
     let timeIndex = createTimeIndex(period, rangeFunc[step].init, rangeFunc[step].step, () => undefined);
     timeIndex = fillIndex(data, timeIndex, (elt) => rangeFunc[step].dist(moment(elt.time.start), period.startDate));
     var tdata = aggregate(data, timeIndex, func);

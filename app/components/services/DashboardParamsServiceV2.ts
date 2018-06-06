@@ -50,7 +50,7 @@ export class DashboardParamsServiceV2 {
     // to desactivate period comparisons on widget side
     comparedData: DataItemV2[] = undefined;
 
-    private useTimeZone = false;
+    useTimeZone = false;
 
     constructor(
         private $http: any,
@@ -79,13 +79,14 @@ export class DashboardParamsServiceV2 {
 
     convertSiteTimezone(data: DataItemV2[]) {
 
-        data.filter(_ => _.siteInfo && _.siteInfo.app_data && _.siteInfo.app_data.timezone).forEach(item => {
+        data.filter(_ => _.siteInfo && _.siteInfo.app_data && _.siteInfo.app_data.timezone).forEach(item => {            
             cApplyLocalTimezone(item.data, item.siteInfo.app_data.timezone);
         });
 
     }
 
-    loadDataOnPeriod(sites: ViewableNode[], period: QueryPeriod) {
+    loadDataOnPeriod(sites: ViewableNode[], period: QueryPeriod) {        
+
         if (!this.useTimeZone) {
             return this.DataService.getRawDataForSitesInInterval(sites, period);
         } else {
@@ -99,7 +100,7 @@ export class DashboardParamsServiceV2 {
                     };
                 })
             )
-            .then(data => {
+            .then(data => {                
                 this.convertSiteTimezone(data);
                 return data;
             });            

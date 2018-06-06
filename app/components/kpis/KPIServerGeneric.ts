@@ -34,7 +34,7 @@ function KPIServerGeneric($scope: any, $controller: any) {
         return that;
     };
 
-    this.compute = function (query: QueryCompute): ComputeRes {
+    this.compute = function (query: QueryCompute): ComputeRes {        
         const func = this.getIndicatorFunc(query.indicator);
         if (func !== undefined) {
             return this.computeFuncs[func].compute(query);
@@ -66,7 +66,8 @@ function KPIServerGeneric($scope: any, $controller: any) {
                 }
             }
         });
-        this.setOptions({indicators: this.indicators});
+        this.defaultIndicatorId = this.indicators.length ? this.indicators[0].id : undefined;
+        this.setOptions({ indicators: this.indicators, defaultIndicatorId: this.defaultIndicatorId });
         return this.indicators;
     };
 
@@ -132,7 +133,7 @@ function KPIServerGeneric($scope: any, $controller: any) {
                     name: 'Months'
                 }
             ],
-            defaultIndicatorId: this.kpis[0].key,
+            defaultIndicatorId: undefined,
             defaultRangeId: '15min',
         });
     };

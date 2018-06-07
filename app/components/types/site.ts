@@ -18,6 +18,8 @@ export interface ViewableNode {
     type: 'compound-node'|'raw-node';
     display_name: string;
     app_data: SiteInfo;
+    // if present could be used by widget with navigation controller    
+    haveItems?: boolean;  
 };
 
 export interface SiteNavItem {

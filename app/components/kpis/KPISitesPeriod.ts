@@ -12,11 +12,14 @@ function KPISitesPeriod() {
 
   this.setOptions({
     indicators: [
-      { id: 'in', name: 'In', func: 'KPISum' },
-      { id: 'out', name: 'Out', func: 'KPISum' },      
-      { id: 'count', name: 'Occupancy', func: 'KPIMean' }
+      { id: 'in', name: 'rawIn' },
+      { id: 'out', name: 'rawOut' },      
+      { id: 'count', name: 'Occupancy' },
+      { id: 'In', name: 'In' },
+      { id: 'Out', name: 'Out' },      
+      { id: 'WaitingTime', name: 'WaitingTime' }
     ],
-    defaultIndicatorId: 'in',
+    defaultIndicatorId: undefined,
     defaultRangeId: 'hours'
   });
 }

@@ -1,8 +1,12 @@
 import { DataResElt, QueryPeriod } from "./data";
 
-export interface KPIServerParams {
-    id: string;
+export interface KPIParams {
     key: string;
+    func: string;
+}
+
+export interface KPIServerParams extends KPIParams {
+    id: string;    
     time: {
         type: "range"|"periods",
         period?: {
@@ -12,8 +16,7 @@ export interface KPIServerParams {
     };
     type: string;
     measure: boolean;
-    defaultValue: number;
-    func: string;
+    defaultValue: number;    
 }
 
 export interface KPIOptionsIndicator {

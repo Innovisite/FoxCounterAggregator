@@ -6,6 +6,7 @@
 
 import * as ComputeService from '../services/ComputeServiceV2';
 import { QueryPeriod, QueryCompute, ComputeRes, DataItemV2 } from '../types/data';
+import { KPIParams } from '../types/kpi';
 
 declare const moment: any;
 
@@ -21,15 +22,30 @@ export default function KPIPeriodGeneric() {
 
   this.kpis = [
     {      
-      key: "in"            
+      key: "in",
+      func: "KPISum"            
     },
     {      
-      key: "out"           
+      key: "out",
+      func: "KPISum"           
     },
     {      
-      key: "count"      
+      key: "count",
+      func: "KPIMean"      
+    },
+    {      
+      key: "In",
+      func: "KPISum"            
+    },
+    {      
+      key: "Out",
+      func: "KPISum"           
+    },
+    {      
+      key: "WaitingTime",
+      func: "KPIMean"      
     }
-  ];
+  ] as KPIParams[];
 
   this.avoid = [];
 
@@ -124,66 +140,51 @@ export default function KPIPeriodGeneric() {
   * @description returns the displayed indicator label
   */
   this.getIndicatorName = function (indicatorId: string) {
-    var elt = this.getIndicatorElt(indicatorId);
+    var elt = this.indicators.find((_: any) => _.id == indicatorId);
     if (elt !== undefined) {
       return elt.name || elt.id;
     }
     return undefined;
   };
 
+  this.haveIndicator = function(id: string) {
+    return this.indicators.find((_: any) => _.id == id);
+  };
+
   this.getIndicatorFunc = function (id: string) {
-    var elt = this.getIndicatorElt(id);
+    const elt = this.indicators.find((elt: any) => elt.id === id);
     if (elt !== undefined) {
-      return elt.func || this.defaultFunc;
+      const kpi = this.kpis.find((elt:KPIParams) => elt.key == id);
+      return kpi.func || this.defaultFunc;
     }
     return undefined;
   };
-
-  this.getIndicatorElt = function (id: string) {
-    return this.indicators.find((elt: any) => elt.id === id);
-  };
-
-  this.getOptionIndicatorElt = function (id: string) {
-    return this.options.indicators.find((elt: any) => elt.id === id);
-  };
-
+  
   this.setOptions = function (options: any) {
     this.options = Object.assign(this.options, options);
-  };
+  };  
 
-  this.addIndicatorElt = function (elt: any) {
-    this.indicators.push(elt);
-  };
-
-  this.updateIndicators = function (sitedata: DataItemV2) {
+  this.updateIndicators = function (sitedata: DataItemV2) {    
     this.indicators = [];
     sitedata.data.forEach(elt => {
       if (!this.indicators.find((_: any) => _.name == elt.key)) {
         const kpi = this.kpis.find((_: any) => _.key == elt.key);
         if (kpi) {
-          this.indicators.push({ id: kpi.key, name: elt.key });
+          this.indicators.push({ id: kpi.key, name: elt.key, func: kpi.func });
         }
       }
     });
     this.defaultIndicatorId = this.indicators.length ? this.indicators[0].id : undefined;
     this.setOptions({ indicators: this.indicators, defaultIndicatorId: this.defaultIndicatorId });    
     return this.indicators;
-  };
-
-  /**
-  * @function haveKPI
-  * @description return whether or not an indicator exist for this kpi
-  */
-  this.haveIndicator = function (id: string) {
-    return this.getIndicatorElt(id) !== undefined;
-  };
+  };  
 
   /**
   * @function compute
   * @memberOf FSCounterAggregatorApp.KPISitesPeriod
   * @description Compute the sum of data for each range within a period of time
   */
-  this.compute = function (query: QueryCompute) {    
+  this.compute = function (query: QueryCompute) {        
     var func = this.getIndicatorFunc(query.indicator);
     if (func !== undefined) {
       return this.computeFuncs[func].compute(query);

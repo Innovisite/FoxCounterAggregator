@@ -20,37 +20,27 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function () {
             '$q',
             '$controller',
             'WidgetStyleService',
-            'DTOptionsBuilder',
-            function ($scope, $q, $controller, WidgetStyleService, DTOptionsBuilder) {
+            /* 'DTOptionsBuilder',
+            'DTColumnDefBuilder', */
+            function ($scope, $q, $controller, WidgetStyleService/* , DTOptionsBuilder, DTColumnDefBuilder */) {                
+
                 $scope.widgetId = "TableKPIWidget";
-                $scope.indicators = $scope.kpi.options.indicators;
+                $scope.indicators = []; //$scope.kpi.options.indicators;
                 $scope.rows = [];
                 $scope.total = {};
                 $scope.showItems = $scope.showItems === "true";
                 $scope.periodComparisonSelected = false;
-                $scope.itemsList = [];
+                $scope.itemsList = [];                
 
-                $scope.dtOptions = DTOptionsBuilder.newOptions().withBootstrap();
+                //$scope.dtOptions = DTOptionsBuilder.newOptions().withBootstrap();              
 
-                if ($scope.kpiOptions !== undefined) {
-                    $scope.kpi.setOptions($scope.kpiOptions);
-                }
-
-                $scope.$on('event:dataTableLoaded', function (event, loadedDT) {
-                    // loadedDT === {"id": "foobar", "DataTable": oTable, "dataTable": $oTable}
-                    // loadedDT.DataTable is the DataTable API instance
-                    // loadedDT.dataTable is the jQuery Object
-                    // See http://datatables.net/manual/api#Accessing-the-API
-                    loadedDT.dataTable.rowGrouping();
-                });
-
-                $scope.$watch('params.data', function (newData, oldData) {
-                    if (newData !== undefined && newData.length) { //&& newData !== oldData) {
+                $scope.$watch('params.data', function (newData, oldData) {                    
+                    if (newData !== undefined && newData.length) { //&& newData !== oldData) {                        
                         $scope.update();
                     }
                 });
 
-                $scope.$watch("params.sites", function (newSites, oldSites) {
+                $scope.$watch("params.sites", function (newSites, oldSites) {                    
                     if (newSites !== undefined && newSites.length) {
                         $scope.itemsList = WidgetStyleService.buildItemsList(newSites, $scope.showItems);
                     }
@@ -65,21 +55,25 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function () {
                     }
                 });
 
+                if ($scope.kpiOptions !== undefined) {
+                    $scope.kpi.setOptions($scope.kpiOptions);
+                }                                                
+
                 $scope.updateIndicators = () => {
                     if ($scope.itemsList.length > 0 && $scope.kpi.updateIndicators !== undefined) {
-                        var idx = _.findIndex($scope.params.data, { "id": $scope.itemsList[0].id });
+                        const idx = _.findIndex($scope.params.data, { "id": $scope.itemsList[0].id });
                         $scope.indicators = $scope.kpi.updateIndicators($scope.params.data[idx]);
                     }
                 };
 
-                $scope.updateTotal = function () {                    
-                    var indicators = $scope.indicators;
-                    var newTotal = {};
-                    for (var i = 0; i < indicators.length; ++i) {
-                        var res = $scope.kpi.compute({
+                $scope.updateTotal = function () {
+                    const indicators = $scope.indicators;
+                    const newTotal = {};
+                    for (let i = 0; i < indicators.length; ++i) {
+                        const res = $scope.kpi.compute({
                             "period": $scope.params.period,
                             "groupBy": "all",
-                            "indicator": indicators[i].id,                            
+                            "indicator": indicators[i].id,
                             "sitedata": $scope.rows.filter(row => $scope.params.sites.find(site => row.id === site.id))
                                 .map(row => {
                                     return {
@@ -91,25 +85,22 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function () {
                         });
                         newTotal[indicators[i].id] = res.value;
                     }
-                    $scope.total = newTotal;
+                    $scope.total = newTotal;                    
                 };
 
-                $scope.updateSites = function () {
-                    var newTableRows = [];
-                    var indicators = $scope.indicators;
-                    var idx,
-                        res,
-                        j;
-                    for (var i = 0; i < $scope.itemsList.length; ++i) {
+                $scope.updateSites = function () {                    
+                    const newTableRows = [];
+                    const indicators = $scope.indicators;
+                    for (let i = 0; i < $scope.itemsList.length; ++i) {
                         const curItem = $scope.itemsList[i];
-                        var rowSite = {
+                        const rowSite = {
                             "name": curItem.name || curItem.display_name,
                             "period": $scope.params.period,
                             "id": curItem.id,
-                            "haveItems": curItem.items && curItem.items.length
+                            "haveItems": curItem.haveItems
                         };
-                        for (j = 0; j < indicators.length; ++j) {
-                            idx = _.findIndex($scope.params.data, { "id": curItem.id });
+                        for (let j = 0; j < indicators.length; ++j) {
+                            const idx = _.findIndex($scope.params.data, { "id": curItem.id });
                             res = $scope.kpi.compute({
                                 "period": $scope.params.period,
                                 "groupBy": "all",
@@ -124,11 +115,11 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function () {
                                 "name": curItem.name || curItem.display_name,
                                 "period": $scope.params.comparedPeriod,
                                 "id": curItem.id,
-                                "haveItems": curItem.items && curItem.items.length,
+                                "haveItems": curItem.haveItems,
                                 "comparedPeriod": true
                             };
-                            for (j = 0; j < indicators.length; ++j) {
-                                idx = _.findIndex($scope.params.comparedData, { "id": curItem.id });
+                            for (let j = 0; j < indicators.length; ++j) {
+                                const idx = _.findIndex($scope.params.comparedData, { "id": curItem.id });
                                 res = $scope.kpi.compute({
                                     "period": $scope.params.comparedPeriod,
                                     "groupBy": "all",
@@ -140,14 +131,14 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function () {
                             newTableRows.push(rowSite);
                         }
                     }
-                    $scope.rows = newTableRows;
+                    $scope.rows = newTableRows;                    
                 };
 
-                $scope.update = function () {                    
+                $scope.update = function () {
 
                     WidgetStyleService.getStyle($scope.widgetId).then(function (style) {
-                        $scope.setWidgetStyle(style);
-                        $scope.updateIndicators();
+                        $scope.setWidgetStyle(style);                        
+                        $scope.updateIndicators();                        
                         $scope.updateSites();
                         if (!$scope.periodComparisonSelected) {
                             $scope.updateTotal();
@@ -155,10 +146,7 @@ angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function () {
                     });
                 };
 
-                $scope.setWidgetStyle = function (style) {
-                    if (style.json !== undefined && style.json.dtOptions !== undefined) {
-                        //$scope.dtOptions = $q.when(style.json.dtOptions);
-                    }
+                $scope.setWidgetStyle = function (style) {                    
                 };
 
                 $scope.goChild = function (id) {

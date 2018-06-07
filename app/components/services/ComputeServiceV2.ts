@@ -55,7 +55,7 @@ const rangeFunc: RangeFuncMap = {
     'all': {
         init: (date) => date,
         step: (date, period) => date = period.endDate.clone(),
-        dist: (data, dateStart) => 0
+        dist: (date, dateStart) => 0
     }
 };
 

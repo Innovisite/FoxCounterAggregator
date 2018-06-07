@@ -20,7 +20,7 @@ export class UserServiceV2 {
 	 * @description retrieve the user settings and cached them
 	 */
     getSettings(): Promise<UserSettings> {
-        const url = this.myconfig.debug ? "assets/self_test.json" : "/api/v1/self";
+        const url = this.myconfig.debug ? "assets/self.json" : "/api/v1/self";
         return this.$http.get(url).
             then((ret: any) => {
                 this.currentUserData = ret.data;

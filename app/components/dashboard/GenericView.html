@@ -30,23 +30,15 @@
           </fca-graph-kpi>
         </div>
       </section>
-    </div>
-    <!-- <div class="row">
-      <section class="col-md-12">
-        <div ng-controller="KPIServerGeneric as kpi" ng-init="init(params)">
-          <fca-graph-kpi ng-if="kpi.kpis.length" params="params" kpi="kpi">
-          </fca-graph-kpi>
-        </div>
-      </section>
-    </div>
-    <div class="row">
-      <section class="col-md-12">
-        <div ng-controller="KPIServerGeneric as kpi" ng-init="init(params)">
-          <fca-table-kpi ng-if="kpi.kpis.length" params="params" kpi="kpi">
-          </fca-table-kpi>
-        </div>
-      </section>
-    </div> -->
+      <div class="row">
+        <section class="col-md-12">
+          <div ng-controller="KPIServerGeneric as kpi" ng-init="init(params)">
+            <fca-table-kpi ng-if="kpi.kpis.length" params="nav.params" kpi="kpi" on-next-item="nav.goChildFromId($event)">
+            </fca-table-kpi>
+          </div>
+        </section>
+      </div>
+    </div>    
   </section>
 
 </div>

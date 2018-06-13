@@ -1,4 +1,4 @@
-import * as ComputeService from "../services/ComputeServiceV2";
+import * as ComputeService from "../services/ComputeService";
 import { QueryCompute, DataResElt, ComputeRes } from "../types/data";
 
 declare const _: any;

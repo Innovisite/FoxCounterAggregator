@@ -4,7 +4,7 @@
 * @description Compute the sum of the available indicators
 */
 
-import * as ComputeService from '../services/ComputeServiceV2';
+import * as ComputeService from '../services/ComputeService';
 import { DataItemV2, QueryCompute } from '../types/data';
 import { KPIParams } from '../types/kpi';
 

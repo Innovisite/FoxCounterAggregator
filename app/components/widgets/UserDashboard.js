@@ -21,7 +21,7 @@ angular.module('FSCounterAggregatorApp')
 
 		     function updateDashboard(user) {
 
-			 element.html(user.userInfo.dashboard).show();
+			 element.html(user.app_data.dashboard).show();
 			 $compile(element.contents())(scope);
 			 
 		     }
@@ -29,13 +29,13 @@ angular.module('FSCounterAggregatorApp')
 		     UserService.getSettings()
 			 .then(function(ret) {
 
-			     updateDashboard(ret.user);
+			     updateDashboard(ret);
 			     
 			 });
 
 		     scope.$watch('params.currentUserdata', function(newVal, oldVal) {
 			 if(oldVal != newVal) {
-			     updateDashboard(newVal.user);
+			     updateDashboard(newVal);
 			 }
 		     });
 		 }

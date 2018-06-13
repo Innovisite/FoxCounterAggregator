@@ -3,7 +3,7 @@
 * @memberOf FSCounterAggregatorApp
 * @description Compute the sum of data for each range within a period of time
 */
-import * as ComputeService from "../services/ComputeServiceV2";
+import * as ComputeService from "../services/ComputeService";
 import KPIPeriodGeneric from "./KPIPeriodGeneric";
 import { QueryPeriod, QueryCompute, ComputeRes, DataEltV2 } from "../types/data";
 

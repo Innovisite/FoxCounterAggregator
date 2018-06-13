@@ -20,8 +20,8 @@ angular.module('FSCounterAggregatorApp')
 	    
 	    UserService.getSettings()
 		.then(function(data) {
-		    $scope.username = data.user.name;
-		    $scope.email = data.user.email;
+		    $scope.username = data.display_name;
+		    $scope.email = data.email;
 		});
 
 	    $scope.oldPassword = "";
@@ -30,8 +30,8 @@ angular.module('FSCounterAggregatorApp')
 	    
 	    $scope.$watch('params.currentUserData', function(newVal, oldVal) {
 		if(newVal != oldVal) {
-		    $scope.username = newVal.user.name;
-		    $scope.email = newVal.user.email;
+		    $scope.username = newVal.display_name;
+		    $scope.email = newVal.email;
 		}
 	    });
 	    

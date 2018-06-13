@@ -1,11 +1,11 @@
-import { DashboardParamsServiceV2 } from "../services/DashboardParamsServiceV2";
+import { DashboardParamsService } from "../services/DashboardParamsService";
 
 declare const window: any;
 
 /*
  * Manage the dashboard data
  **/
-function DashboardControllerV2($scope: any, paramsService: DashboardParamsServiceV2) {    
+function DashboardController($scope: any, paramsService: DashboardParamsService) {    
 
     $scope.params = paramsService;
 
@@ -24,6 +24,6 @@ function DashboardControllerV2($scope: any, paramsService: DashboardParamsServic
 
 }
 
-(<any>DashboardControllerV2).$inject = ["$scope", "DashboardParamsServiceV2"];
+(<any>DashboardController).$inject = ["$scope", "DashboardParamsService"];
 
-export = DashboardControllerV2;
+export = DashboardController;

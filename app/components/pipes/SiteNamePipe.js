@@ -7,7 +7,7 @@
     require('../services/UserService');
     
  angular.module('FSCounterAggregatorApp')
-    .filter("SiteName", ["UserServiceV2", function(UserService)
+    .filter("SiteName", ["UserService", function(UserService)
     {
         var addSiteName = function(siteId)
         {            

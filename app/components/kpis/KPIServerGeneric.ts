@@ -3,7 +3,7 @@ declare const moment: any;
 import { KPIOptions, KPIServerParams, EMPTY_KPI_OPTIONS } from '../types/kpi';
 import { DataItemV2, QueryCompute, ComputeRes, QueryPeriod, DataResElt } from '../types/data';
 
-import * as ComputeService from "../services/ComputeServiceV2";
+import * as ComputeService from "../services/ComputeService";
 
 function KPIServerGeneric($scope: any, $controller: any) {
 

@@ -6,7 +6,7 @@ import { QueryPeriod, DataEltV2, DataItemV2 } from "../types/data";
  * @memberOf FSCounterAggregatorApp
  * @description Get Data from server
  */
-export class DataServiceV2 {
+export class DataService {
 
     static $inject = [
         "$http",

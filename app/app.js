@@ -66,7 +66,7 @@
     .controller('KPIMaxSiteRatio', require('./components/kpis/KPIMaxSiteRatio'))
     .controller('KPIMaxPeriod', require('./components/kpis/KPIMaxPeriod'))
     .controller('SiteNavigationController', require('./components/widgets/SiteNavigationController'))
-    .controller('DashboardControllerV2', require('./components/dashboard/DashboardControllerV2'));
+    .controller('DashboardController', require('./components/dashboard/DashboardController'));
 
   // filters
   require('./components/pipes/HourFormatPipe');
@@ -74,9 +74,9 @@
 
   // services
   angular.module('FSCounterAggregatorApp')
-    .service('UserServiceV2', require('./components/services/UserServiceV2').UserServiceV2)    
-    .service('DashboardParamsServiceV2', require('./components/services/DashboardParamsServiceV2').DashboardParamsServiceV2)
-    .service('DataServiceV2', require('./components/services/DataServiceV2').DataServiceV2);
+    .service('UserService', require('./components/services/UserService').UserService)    
+    .service('DashboardParamsService', require('./components/services/DashboardParamsService').DashboardParamsService)
+    .service('DataService', require('./components/services/DataService').DataService);
 
   // Configure routes
   angular.module('FSCounterAggregatorApp').config(['$urlRouterProvider', '$stateProvider',
@@ -89,21 +89,21 @@
         state('dashboard', {
           url: '/dashboard', 
           templateUrl: 'build/html/DashboardView.html',
-          controller: 'DashboardControllerV2',
+          controller: 'DashboardController',
           pageName: 'Counters / Sites Overview',
           category: 'Counters'
         }).
         state('generic', {
           url: '/generic', 
           templateUrl: 'build/html/GenericView.html',
-          controller: 'DashboardControllerV2',
+          controller: 'DashboardController',
           pageName: 'Counters / Generic',
           category: 'Counters'
         }).
         state('mydashboard', {
           url: '/mydashboard', 
           templateUrl: 'build/html/MyDashboardView.html',
-          controller: 'DashboardControllerV2',
+          controller: 'DashboardController',
           pageName: 'Counters / MyDashboard',
           category: 'Counters'
         }).

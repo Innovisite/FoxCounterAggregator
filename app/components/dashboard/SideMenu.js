@@ -25,7 +25,7 @@
 						LayoutService.init();
 
 						function updateRights(data) {
-							var currentUserSites = data.sites;
+							var currentUserSites = data.viewable_nodes;
 							scope.hasAdminSites = false;
 							for (var i = 0; i < currentUserSites.length; ++i) {
 								if (currentUserSites[i].isadmin) {
@@ -33,7 +33,7 @@
 									break;
 								}
 							}
-							scope.hasUserDashboard = data.user.userInfo && data.user.userInfo.dashboard && data.user.userInfo.dashboard.length > 0;
+							scope.hasUserDashboard = data.app_data && data.app_data.dashboard && data.app_data.dashboard.length > 0;
 						}
 
 						UserService.getSettings()

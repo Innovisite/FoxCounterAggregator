@@ -1,12 +1,12 @@
 import { SiteItem, SiteNavItem, SITE_NAV_EMPTY_ROOT, ViewableNode } from "../types/site";
 import { DataItem, QueryPeriod } from "../types/data";
-import { DashboardParamsServiceV2 } from '../services/DashboardParamsServiceV2';
+import { DashboardParamsService } from '../services/DashboardParamsService';
 
 /**
  * @class SiteNavigationController
  * @memberOf FSCounterAggregatorApp
  */
-function SiteNavigationController($scope: any, $controller: any, $paramsService: DashboardParamsServiceV2) {
+function SiteNavigationController($scope: any, $controller: any, $paramsService: DashboardParamsService) {
 
     this.params = { sites: [], data: [] };
     this.three = Object.assign({}, SITE_NAV_EMPTY_ROOT);
@@ -124,6 +124,6 @@ function SiteNavigationController($scope: any, $controller: any, $paramsService:
 
 }
 
-(<any>SiteNavigationController).$inject = ["$scope", "$controller", "DashboardParamsServiceV2"];
+(<any>SiteNavigationController).$inject = ["$scope", "$controller", "DashboardParamsService"];
 
 export = SiteNavigationController;

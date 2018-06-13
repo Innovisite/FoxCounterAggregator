@@ -1,5 +1,5 @@
 
-import * as ComputeService from "../services/ComputeServiceV2";
+import * as ComputeService from "../services/ComputeService";
 import { QueryCompute, DataResElt } from "../types/data";
 
 /**

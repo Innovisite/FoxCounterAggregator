@@ -5,22 +5,22 @@ declare const _: any;
 import { ViewableNode } from '../types/site';
 import { QueryPeriod, DataItemV2 } from '../types/data';
 
-import { UserServiceV2 } from './UserServiceV2';
+import { UserService } from './UserService';
 import { KPIServerParams } from '../types/kpi';
-import { DataServiceV2 } from './DataServiceV2';
+import { DataService } from './DataService';
 
-import { cApplyLocalTimezone } from './ComputeServiceV2';
+import { cApplyLocalTimezone } from './ComputeService';
 
 /**
  * @class DashboardParamsService
  * @memberOf FSCounterAggregatorApp
  * @description Manage global dashboard parameters such as periods
  **/
-export class DashboardParamsServiceV2 {
+export class DashboardParamsService {
 
     static $inject = [
-        "$http", "$q", "DataServiceV2", "UserServiceV2",
-        "SiteService", "OccupancyIndicator", "myconfig"];
+        "$http", "$q", "DataService", "UserService",
+        "SiteService", "myconfig"];
 
     period: QueryPeriod = {
         startDate: moment().hours(0).minutes(0).seconds(0).milliseconds(0),
@@ -55,10 +55,9 @@ export class DashboardParamsServiceV2 {
     constructor(
         private $http: any,
         private $q: any,
-        private DataService: DataServiceV2,
-        private UserService: UserServiceV2,
-        private SiteService: any,      
-        private OccupancyIndicator: any,
+        private DataService: DataService,
+        private UserService: UserService,
+        private SiteService: any,              
         private myconfig: any
     ) {
     }

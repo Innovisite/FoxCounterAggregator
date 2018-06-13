@@ -4,13 +4,13 @@ declare const _: any;
 import { UserSettings } from '../types/user';
 import { ViewableNode } from '../types/site';
 
-export class UserServiceV2 {
+export class UserService {
 
-    static $inject = ["$http", "$resource", "$q", "myconfig"];
+    static $inject = ["$http", "$resource", "myconfig"];
 
     private currentUserData: UserSettings;
 
-    constructor(private $http: any, private $resource: any, private $q: any, private myconfig: any) {
+    constructor(private $http: any, private $resource: any, private myconfig: any) {
 
     }
 

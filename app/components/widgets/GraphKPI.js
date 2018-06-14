@@ -124,6 +124,12 @@ angular.module('FSCounterAggregatorApp').
                         }
                     });
 
+                    $scope.onMainSiteSelectionChange = function () {
+                        $scope.updateIndicators();
+                        $scope.updateSelectedRange();
+                        $scope.update();
+                    };
+
                     $scope.updateIndicators = function () {
                         // we update the kpi indicators by using
                         // data on the selected site or from the first returned site
@@ -248,14 +254,16 @@ angular.module('FSCounterAggregatorApp').
                         }
                     }
 
+                    function clearWidgetStyle(style) {                        
+                        $scope.style = Object.assign({}, style.json);                        
+                    }
+
                     $scope.update = function () {
 
                         WidgetStyleService.getStyle($scope.widgetId).
                             then(function (style) {
 
-                                $scope.setWidgetStyle(style);
-
-                                //$scope.updateIndicators();
+                                clearWidgetStyle(style);
 
                                 $scope.periodComparisonLabels = {};
 
@@ -263,37 +271,43 @@ angular.module('FSCounterAggregatorApp').
                                 var chartsLegends = [];
                                 var chartsLegendsCompared = [];
 
-                                updateOnPeriod($scope.params.period, $scope.params.data, $scope.style.chartData, chartsData, chartsLegends, "");
+                                if ($scope.rangeSelected.id !== undefined && $scope.indicatorSelected.id !== undefined) {
 
-                                if ($scope.periodComparisonSelected) {
+                                    $scope.setWidgetStyle(style);
 
-                                    updateOnPeriod($scope.params.comparedPeriod, $scope.params.comparedData, $scope.style.chartDataCompared, chartsData, chartsLegendsCompared, "comp");
+                                    updateOnPeriod($scope.params.period, $scope.params.data, $scope.style.chartData, chartsData, chartsLegends, "");
 
-                                    $scope.periodComparisonMoments = [];
+                                    if ($scope.periodComparisonSelected) {
 
-                                    if ($scope.itemsSelected[1] === undefined) {
-                                        replaceXaxis(chartsData[1].values, chartsData[0].values, $scope.periodComparisonMoments);
-                                    } else {
-                                        replaceXaxis(chartsData[2].values, chartsData[0].values, $scope.periodComparisonMoments);
-                                        replaceXaxis(chartsData[3].values, chartsData[1].values);
+                                        updateOnPeriod($scope.params.comparedPeriod, $scope.params.comparedData, $scope.style.chartDataCompared, chartsData, chartsLegendsCompared, "comp");
+
+                                        $scope.periodComparisonMoments = [];
+
+                                        if ($scope.itemsSelected[1] === undefined) {
+                                            replaceXaxis(chartsData[1].values, chartsData[0].values, $scope.periodComparisonMoments);
+                                        } else {
+                                            replaceXaxis(chartsData[2].values, chartsData[0].values, $scope.periodComparisonMoments);
+                                            replaceXaxis(chartsData[3].values, chartsData[1].values);
+                                        }
+
+                                        $scope.chartLegendsCompared = chartsLegendsCompared;
                                     }
 
-                                    $scope.chartLegendsCompared = chartsLegendsCompared;
+                                    $scope.periodTimeFormat = $scope.kpi.getTimeFormat($scope.params.period, $scope.rangeSelected.id);
                                 }
-
-                                $scope.periodTimeFormat = $scope.kpi.getTimeFormat($scope.params.period, $scope.rangeSelected.id);
 
                                 $scope.chartLegends = chartsLegends;
                                 $scope.chartLegendsCompared = chartsLegendsCompared;
-
                                 $scope.countingChartOptions = $scope.style.nvd3;
                                 $scope.countingChartOptions.chart.xScale = d3.time.scale();
                                 $scope.countingChartData = chartsData;
+
+                                $scope.api.refresh();
                             });
                     };
 
                     $scope.setWidgetStyle = function (style) {
-                        $scope.style = style.json;
+                    
                         $scope.style.nvd3.chart.xAxis.tickFormat = function (d) {
                             return moment(d).format($scope.periodTimeFormat);
                         };

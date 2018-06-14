@@ -42,7 +42,7 @@ export class KPIServerGeneric extends KPIPeriodBase {
     }
 
     isPeriodComparable(rangeId: string) {
-        return this.getRangeParams(rangeId).comparable;
+        return rangeId !== undefined && this.getRangeParams(rangeId).comparable;
     }
 
     getIndicatorFunc(key: string) {

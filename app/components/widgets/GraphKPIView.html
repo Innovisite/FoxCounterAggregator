@@ -19,7 +19,7 @@
 
       <h3 class="box-title">
         <select class="form-control" ng-model="itemsSelected[0]" ng-options="option.display_name disable when (itemsSelected[1] && option.id == itemsSelected[1].id) for option in itemsList track by option.id"
-          ng-change="update()">
+          ng-change="onMainSiteSelectionChange()">
         </select>
       </h3>
       <h3 class="box-title" ng-show="showsitecomparing">
@@ -70,6 +70,6 @@
         </div>
       </div>
     </div>
-    <nvd3 options="countingChartOptions" data="countingChartData"></nvd3>
+    <nvd3 options="countingChartOptions" data="countingChartData" api="api"></nvd3>
   </div>
 </div>

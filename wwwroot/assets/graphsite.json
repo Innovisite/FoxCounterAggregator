@@ -1,61 +1,60 @@
 {
-    "nvd3": {
-	"chart": {
-	    "type": "lineChart",
-	    "useInteractiveGuideline": true,
-	    "height": 300,
-	    "interactiveLayer": {
-		"tooltip": {
+	"nvd3": {
+		"chart": {
+			"type": "lineChart",
+			"useInteractiveGuideline": true,
+			"height": 300,
+			"interactiveLayer": {
+				"tooltip": {}
+			},
+			"tooltip": {},
+			"xAxis": {},
+			"yAxis": {},
+			"forceY": [
+				0,
+				1
+			],
+			"pointShape": "circle",
+			"pointSize": 2,
+			"showLegend": false,
+			"zoom": {
+				"enabled": false,
+				"scaleExtent": [
+					1,
+					10
+				],
+				"useFixedDomain": false,
+				"useNiceScale": false,
+				"horizontalOff": false,
+				"verticalOff": true,
+				"unzoomEventType": "dblclick.zoom"
+			}
 		}
-	    },
-	    "tooltip": {
-	    },
-	    "xAxis": {
-	    },
-	    "yAxis": {
-	    },
-	    "forceY": [ 0, 1 ],
-	    "pointShape": "circle",
-	    "pointSize": 2,
-	    "showLegend": false,
-	    "zoom": {
-		"enabled": false,
-		"scaleExtent": [
-		    1,
-		    10
-		],
-		"useFixedDomain": false,
-		"useNiceScale": false,
-		"horizontalOff": false,
-		"verticalOff": true,
-		"unzoomEventType": "dblclick.zoom"
-	    }
-	}
-    },
-    "chartData": [
-	{
-	    "area": true,
-            "strokeWidth": 4,
-	    "fillOpacity": 0.1,
-	    "color": "#1F77B4"
 	},
-	{
-	    "area": false,
-	    "strokeWidth": 4,
-	    "color": "#aadff3"
-	}
-    ],
-    "chartDataCompared": [
-	{
-	    "area": true,
-            "strokeWidth": 4,
-	    "fillOpacity": 0.1,
-	    "color": "#ED7E17"
-	},
-	{
-	    "area": false,
-	    "strokeWidth": 4,
-	    "color": "#f2d5bd"
-	}
-    ]
+	"chartData": [
+		{
+			"area": true,
+			"strokeWidth": 4,
+			"fillOpacity": 0.1,
+			"color": "#1F77B4"
+		},
+		{
+			"area": false,
+			"strokeWidth": 4,
+			"color": "#aadff3"
+		}
+	],
+	"chartDataCompared": [
+		{
+			"area": true,
+			"strokeWidth": 4,
+			"fillOpacity": 0.1,
+			"color": "#ED7E17"
+		},
+		{
+			"area": false,
+			"strokeWidth": 4,
+			"color": "#f2d5bd"
+		}
+	]
 }

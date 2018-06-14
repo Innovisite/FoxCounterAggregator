@@ -35,13 +35,14 @@ export interface KPIOptions {
     indicators: KPIOptionsIndicator[];
     defaultIndicatorId: string;
     defaultRangeId: string;
+    getLabel?: (id: string) => string;
 }
 
 export const EMPTY_KPI_OPTIONS: KPIOptions = {
     ranges: [],
     indicators: [],
     defaultIndicatorId: null,
-    defaultRangeId: null
+    defaultRangeId: null    
 };
 
 export type MomentDate = any;

@@ -178,6 +178,14 @@ function createTimeIndex(period: QueryPeriod, initFunc: RangeInitFunc, stepFunc:
 }
 
 /**
+ * @function getDataStepSeconds
+ * @description Returns the data step in seconds
+ */
+export function getDataStepSeconds(elt: DataEltV2): number {
+    return moment(elt.time.end).unix() - moment(elt.time.start).unix();
+}
+
+/**
 * @function fillIndex
 * @memberOf FSCounterAggregatorApp.ComputeService
 * @description create new index

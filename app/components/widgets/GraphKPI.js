@@ -24,7 +24,7 @@ angular.module('FSCounterAggregatorApp').
                     $scope,
                     WidgetStyleService,
                     $sce
-                ) {                    
+                ) {
 
                     $scope.showsitecomparing = ($scope.sitecomparing === undefined) || ($scope.sitecomparing === "true");
 
@@ -38,7 +38,7 @@ angular.module('FSCounterAggregatorApp').
             '<ul>' +
             '<li ng-repeat="option in parent.kpi.options.indicators"> {{option.name}}</li>' +
             '</ul>'
-          );*/                   
+          );*/
 
                     $scope.siteComparisonSelected = undefined;
 
@@ -47,15 +47,15 @@ angular.module('FSCounterAggregatorApp').
                     /* $scope.chartData = [ {}, {} ]; */
                     $scope.chartLegends = [];
 
-                    $scope.$watch("params.sites", function (newSites, oldSites) {                        
+                    $scope.$watch("params.sites", function (newSites, oldSites) {
                         if (newSites !== undefined && newSites.length) {
                             $scope.itemsSelected[0] = $scope.params.sites[0];
                             $scope.itemsList = WidgetStyleService.buildItemsList($scope.params.sites, $scope.showItems);
-                            $scope.itemsSelected[1] = undefined;                            
+                            $scope.itemsSelected[1] = undefined;
                         }
                     });
 
-                    
+
                     $scope.periodComparisonSelected = false;
                     $scope.periodComparisonMoments = [];
                     $scope.periodComparisonLabels = {};
@@ -93,15 +93,17 @@ angular.module('FSCounterAggregatorApp').
                         $scope.itemsSelected[1] = (open ? ($scope.params.sites[0].id !== $scope.itemsSelected[0].id ?
                             $scope.params.sites[0] : $scope.params.sites[1]) : undefined);
                         //$scope.countingChartOptions.chart.useInteractiveGuideline = open;
+                        $scope.updateIndicators();
                         $scope.updateSelectedRange();
                         $scope.update();
                     };
 
                     // todo: update site list regarding the sites
                     // delivered by the data provider
-                    $scope.$watch('params.data', function (newData, oldData) {                        
+                    $scope.$watch('params.data', function (newData, oldData) {
                         if (newData !== undefined && newData.length) {
                             //$scope.updateSiteList();
+                            $scope.updateIndicators();
                             $scope.updateSelectedRange();
                             $scope.update();
                         }
@@ -133,7 +135,7 @@ angular.module('FSCounterAggregatorApp').
 
                             var idx = _.findIndex($scope.params.data, {
                                 "id": selSite.id
-                            });                            
+                            });
 
                             $scope.kpi.updateIndicators($scope.params.data[idx]);
 
@@ -147,10 +149,19 @@ angular.module('FSCounterAggregatorApp').
                     };
 
                     $scope.updateSelectedRange = function () {
+                        let availableRanges = $scope.kpi.options.ranges;
+                        if ($scope.params.sites.length > 0 &&
+                            $scope.kpi.updateRanges !== undefined) {
+                            const selSite = $scope.itemsSelected.length > 0 ?
+                                $scope.itemsSelected[0] : $scope.params.sites[0];
+                            const siteData = $scope.params.data.find(_ => _.id === selSite.id);
+                            availableRanges = $scope.kpi.updateRanges(siteData, $scope.indicatorSelected.id);
+                        }
                         var firstEnabledRange;
-                        for (var i = 0; i < $scope.kpi.options.ranges.length; ++i) {
-                            var rangeId = $scope.kpi.options.ranges[i].id;
-                            var computable =
+                        for (let i = 0; i < $scope.kpi.options.ranges.length; ++i) {
+                            const rangeId = $scope.kpi.options.ranges[i].id;
+                            const computable =
+                                availableRanges.find(r => rangeId === r.id) &&
                                 $scope.kpi.isPeriodComputable($scope.params.period,
                                     rangeId) &&
                                 ($scope.kpi.isPeriodComparable(rangeId) || !$scope.itemsSelected[1]);
@@ -238,13 +249,13 @@ angular.module('FSCounterAggregatorApp').
                     }
 
                     $scope.update = function () {
-                        
+
                         WidgetStyleService.getStyle($scope.widgetId).
                             then(function (style) {
 
                                 $scope.setWidgetStyle(style);
 
-                                $scope.updateIndicators();
+                                //$scope.updateIndicators();
 
                                 $scope.periodComparisonLabels = {};
 

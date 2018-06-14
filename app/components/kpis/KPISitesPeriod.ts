@@ -4,24 +4,25 @@
 * @description Compute the sum of data for each range within a period of time
 */
 
-import KPIPeriodGeneric from "./KPIPeriodGeneric";
+import { KPIPeriodGeneric } from "./KPIPeriodGeneric";
 
-function KPISitesPeriod() {
+export class KPISitesPeriod extends KPIPeriodGeneric {
 
-  KPIPeriodGeneric.call(this);
+  constructor() {
+    super();
 
-  this.setOptions({
-    indicators: [
-      { id: 'in', name: 'rawIn' },
-      { id: 'out', name: 'rawOut' },      
-      { id: 'count', name: 'Occupancy' },
-      { id: 'In', name: 'In' },
-      { id: 'Out', name: 'Out' },      
-      { id: 'WaitingTime', name: 'WaitingTime' }
-    ],
-    defaultIndicatorId: undefined,
-    defaultRangeId: 'hours'
-  });
+    this.setOptions({
+      indicators: [
+        { id: 'in', name: 'rawIn' },
+        { id: 'out', name: 'rawOut' },
+        { id: 'count', name: 'Occupancy' },
+        { id: 'In', name: 'In' },
+        { id: 'Out', name: 'Out' },
+        { id: 'WaitingTime', name: 'WaitingTime' }
+      ],
+      defaultIndicatorId: undefined,
+      defaultRangeId: 'hours'
+    });
+  }
+
 }
-
-export = KPISitesPeriod;

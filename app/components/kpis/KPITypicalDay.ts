@@ -4,91 +4,94 @@
 * @description Compute the sum of data for each range within a period of time
 */
 import * as ComputeService from "../services/ComputeService";
-import KPIPeriodGeneric from "./KPIPeriodGeneric";
+import { KPIPeriodGeneric } from "./KPIPeriodGeneric";
 import { QueryPeriod, QueryCompute, ComputeRes, DataEltV2 } from "../types/data";
 
 declare const moment: any;
 declare const _: any;
 
-function KPITypicalDay() {
+export class KPITypicalDay extends KPIPeriodGeneric {
 
-  KPIPeriodGeneric.call(this, ComputeService);
+  constructor() {
+    super();
 
-  var _startDate = moment().startOf('week');
+    const _startDate = moment().startOf('week');
 
-  this.rangeParams = {
-    'days': {
-      label: (d: string, p: any) => moment(d).format("HH:mm"),      
-      isPeriodComputable: (period: QueryPeriod) => true,
-      //return the function to be used when grouping timestmaps
-      getGroupingTimestamp: (timestamp: string) => moment(timestamp).minutes(0).seconds(0).millisecond(0).unix(),      
-      getNormalisedTimestamp: function (timestamp: number) { //return a uniform timestamp with respect to the aggragation option
-        return _startDate.clone().add(moment.unix(timestamp).hours(), "hours").unix();
+    this.rangeParams = {
+      'days': {
+        label: (d: string, p: any) => moment(d).format("HH:mm"),
+        isPeriodComputable: (period: QueryPeriod) => true,
+        //return the function to be used when grouping timestmaps
+        getGroupingTimestamp: (timestamp: string) => moment(timestamp).minutes(0).seconds(0).millisecond(0).unix(),
+        getNormalisedTimestamp: function (timestamp: number) { //return a uniform timestamp with respect to the aggragation option
+          return _startDate.clone().add(moment.unix(timestamp).hours(), "hours").unix();
+        },
+        getDefaultValues: function () { //the values which should be present in the output array        
+          const ret: any = {};
+          for (let i = 0; i < 24; i++)
+            ret[this.getNormalisedTimestamp(i * 3600)] = 0;
+          return ret;
+        }
       },
-      getDefaultValues: function () { //the values which should be present in the output array        
-        const ret: any = {};
-        for (let i = 0; i < 24; i++)
-          ret[this.getNormalisedTimestamp(i * 3600)] = 0;
-        return ret;
-      }
-    },
 
-    'week': {
-      label: (d: string, p: any) => moment(d).format("dddd"),    
-      isPeriodComputable: (period: QueryPeriod) => period.endDate.diff(period.startDate, "weeks") >= 1,    
-      getGroupingTimestamp: function (timestamp: string) //return the function to be used when grouping timestmaps
+      'week': {
+        label: (d: string, p: any) => moment(d).format("dddd"),
+        isPeriodComputable: (period: QueryPeriod) => period.endDate.diff(period.startDate, "weeks") >= 1,
+        getGroupingTimestamp: function (timestamp: string) //return the function to be used when grouping timestmaps
+        {
+          return moment(timestamp).hours(0).minutes(0).seconds(0).millisecond(0).unix();
+        },
+        getNormalisedTimestamp: function (timestamp: number) {
+          return _startDate.clone().add(moment.unix(timestamp).days(), "days").unix();
+        },
+        getDefaultValues: function () {
+          const ret: any = {};
+          for (let i = 0; i < 24; i++)
+            ret[this.getNormalisedTimestamp(i * 3600 * 24)] = 0;
+          return ret;
+        }
+      }
+    };
+
+    this.setOptions({
+      ranges: [{
+        id: 'days',
+        name: 'Days'
+      },
       {
-        return moment(timestamp).hours(0).minutes(0).seconds(0).millisecond(0).unix();
+        id: 'week',
+        name: 'Week'
+      }],
+
+      indicators: [{
+        id: 'in',
+        name: 'In'
       },
-      getNormalisedTimestamp: function (timestamp: number) {
-        return _startDate.clone().add(moment.unix(timestamp).days(), "days").unix();
+      {
+        id: 'out',
+        name: 'Out'
       },
-      getDefaultValues: function () {
-        const ret: any = {};
-        for (let i = 0; i < 24; i++)
-          ret[this.getNormalisedTimestamp(i * 3600 * 24)] = 0;
-        return ret;
-      }
-    }
-  };
+      {
+        id: 'count',
+        name: 'Occupancy'
+      }],
 
-  this.setOptions({
-    ranges: [{
-      id: 'days',
-      name: 'Days'
-    },
-    {
-      id: 'week',
-      name: 'Week'
-    }],
+      defaultIndicatorId: 'in',
 
-    indicators: [{
-      id: 'in',
-      name: 'In'
-    },
-    {
-      id: 'out',
-      name: 'Out'
-    },
-    {
-      id: 'count',
-      name: 'Occupancy'
-    }],
+      defaultRangeId: 'days',
 
-    defaultIndicatorId: 'in',
+    });
 
-    defaultRangeId: 'days',
-
-  });
+  }
 
   /**
   * @function getTimeFormat
   * @memberOf FSCounterAggregator.KPITypicalDay
   * @description retrieve style information for a specific period range
   */
-  this.getTimeFormat = function (period: any, rangeId: string) {
+  getTimeFormat(period: QueryPeriod, rangeId: string): string {
     return rangeId === 'days' ? "HH:mm" : "ddd";
-  };
+  }
 
   /**
   * @function isPeriodComparable
@@ -96,11 +99,11 @@ function KPITypicalDay() {
   * @description return whether or not this range period
   * could be used for comparisons between multiple sets of data
   */
-  this.isPeriodComparable = function (rangeId: any) {
+  isPeriodComparable(rangeId: any) {
     return false;
-  };
+  }
 
-  function keepObjValue(objValue: any, srcValue: any) {
+  keepObjValue(objValue: any, srcValue: any) {
     return _.isUndefined(objValue) ? srcValue : objValue;
   }
 
@@ -109,20 +112,18 @@ function KPITypicalDay() {
   * @memberOf FSCounterAggregatorApp.KPITypicalDay
   * @description Compute the sum of data for each range within a period of time
   */
-  this.compute = function (query: QueryCompute) {    
-    
+  compute(query: QueryCompute) {
+
     const startDate = moment();
-    
+
     const res: ComputeRes = {
       query: query,
       data: [],
       value: undefined
     };
 
-    function groupFnctForIndicator(arr: DataEltV2[], indicator: string) {      
-
+    function groupFnctForIndicator(arr: DataEltV2[], indicator: string) {
       if (arr.length === 0) return 0;
-
       let ret = _.sumBy(arr, "value");
       if (indicator === "count") ret /= arr.length;
       return ret;
@@ -142,11 +143,11 @@ function KPITypicalDay() {
         return rangeParams.getGroupingTimestamp(siteElement.time.start);
       })
       //compute the sum/avg for each group
-      .mapValues(function (allElementsForAMoment: DataEltV2[]) {            
+      .mapValues(function (allElementsForAMoment: DataEltV2[]) {
         return groupFnctForIndicator(allElementsForAMoment, query.indicator);
       })
       //convert to an array
-      .map(function (val: number, key: any) {      
+      .map(function (val: number, key: any) {
         return {
           time: key,
           value: val
@@ -162,7 +163,7 @@ function KPITypicalDay() {
           _.sumBy(allElementsForAMoment, "value") / allElementsForAMoment.length;
       })
       //fill missing values
-      .assignWith(rangeParams.getDefaultValues(), keepObjValue) //fill missing values
+      .assignWith(rangeParams.getDefaultValues(), this.keepObjValue) //fill missing values
       //convert to an array of {x, y}
       .map(function (val: number, key: any) {
         return {
@@ -177,7 +178,6 @@ function KPITypicalDay() {
     if (query.indicator == 'count' && res.data.length > 0) res.value = Math.floor(res.value / res.data.length);
 
     return res;
-  };
+  }
 }
 
-export = KPITypicalDay;

@@ -22,7 +22,7 @@ export interface KPIServerParams extends KPIParams {
 export interface KPIOptionsIndicator {
     id: string;
     name: string;
-    func: string;
+    func?: string;
 }
 
 export interface KPIOptionsRange {
@@ -31,10 +31,10 @@ export interface KPIOptionsRange {
 }
 
 export interface KPIOptions {
-    ranges: KPIOptionsRange[];
+    ranges?: KPIOptionsRange[];
     indicators: KPIOptionsIndicator[];
-    defaultIndicatorId: string;
-    defaultRangeId: string;
+    defaultIndicatorId?: string;
+    defaultRangeId?: string;
     getLabel?: (id: string) => string;
 }
 

@@ -40,11 +40,22 @@ export class DataService {
             const vIn = Math.floor(50 * Math.random());
             const vOut = Math.floor(50 * Math.random());
             const vOcc = vOut - vIn;
-            retData.push(
-                this.create_fake_data_elt(siteId, "in", vIn, ts, duration),
-                this.create_fake_data_elt(siteId, "out", vOut, ts, duration),
-                this.create_fake_data_elt(siteId, "count", vOcc, ts, duration)
-            );
+
+            const rnd = Math.random();
+
+            if (rnd < 0.3) {
+                retData.push(
+                    this.create_fake_data_elt(siteId, "in", vIn, ts, duration),
+                    this.create_fake_data_elt(siteId, "out", vOut, ts, duration),
+                    this.create_fake_data_elt(siteId, "count", vOcc, ts, duration)
+                );
+            } else if(rnd < 0.6) {
+                retData.push(
+                    this.create_fake_data_elt(siteId, "in", vIn, ts, duration),
+                    this.create_fake_data_elt(siteId, "WaitingTime", vOut, ts, duration),
+                    this.create_fake_data_elt(siteId, "count", vOcc, ts, duration)
+                );   
+            } 
         }
         return Promise.resolve({ data: retData });
     }

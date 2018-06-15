@@ -3,6 +3,8 @@ import { KPIOptions, KPIServerParams, EMPTY_KPI_OPTIONS } from '../types/kpi';
 import { KPIParams } from '../types/kpi';
 import * as ComputeService from "../services/ComputeService";
 
+declare const _: any;
+
 export class KPIPeriodBase {
 
     rangeParams: any = ComputeService.DEFAULT_RANGE_PARAMS;
@@ -19,7 +21,7 @@ export class KPIPeriodBase {
 
     defaultIndicatorId: any = undefined;
 
-    kpis: any = [];
+    kpis: KPIParams[] = [];
 
     // ranges enabled, use updateRanges to update using
     // site data element
@@ -62,16 +64,15 @@ export class KPIPeriodBase {
         }
     }
 
-    updateIndicators(sitedata: DataItemV2) {
-        this.indicators = [];
-        sitedata.data.forEach(elt => {
-            if (!this.indicators.find((_: any) => _.name == elt.key)) {
+    updateIndicators(sites: DataItemV2[]) {
+        this.indicators = sites
+            .map(sitedata => _.uniqBy(sitedata.data, "key"))
+            .reduce((acc: any, value: any) => _.intersectionBy(acc, value, "key"))
+            .map((elt: any) => {
                 const kpi = this.kpis.find((_: any) => _.key == elt.key);
-                if (kpi) {
-                    this.indicators.push({ id: kpi.key, name: elt.key, func: kpi.func });
-                }
-            }
-        });
+                return kpi ? { id: kpi.key, name: elt.key, func: kpi.func } : undefined;
+            })
+            .filter((kpi: any) => kpi);
         this.defaultIndicatorId = this.indicators.length ? this.indicators[0].id : undefined;
         this.setOptions({ indicators: this.indicators, defaultIndicatorId: this.defaultIndicatorId });
         return this.indicators;

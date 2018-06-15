@@ -143,7 +143,7 @@ angular.module('FSCounterAggregatorApp').
                                 "id": selSite.id
                             });
 
-                            $scope.kpi.updateIndicators($scope.params.data[idx]);
+                            $scope.kpi.updateIndicators([ $scope.params.data[idx] ]);
 
                             if ($scope.indicatorSelected.id === undefined) {
                                 $scope.indicatorSelected = {

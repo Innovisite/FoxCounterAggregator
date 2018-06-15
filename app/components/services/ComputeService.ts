@@ -1,4 +1,5 @@
 declare const moment: any;
+declare const _: any;
 
 import { DataEltV2, QueryPeriod, DataResElt, QueryCompute, ComputeRes } from '../types/data';
 import { MomentDate, RangeFunc, RangeInitFunc, RangeDistFunc, RangeStepFunc, ResMapFunc } from '../types/kpi';
@@ -114,7 +115,7 @@ export const DEFAULT_RANGE_PARAMS = {
 
 export const DEFAULT_COMPUTE_FUNCS = {
     'KPISum': {
-        compute: function (query: QueryCompute): ComputeRes {                
+        compute: function (query: QueryCompute): ComputeRes {
             const res: ComputeRes = {
                 query: query,
                 data: [],
@@ -148,6 +149,23 @@ export const DEFAULT_COMPUTE_FUNCS = {
             );
             res.data = meanPeriod;
             res.value = Math.round(cMean(meanPeriod, (elt) => elt.y));
+            return res;
+        }
+    },
+    'KPIMax': {
+        compute: function (query: QueryCompute): ComputeRes {
+            const res: ComputeRes = {
+                query: query,
+                value: 0
+            };
+
+            const maxElt = _.maxBy(
+                query.sitedata.filter(_ => _.key == query.indicator),
+                "value"
+            );
+            
+            res.value = maxElt ? maxElt.value : 0;
+
             return res;
         }
     }
@@ -249,7 +267,7 @@ export function cApplyLocalTimezone(data: DataEltV2[], tzSrc: string) {
   * @memberOf FSCounterAggregatorApp.ComputeService
   * @description aggregate data on a period grouped by step duration
   */
-function cFuncForPeriod(data: DataEltV2[], period: QueryPeriod, step: string, id: string, func: CumulFunc) {      
+function cFuncForPeriod(data: DataEltV2[], period: QueryPeriod, step: string, id: string, func: CumulFunc) {
     let timeIndex = createTimeIndex(period, rangeFunc[step].init, rangeFunc[step].step, () => undefined);
     timeIndex = fillIndex(data, timeIndex, (elt) => rangeFunc[step].dist(moment(elt.time.start), period.startDate));
     var tdata = aggregate(data, timeIndex, func);
@@ -283,7 +301,7 @@ export function cMean(data: DataResElt[], fsum: ResMapFunc) {
   * @memberOf FSCounterAggregatorApp.ComputeService
   * @description aggregate data on a period grouped by step duration
   */
-export function cSumForPeriod(data: DataEltV2[], period: QueryPeriod, step: string, id: string) {    
+export function cSumForPeriod(data: DataEltV2[], period: QueryPeriod, step: string, id: string) {
     return cFuncForPeriod(data, period, step, id, (elt, curCumul) => curCumul !== undefined ? curCumul + (<any>elt)[id] : 0);
 }
 

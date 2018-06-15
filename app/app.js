@@ -54,8 +54,8 @@
 
   // kpis
   angular.module('FSCounterAggregatorApp')
-    .controller('KPISumGeneric', require('./components/kpis/KPISumGeneric'))
-    .controller('KPISumMax', require('./components/kpis/KPISumMax'))    
+    .controller('KPISumGeneric', require('./components/kpis/KPISumGeneric').KPISumGeneric)
+    .controller('KPISumMax', require('./components/kpis/KPISumMax').KPISumMax)    
     .controller('KPIPeriodGeneric', require('./components/kpis/KPIPeriodGeneric').KPIPeriodGeneric)
     .controller('KPISitesPeriod', require('./components/kpis/KPISitesPeriod').KPISitesPeriod)
     .controller('KPITypicalDay', require('./components/kpis/KPITypicalDay').KPITypicalDay)

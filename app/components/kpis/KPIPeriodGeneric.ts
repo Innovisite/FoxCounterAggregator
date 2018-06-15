@@ -90,7 +90,7 @@ export class KPIPeriodGeneric extends KPIPeriodBase {
   * could be used for comparisons between multiple sets of data
   */
   isPeriodComparable(rangeId: string) {
-    return this.getRangeParams(rangeId).comparable;
+    return rangeId && this.getRangeParams(rangeId).comparable;
   }
 
   /**

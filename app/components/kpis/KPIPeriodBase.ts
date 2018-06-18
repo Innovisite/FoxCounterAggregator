@@ -108,8 +108,8 @@ export class KPIPeriodBase {
         return this.getRangeParams(rangeId).label;
     }
 
-    haveIndicator(id: string) {
-        return this.indicators.find((_: any) => _.id == id);
+    haveIndicator(id: string|undefined) {
+        return id !== undefined && this.indicators.find((_: any) => _.id == id);
     }
 
     setOptions(options: any) {

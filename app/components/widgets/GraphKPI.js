@@ -145,7 +145,9 @@ angular.module('FSCounterAggregatorApp').
 
                             $scope.kpi.updateIndicators([ $scope.params.data[idx] ]);
 
-                            if ($scope.indicatorSelected.id === undefined) {
+                            // we try to keep the same selected indicator otherwise we get
+                            // the default one
+                            if (!$scope.kpi.haveIndicator($scope.indicatorSelected.id)) {
                                 $scope.indicatorSelected = {
                                     id: $scope.kpi.options.defaultIndicatorId
                                 };

@@ -33,30 +33,22 @@ export class DataService {
         };
     }
 
+    private add_fake_data_period(period: QueryPeriod, siteId: string, duration: number, kpi: string, retData: DataEltV2[]) {        
+        for (let ts = period.startDate.clone(); ts.unix() < period.endDate.unix(); ts.add(duration, "m")) {
+            const val = Math.floor(50 * Math.random());            
+            retData.push(this.create_fake_data_elt(siteId, kpi, val, ts, duration));
+        }
+        return retData;
+    }
+
     private get_fake_data_nodes(siteId: string, period: QueryPeriod): Promise<any> {
         const duration = 15;
         const retData: DataEltV2[] = [];
-        for (let ts = period.startDate.clone(); ts.unix() < period.endDate.unix(); ts.add(duration, "m")) {
-            const vIn = Math.floor(50 * Math.random());
-            const vOut = Math.floor(50 * Math.random());
-            const vOcc = vOut - vIn;
-
-            const rnd = Math.random();
-
-            if (rnd < 0.3) {
-                retData.push(
-                    this.create_fake_data_elt(siteId, "in", vIn, ts, duration),
-                    this.create_fake_data_elt(siteId, "out", vOut, ts, duration),
-                    this.create_fake_data_elt(siteId, "count", vOcc, ts, duration)
-                );
-            } else if(rnd < 0.6) {
-                retData.push(
-                    this.create_fake_data_elt(siteId, "in", vIn, ts, duration),
-                    this.create_fake_data_elt(siteId, "WaitingTime", vOut, ts, duration),
-                    this.create_fake_data_elt(siteId, "count", vOcc, ts, duration)
-                );   
-            } 
-        }
+        [ "in", "out", "count", "WaitingTime" ].forEach(kpi => {
+            if(Math.random() <= 0.5) {
+                this.add_fake_data_period(period, siteId, duration, kpi, retData);
+            }
+        });       
         return Promise.resolve({ data: retData });
     }
 

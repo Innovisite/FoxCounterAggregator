@@ -15,6 +15,8 @@ export class KPIPeriodBase {
 
     options = EMPTY_KPI_OPTIONS;
 
+    forMinutesPeriodSeconds = ComputeService.NSEC_15MIN;
+
     // kpis enabled, use updateIndicators to update using
     // site data elements
     indicators: any = [];
@@ -29,20 +31,20 @@ export class KPIPeriodBase {
 
     availableRanges = [
         {
-            id: '15min',
-            seconds: 900
+            id: 'min',
+            seconds: ComputeService.NSEC_15MIN
         }, {
             id: 'hours',
-            seconds: 3600,
+            seconds: ComputeService.NSEC_HOUR,
         }, {
             id: 'days',
-            seconds: 21600
+            seconds: ComputeService.NSEC_DAY
         }, {
             id: 'week',
-            seconds: 151200
+            seconds: ComputeService.NSEC_WEEK
         }, {
             id: 'month',
-            seconds: 4687200
+            seconds: ComputeService.NSEC_MONTH
         }
     ];
 
@@ -83,6 +85,14 @@ export class KPIPeriodBase {
         const firstKPIData = sitedata.data.find((_: any) => _.key === kpiId);
         if (firstKPIData) {
             const dataStepSeconds = ComputeService.getDataStepSeconds(sitedata.data[0]);
+
+            // if the period of data is less than 1 hour, we use the appropriate data period for per minutes             
+            if (dataStepSeconds < ComputeService.NSEC_HOUR) {
+                this.forMinutesPeriodSeconds = dataStepSeconds;
+                const availableRangesMinutes = this.availableRanges.find(_ => _.id === 'min');
+                availableRangesMinutes.seconds = this.forMinutesPeriodSeconds;
+            }
+
             this.ranges = this.options.ranges
                 .map((_: any) => Object.assign({}, _, this.availableRanges.find((r: any) => r.id === _.id)))
                 .filter((_: any) => dataStepSeconds <= _.seconds);
@@ -105,10 +115,10 @@ export class KPIPeriodBase {
   * @description returns the appropriate function which set the date format
   */
     getRangeTimeFormat(rangeId: string) {
-        return this.getRangeParams(rangeId).label;
+        return rangeId === "min" ? this.getRangeParams(rangeId).label.bind(null, this.forMinutesPeriodSeconds) : this.getRangeParams(rangeId).label;
     }
 
-    haveIndicator(id: string|undefined) {
+    haveIndicator(id: string | undefined) {
         return id !== undefined && this.indicators.find((_: any) => _.id == id);
     }
 
@@ -119,7 +129,9 @@ export class KPIPeriodBase {
     compute(query: QueryCompute): ComputeRes {
         const func = this.getIndicatorFunc(query.indicator);
         if (func !== undefined) {
-            return this.computeFuncs[func].compute(query);
+            return query.groupBy === "min" ?
+                this.computeFuncs["KPIDirect"].compute({ ...query, periodInterval: this.forMinutesPeriodSeconds }) :
+                this.computeFuncs[func].compute(query);
         }
         return undefined;
     }
@@ -133,7 +145,40 @@ export class KPIPeriodBase {
         return undefined;
     }
 
+    /**
+     * @function getIndicatorName
+     * @memberOf FSCounterAggregator.KPISitesPeriod
+     * @description returns the displayed indicator label
+     */
+    getIndicatorName(indicatorId: string) {
+        var elt = this.indicators.find((_: any) => _.id == indicatorId);
+        if (elt !== undefined) {
+            return elt.name || elt.id;
+        }
+        return undefined;
+    }
+
     getDefaultIndicatorId() {
         return this.defaultIndicatorId;
+    }
+
+    /**
+  * @function isPeriodComputable
+  * @memberOf FSCounterAggregator.KPISitesPeriod
+  * @description return whether or not we can compute the KPI
+  * for a specific period size
+  */
+    isPeriodComputable(period: QueryPeriod, rangeId: string) {
+        return this.getRangeParams(rangeId).isPeriodComputable(period);
+    }
+
+    /**
+    * @function isPeriodComparable
+    * @memberOf FSCounterAggregator.KPISitesPeriod
+    * @description return whether or not this range period
+    * could be used for comparisons between multiple sets of data
+    */
+    isPeriodComparable(rangeId: string) {
+        return rangeId !== undefined && this.getRangeParams(rangeId).comparable;
     }
 }

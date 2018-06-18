@@ -21,6 +21,7 @@ export interface QueryCompute {
     groupBy: string;
     indicator: string;
     period: QueryPeriod;
+    periodInterval?: number; // actually only used for KPIDirect computation with raw data interval within minutes
 }
 
 export interface DataResElt {

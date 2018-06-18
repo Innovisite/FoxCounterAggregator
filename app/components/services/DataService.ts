@@ -42,7 +42,7 @@ export class DataService {
     }
 
     private get_fake_data_nodes(siteId: string, period: QueryPeriod): Promise<any> {
-        const duration = 15;
+        const duration = Math.trunc( Math.random() * 30) + 2;
         const retData: DataEltV2[] = [];
         [ "in", "out", "count", "WaitingTime" ].forEach(kpi => {
             if(Math.random() <= 0.5) {

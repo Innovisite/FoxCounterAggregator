@@ -49,7 +49,7 @@ export class KPIPeriodGeneric extends KPIPeriodBase {
     this.options = {
       ranges: [
         {
-          id: '15min',
+          id: 'min',
           name: 'Minutes'
         }, {
           id: 'hours',
@@ -71,51 +71,6 @@ export class KPIPeriodGeneric extends KPIPeriodBase {
       getLabel: (id: string) => id
     };
 
-  }
+  }   
 
-  /**
-  * @function isPeriodComputable
-  * @memberOf FSCounterAggregator.KPISitesPeriod
-  * @description return whether or not we can compute the KPI
-  * for a specific period size
-  */
-  isPeriodComputable(period: QueryPeriod, rangeId: string) {
-    return this.getRangeParams(rangeId).isPeriodComputable(period);
-  }
-
-  /**
-  * @function isPeriodComparable
-  * @memberOf FSCounterAggregator.KPISitesPeriod
-  * @description return whether or not this range period
-  * could be used for comparisons between multiple sets of data
-  */
-  isPeriodComparable(rangeId: string) {
-    return rangeId && this.getRangeParams(rangeId).comparable;
-  }
-
-  /**
-  * @function getIndicatorName
-  * @memberOf FSCounterAggregator.KPISitesPeriod
-  * @description returns the displayed indicator label
-  */
-  getIndicatorName(indicatorId: string) {
-    var elt = this.indicators.find((_: any) => _.id == indicatorId);
-    if (elt !== undefined) {
-      return elt.name || elt.id;
-    }
-    return undefined;
-  }
-
-  /**
-  * @function compute
-  * @memberOf FSCounterAggregatorApp.KPISitesPeriod
-  * @description Compute the sum of data for each range within a period of time
-  */
-  compute(query: QueryCompute) {
-    const func = this.getIndicatorFunc(query.indicator);
-    if (func !== undefined) {
-      return this.computeFuncs[func].compute(query);
-    }
-    return undefined;
-  }
 }

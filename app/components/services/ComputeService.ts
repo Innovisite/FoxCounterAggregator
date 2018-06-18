@@ -4,12 +4,11 @@ declare const _: any;
 import { DataEltV2, QueryPeriod, DataResElt, QueryCompute, ComputeRes } from '../types/data';
 import { MomentDate, RangeFunc, RangeInitFunc, RangeDistFunc, RangeStepFunc, ResMapFunc } from '../types/kpi';
 
-const NSEC_5MIN = 300;
-const NSEC_15MIN = 900;
-const NSEC_HOUR = 3600;
-const NSEC_DAY = 86400;
-const NSEC_WEEK = 604800;
-
+export const NSEC_15MIN = 900;
+export const NSEC_HOUR = 3600;
+export const NSEC_DAY = 86400;
+export const NSEC_WEEK = 604800;
+export const NSEC_MONTH = 18144000;
 interface RangeFuncMap {
     [id: string]: RangeFunc;
 };
@@ -23,16 +22,6 @@ interface DataIndexElt {
 };
 
 const rangeFunc: RangeFuncMap = {
-    '5min': {
-        init: (date: MomentDate) => date.minute(Math.floor(date.minute() / 5) * 5),
-        step: (date: MomentDate) => date.add(5, "m"),
-        dist: (date: MomentDate, dateStart: MomentDate) => getTimeIndex(date.unix(), dateStart.unix(), NSEC_5MIN)
-    },
-    '15min': {
-        init: (date) => date.minute(Math.floor(date.minute() / 15) * 15),
-        step: (date) => date.add(15, "m"),
-        dist: (date, dateStart) => getTimeIndex(date.unix(), dateStart.unix(), NSEC_15MIN)
-    },
     'hours': {
         init: (date) => date.minute(0),
         step: (date) => date.add(1, "h"),
@@ -61,11 +50,11 @@ const rangeFunc: RangeFuncMap = {
 };
 
 export const DEFAULT_RANGE_PARAMS = {
-    '15min': {
+    'min': {
         hourMode: true,
         comparable: false,
-        label: function (d: string, p: any) {
-            return moment(d).format("dddd, MMMM Do YYYY, HH:mm").concat(moment(d).add(15, "m").format(" - HH:mm"));
+        label: function (interval: number, d: string, p: any) {
+            return moment(d).format("dddd, MMMM Do YYYY, HH:mm").concat(moment(d).add(interval, "s").format(" - HH:mm"));
         },
         isPeriodComputable: function (period: QueryPeriod) {
             return period.endDate.diff(period.startDate, "days") <= 15;
@@ -114,8 +103,25 @@ export const DEFAULT_RANGE_PARAMS = {
 };
 
 export const DEFAULT_COMPUTE_FUNCS = {
+    'KPIDirect': {
+        compute: function (query: QueryCompute): ComputeRes {            
+
+            const res: ComputeRes = {
+                query: query,
+                data: [],
+                value: undefined,
+                valueCount: 0
+            };
+
+            res.data = query.sitedata.filter(_ => _.key == query.indicator)
+                .map(elt => { return { x: moment(elt.time.start), y: elt.value } });            
+
+            return res;
+        }
+    },
     'KPISum': {
-        compute: function (query: QueryCompute): ComputeRes {
+        compute: function (query: QueryCompute): ComputeRes {            
+
             const res: ComputeRes = {
                 query: query,
                 data: [],

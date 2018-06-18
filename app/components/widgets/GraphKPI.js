@@ -24,7 +24,7 @@ angular.module('FSCounterAggregatorApp').
                     $scope,
                     WidgetStyleService,
                     $sce
-                ) {
+                ) {                    
 
                     $scope.showsitecomparing = ($scope.sitecomparing === undefined) || ($scope.sitecomparing === "true");
 
@@ -47,7 +47,8 @@ angular.module('FSCounterAggregatorApp').
                     /* $scope.chartData = [ {}, {} ]; */
                     $scope.chartLegends = [];
 
-                    $scope.$watch("params.sites", function (newSites, oldSites) {
+                    $scope.$watch("params.sites", function (newSites, oldSites) {                        
+
                         if (newSites !== undefined && newSites.length) {
                             $scope.itemsSelected[0] = $scope.params.sites[0];
                             $scope.itemsList = WidgetStyleService.buildItemsList($scope.params.sites, $scope.showItems);

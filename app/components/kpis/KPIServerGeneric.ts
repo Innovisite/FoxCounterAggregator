@@ -26,24 +26,7 @@ export class KPIServerGeneric extends KPIPeriodBase {
 
             return this;
         };
-    }
-
-    compute(query: QueryCompute): ComputeRes {
-        const func = this.getIndicatorFunc(query.indicator);
-        if (func !== undefined) {
-            return this.computeFuncs[func].compute(query);
-        }
-        return undefined;
-    }
-
-
-    isPeriodComputable(period: QueryPeriod, rangeId: string) {
-        return this.getRangeParams(rangeId).isPeriodComputable(period);
-    }
-
-    isPeriodComparable(rangeId: string) {
-        return rangeId !== undefined && this.getRangeParams(rangeId).comparable;
-    }
+    }       
 
     getIndicatorFunc(key: string) {
         const elt = this.kpis.find((_: KPIServerParams) => _.key == key);
@@ -51,12 +34,7 @@ export class KPIServerGeneric extends KPIPeriodBase {
             return elt.func || this.defaultFunc;
         }
         return undefined;
-    }
-
-    getIndicatorName(id: string): string {
-        const elt = this.indicators.find((_: any) => _.id == id);
-        return elt ? elt.name : "";
-    }
+    }    
 
     createKPIs(kpis: KPIServerParams[]) {
         this.kpis = kpis;
@@ -71,7 +49,7 @@ export class KPIServerGeneric extends KPIPeriodBase {
             indicators: this.indicators,
             ranges: [
                 {
-                    id: '15min',
+                    id: 'min',
                     name: 'Minutes'
                 }, {
                     id: 'hours',
@@ -88,7 +66,7 @@ export class KPIServerGeneric extends KPIPeriodBase {
                 }
             ],
             defaultIndicatorId: undefined,
-            defaultRangeId: '15min',
+            defaultRangeId: 'min',
         });
     }
 }

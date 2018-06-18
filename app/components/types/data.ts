@@ -29,9 +29,10 @@ export interface DataResElt {
 }
 
 export interface ComputeRes {
-    query: QueryCompute;
+    query: QueryCompute;    
     data?: DataResElt[];
     value?: number;
+    valueCount?: number; // when value is used then it's the number of element used for computing the value 0 means no element
     // if true then the returned value refer to the data from the index position in the allsitedata array 
     // this is used for example to find a site that have some special properties (max count, occupation...)
     // default is false

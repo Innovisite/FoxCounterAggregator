@@ -29,7 +29,7 @@
           <td ng-if="row.haveItems" class="{{periodComparisonSelected ? (row.comparedPeriod ? 'cell-compared-period' : 'cell-period') : ''}}">
             <a class="cell-link" ng-click="goChild(row.id)">{{row.name}}</a>
           </td>
-          <td class="{{periodComparisonSelected ? (row.comparedPeriod ? 'cell-compared-period' : 'cell-period') : ''}}" ng-repeat="indicator in indicators">{{row[indicator.id]}}</td>
+          <td class="{{periodComparisonSelected ? (row.comparedPeriod ? 'cell-compared-period' : 'cell-period') : ''}}" ng-repeat="indicator in indicators">{{row.resElts[indicator.id].valueCount > 0 ? row.resElts[indicator.id].value : 'no data'}}</td>
         </tr>
       </tbody>
     </table>

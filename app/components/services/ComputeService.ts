@@ -119,17 +119,23 @@ export const DEFAULT_COMPUTE_FUNCS = {
             const res: ComputeRes = {
                 query: query,
                 data: [],
-                value: undefined
+                value: undefined,
+                valueCount: 0
             };
 
+            const data = query.sitedata.filter(_ => _.key == query.indicator);
+
             const sumPeriod = cSumForPeriod(
-                query.sitedata.filter(_ => _.key == query.indicator),
+                data,
                 query.period,
                 query.groupBy,
                 "value"
             );
+
             res.data = sumPeriod;
             res.value = cSum(sumPeriod, (elt: DataResElt) => elt.y);
+            res.valueCount = data.length;
+
             return res;
         }
     },
@@ -138,17 +144,22 @@ export const DEFAULT_COMPUTE_FUNCS = {
             const res: ComputeRes = {
                 query: query,
                 data: [],
-                value: undefined
+                value: undefined,
+                valueCount: 0
             };
 
+            const data = query.sitedata.filter(_ => _.key == query.indicator);
+
             const meanPeriod = cMeanForPeriod(
-                query.sitedata.filter(_ => _.key == query.indicator),
+                data,
                 query.period,
                 query.groupBy,
                 "value"
             );
             res.data = meanPeriod;
             res.value = Math.round(cMean(meanPeriod, (elt) => elt.y));
+            res.valueCount = data.length;
+
             return res;
         }
     },
@@ -156,15 +167,18 @@ export const DEFAULT_COMPUTE_FUNCS = {
         compute: function (query: QueryCompute): ComputeRes {
             const res: ComputeRes = {
                 query: query,
-                value: 0
+                value: undefined,
+                valueCount: 0
             };
 
+            const data = query.sitedata.filter(_ => _.key == query.indicator);
+
             const maxElt = _.maxBy(
-                query.sitedata.filter(_ => _.key == query.indicator),
+                data,
                 "value"
             );
-            
-            res.value = maxElt ? maxElt.value : 0;
+            res.value = maxElt ? maxElt.value : res.value;
+            res.valueCount = data.length;
 
             return res;
         }

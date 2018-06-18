@@ -67,7 +67,7 @@ export class KPIPeriodBase {
     updateIndicators(sites: DataItemV2[]) {
         this.indicators = sites
             .map(sitedata => _.uniqBy(sitedata.data, "key"))
-            .reduce((acc: any, value: any) => _.intersectionBy(acc, value, "key"))
+            .reduce((acc: any, value: any) => _.unionBy(acc, value, "key"))
             .map((elt: any) => {
                 const kpi = this.kpis.find((_: any) => _.key == elt.key);
                 return kpi ? { id: kpi.key, name: elt.key, func: kpi.func } : undefined;

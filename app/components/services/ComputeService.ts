@@ -104,23 +104,31 @@ export const DEFAULT_RANGE_PARAMS = {
 
 export const DEFAULT_COMPUTE_FUNCS = {
     'KPIDirect': {
-        compute: function (query: QueryCompute): ComputeRes {            
+        compute: function (query: QueryCompute): ComputeRes {
 
             const res: ComputeRes = {
                 query: query,
                 data: [],
                 value: undefined,
                 valueCount: 0
-            };
+            };            
 
-            res.data = query.sitedata.filter(_ => _.key == query.indicator)
-                .map(elt => { return { x: moment(elt.time.start), y: elt.value } });            
+            res.data = cFuncForPeriodWithRangeFunc(
+                query.sitedata.filter(_ => _.key == query.indicator),
+                query.period, {
+                    init: (date) => date,
+                    step: (date) => date.add(query.periodInterval, "s"),
+                    dist: (date, dateStart) => getTimeIndex(date.unix(), dateStart.unix(), query.periodInterval)
+                },
+                "value",
+                (elt, curCumul) => curCumul !== undefined ? curCumul + (<any>elt)["value"] : 0
+            );                 
 
             return res;
         }
     },
     'KPISum': {
-        compute: function (query: QueryCompute): ComputeRes {            
+        compute: function (query: QueryCompute): ComputeRes {
 
             const res: ComputeRes = {
                 query: query,
@@ -288,8 +296,12 @@ export function cApplyLocalTimezone(data: DataEltV2[], tzSrc: string) {
   * @description aggregate data on a period grouped by step duration
   */
 function cFuncForPeriod(data: DataEltV2[], period: QueryPeriod, step: string, id: string, func: CumulFunc) {
-    let timeIndex = createTimeIndex(period, rangeFunc[step].init, rangeFunc[step].step, () => undefined);
-    timeIndex = fillIndex(data, timeIndex, (elt) => rangeFunc[step].dist(moment(elt.time.start), period.startDate));
+    return cFuncForPeriodWithRangeFunc(data, period, rangeFunc[step], id, func);    
+}
+
+function cFuncForPeriodWithRangeFunc(data: DataEltV2[], period: QueryPeriod, rangeFunc: RangeFunc, id: string, func: CumulFunc) {
+    let timeIndex = createTimeIndex(period, rangeFunc.init, rangeFunc.step, () => undefined);
+    timeIndex = fillIndex(data, timeIndex, (elt) => rangeFunc.dist(moment(elt.time.start), period.startDate));
     var tdata = aggregate(data, timeIndex, func);
     return tdata;
 }

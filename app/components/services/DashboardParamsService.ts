@@ -10,6 +10,7 @@ import { KPIServerParams } from '../types/kpi';
 import { DataService } from './DataService';
 
 import { cApplyLocalTimezone } from './ComputeService';
+import { UserLiveModeConfig } from '../types/user';
 
 /**
  * @class DashboardParamsService
@@ -52,6 +53,8 @@ export class DashboardParamsService {
 
     useTimeZone = false;
 
+    liveConfig: UserLiveModeConfig;
+
     constructor(
         private $http: any,
         private $q: any,
@@ -68,6 +71,7 @@ export class DashboardParamsService {
             then((data) => {
                 this.sitesWithChilds = data.viewable_nodes;
                 this.sites = this.sitesWithChilds.filter(site => !site.parent_id);
+                this.liveConfig = data.app_data.live_mode;
                 return this.getKPIs();
             })
             .then(kpis => {
@@ -124,10 +128,11 @@ export class DashboardParamsService {
 
     // reload all the data including comparison if activated
     reloadData() {
-        this.loadData();
+        const promises = [ this.loadData() ];
         if (this.comparedData !== undefined) {
-            this.loadDataCompared();
+            promises.push(this.loadDataCompared());
         }
+        return this.$q.all(promises);
     }
 
     // must be called in order to remove comparison on widget sides

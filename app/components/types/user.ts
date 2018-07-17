@@ -1,7 +1,15 @@
 import { ViewableNode } from './site';
 
+export const USER_LIVE_REFRESH_RATE = 900000; // every 15mns
+
+export interface UserLiveModeConfig {
+    enabled: boolean;
+    refresh_rate?: number;
+}
+
 export interface UserInfo {
     dashboard?: string;
+    live_mode?: UserLiveModeConfig;
 }
 
 export interface UserSettings {

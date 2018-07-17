@@ -1,7 +1,7 @@
 declare const angular: any;
 declare const _: any;
 
-import { UserSettings } from '../types/user';
+import { UserSettings, UserLiveModeConfig } from '../types/user';
 import { ViewableNode } from '../types/site';
 
 export class UserService {
@@ -14,6 +14,10 @@ export class UserService {
 
     }
 
+    getLiveMode(): UserLiveModeConfig {
+        return this.currentUserData ? this.currentUserData.app_data.live_mode : undefined;
+    }
+
     /**
 	 * @function getSettings
 	 * @memberOf FSCounterAggregatorApp.UserService
@@ -22,7 +26,7 @@ export class UserService {
     getSettings(): Promise<UserSettings> {
         const url = this.myconfig.debug ? "assets/self.json" : "/api/v1/self";
         return this.$http.get(url).
-            then((ret: any) => {
+            then((ret: any) => {                
                 this.currentUserData = ret.data;
                 return ret.data;
             });

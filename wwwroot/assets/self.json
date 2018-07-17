@@ -6,7 +6,11 @@
     "is_enabled": true,
     "is_global_administrator": false,
     "app_data": {
-        "dashboard": "<div class='row'>\n<section class='col-md-12'>\n<fca-heat-map-kpi params='params'></fca-heat-map-kpi>\n</section>\n<section class='col-md-12'>\n<div ng-controller='KPIPeriodGeneric as kpi'>\n<fca-graph-kpi params='params' kpi='kpi' show-items='true'>\n</fca-graph-kpi>\n</div>\n</section>\n</div>"
+        "dashboard": "<div class='row'>\n<section class='col-md-12'>\n<fca-heat-map-kpi params='params'></fca-heat-map-kpi>\n</section>\n<section class='col-md-12'>\n<div ng-controller='KPIPeriodGeneric as kpi'>\n<fca-graph-kpi params='params' kpi='kpi' show-items='true'>\n</fca-graph-kpi>\n</div>\n</section>\n</div>",
+        "live_mode": {
+            "enabled": true,
+            "refresh_rate": 10000
+        }
     },
     "viewable_nodes": [
         {

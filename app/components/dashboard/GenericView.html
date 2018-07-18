@@ -24,6 +24,14 @@
         <fca-widget-navigation three="nav.three" three-pos="nav.threePos" on-next-site="nav.goNav($event)">
         </fca-widget-navigation>
       </section>
+
+      <section class="col-md-12">
+        <div ng-controller="KPISum as kpi">
+          <fca-stat-box-kpi kpi="kpi" params="nav.params" indicator="in" label="Total In" unit='ent' description="Total number of entries over the selected perdiod.">
+          </fca-stat-box-kpi>
+        </div>
+      </section>
+
       <section class="col-md-12">
         <div ng-controller="KPIServerGeneric as kpi" ng-init="init(params)">
           <fca-graph-kpi ng-if="kpi.kpis.length" params="nav.params" kpi="kpi">
@@ -38,7 +46,7 @@
           </div>
         </section>
       </div>
-    </div>    
+    </div>
   </section>
 
 </div>

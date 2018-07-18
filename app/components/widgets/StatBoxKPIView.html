@@ -5,10 +5,10 @@
    label="label"
    bg-color="bg-period"
    icon="icon"
-   period="periodComparisonSelected ? params.period : undefined">
+   period="periodComparisonSelected && !liveMode ? params.period : undefined">
 </fca-stat-box>
 
-<div ng-show="periodComparisonSelected">
+<div ng-show="periodComparisonSelected && !liveMode">
   <fca-stat-box
      unit="unit"
      description="description"

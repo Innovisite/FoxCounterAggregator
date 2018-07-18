@@ -53,7 +53,11 @@ export class DashboardParamsService {
 
     useTimeZone = false;
 
-    liveConfig: UserLiveModeConfig;
+    liveConfig: UserLiveModeConfig;    
+
+    // use this to control others components behaviour (i.e mono widgets)
+    // or to automatically refresh data
+    liveMode = false;
 
     constructor(
         private $http: any,
@@ -65,10 +69,19 @@ export class DashboardParamsService {
     ) {
     }
 
+    hasLiveModeEnabled() {
+        return this.liveConfig && this.liveConfig.enabled;
+    }
+
+    updateLiveMode() {
+        this.liveMode = this.hasLiveModeEnabled() && this.period.endDate.isSame(moment(), 'day');
+        console.log("LIVE MODE UPDATE = ", this.liveMode);
+    }
+
     loadParams() {        
 
         return this.UserService.getSettings().
-            then((data) => {
+            then((data) => {                
                 this.sitesWithChilds = data.viewable_nodes;
                 this.sites = this.sitesWithChilds.filter(site => !site.parent_id);
                 this.liveConfig = data.app_data.live_mode;

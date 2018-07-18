@@ -14,17 +14,13 @@ function DashboardController($scope: any, $interval: any, paramsService: Dashboa
     let liveStopPromise: any;
 
     // use this variable to prevent multiple calls during live mode    
-    let dataLoadingLock: boolean = false;
-
-    // use this to control others components behaviour (i.e mono widgets)
-    $scope.liveMode = false;
+    let dataLoadingLock: boolean = false;    
 
     $scope.params = paramsService;
     
     $scope.$watch('params.period', (newData: QueryPeriod, oldData: QueryPeriod) => {
         if(newData !== undefined) {            
-            $scope.liveMode = paramsService.period.endDate.isSame(moment(), 'day');
-            console.log("LIVE MODE CHANGED = ", $scope.liveMode);
+            paramsService.updateLiveMode();
         }
     });
 
@@ -36,11 +32,12 @@ function DashboardController($scope: any, $interval: any, paramsService: Dashboa
         }
     };
 
-    $scope.startLive = () => {
+    $scope.startLive = () => {        
         $scope.stopLive();
-        if (paramsService.liveConfig && paramsService.liveConfig.enabled) {
+        if (paramsService.hasLiveModeEnabled()) {
+            paramsService.updateLiveMode();
             liveStopPromise = $interval(() => {
-                if ($scope.liveMode) {
+                if (paramsService.liveMode) {
                     $scope.reloadDataCheckLock();
                 }
             }, paramsService.liveConfig.refresh_rate || USER_LIVE_REFRESH_RATE);
@@ -49,6 +46,7 @@ function DashboardController($scope: any, $interval: any, paramsService: Dashboa
 
     $scope.reloadDataCheckLock = () => {
         if (!dataLoadingLock) {
+            console.log("LIVE MODE RELOAD = ", moment());
             dataLoadingLock = true;
             $scope.params.reloadData()
                 .then(() => dataLoadingLock = false, () => dataLoadingLock = false);

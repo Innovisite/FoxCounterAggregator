@@ -25,7 +25,8 @@
     <div class="row">
       <div class="col-lg-3 col-xs-6">
         <div ng-controller="KPISum as kpi">
-          <fca-stat-box-kpi kpi="kpi" params="params" indicator="in" label="Total In" unit='ent' description="Total number of entries over the selected perdiod.">
+          <fca-stat-box-kpi options="{ indicator:'in', label:'Total In', unit:'ent' }" kpi="kpi" params="params" indicator="in" label="Total In"
+            unit='ent' description="Total number of entries over the selected perdiod.">
           </fca-stat-box-kpi>
         </div>
       </div>

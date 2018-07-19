@@ -21,7 +21,8 @@
     'ui.codemirror',
     'adminLTE',
     'ngReallyClickModule',
-    'angularScreenfull'
+    'angularScreenfull',
+    'angularjs-gauge'
   ]);
 
   // controllers
@@ -48,6 +49,7 @@
   require('./components/widgets/heatmap/HeatMapKPI');
   require('./components/widgets/StatBox');
   require('./components/widgets/StatBoxKPI');
+  require('./components/widgets/GaugeBoxKPI');
   require('./components/widgets/TableKPI');
   require('./components/widgets/UserDashboard');
   require('./components/widgets/WidgetNavigation');

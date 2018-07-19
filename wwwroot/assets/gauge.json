@@ -1,0 +1,10 @@
+{
+    "size": 200,
+    "type": "full",
+    "cap": "butt",
+    "thick": 6,
+    "foreground-color": "#1f77b4",
+    "foreground-color-cmp": "#ed7e17",
+    "background-color": "rgba(0, 0, 0, 0.1)",
+    "duration": "1500"
+}

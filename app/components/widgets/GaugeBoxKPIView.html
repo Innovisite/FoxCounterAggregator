@@ -1,0 +1,7 @@
+<ng-gauge thick="{{thick}}" size="{{size}}" append="{{unit}}" value="value" label="{{label}}" type="{{type}}" cap="{{cap}}" foreground-color="{{fgColor}}">
+</ng-gauge>
+
+<div ng-show="periodComparisonSelected && !liveMode">
+    <ng-gauge thick="{{thick}}" size="{{size}}" append="{{unit}}" value="valueCompared" label="{{label}}" type="{{type}}" cap="{{cap}}" foreground-color="{{fgColorCmp}}">
+    </ng-gauge>
+</div>

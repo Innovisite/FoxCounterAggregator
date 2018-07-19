@@ -25,24 +25,27 @@ function KPIMean($scope: any, $controller: any) {
 			value: 0
 		};
 
-		if (!query.indicator)
+		if (!query.indicator) {
 			query.indicator = this.getDefaultIndicatorId();
-
+		}
 
 		const felt = (elt: DataResElt) => elt.y;
 
-		if (query.allsitedata)
-			for (let i = 0; i < query.allsitedata.length; ++i) {
-				res.value += ComputeService.cMean(
-					query.allsitedata[i].filter(_ => _.key == query.indicator).map(_ => { return { y: _.value }; }),
-					felt
-				);
+		function computeMean(data: any[]) {
+			const dataFilter = data.filter(_ => _.key == query.indicator).map(_ => { return { y: _.value }; });
+
+			if (dataFilter.length) {
+				return /* query.periodLive ? felt(dataFilter[dataFilter.length - 1]) : */ ComputeService.cMean(dataFilter, felt);
 			}
-		else
-			res.value += ComputeService.cMean(
-				query.sitedata.filter(_ => _.key == query.indicator).map(_ => { return { y: _.value }; }),
-				felt
-			);
+
+			return 0;
+		}
+
+		if (query.allsitedata) {
+			query.allsitedata.forEach(sitedata => res.value += computeMean(sitedata));
+		} else {
+			res.value = computeMean(query.sitedata);
+		}
 
 		res.value = Math.round(res.value / (query.period.endDate - query.period.startDate));
 

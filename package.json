@@ -57,6 +57,7 @@
     "angular-screenfull": "^0.1.0",
     "angular-ui-bootstrap": "~2.5.6",
     "angular-ui-codemirror": "git://github.com/Codeffekt/ui-codemirror#master",
+    "angularjs-gauge": "^2.2.0",
     "bootstrap": "^3.3.7",
     "bootstrap-daterangepicker": "git://github.com/Codeffekt/bootstrap-daterangepicker#master",
     "codemirror": "^5.15.2",

@@ -29,6 +29,11 @@ export class WidgetStyleService {
 			"json": "assets/table.json",
 			"css": undefined,
 			"cached": undefined
+		},
+		"GaugeBoxWidget": {
+			"json": "assets/gauge.json",
+			"css": undefined,
+			"cached": undefined
 		}
 	};
 

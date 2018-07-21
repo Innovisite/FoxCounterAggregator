@@ -22,7 +22,6 @@ export interface QueryCompute {
     indicator: string;
     period: QueryPeriod;
     periodInterval?: number; // actually only used for KPIDirect computation with raw data interval within minutes
-    periodLive?: boolean; // when true, possibly take only the last available value for computation
 }
 
 export interface DataResElt {

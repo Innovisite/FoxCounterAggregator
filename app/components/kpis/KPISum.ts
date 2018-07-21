@@ -36,7 +36,7 @@ function KPISum($scope: any, $controller: any) {
 			const dataFilter = data.filter(_ => _.key == query.indicator).map(_ => { return { y: _.value }; });
 
 			if (dataFilter.length) {
-				return query.periodLive ? felt(dataFilter[dataFilter.length - 1]) : ComputeService.cSum(dataFilter, felt);
+				return ComputeService.cSum(dataFilter, felt);
 			}
 
 			return 0;

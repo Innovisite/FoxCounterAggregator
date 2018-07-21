@@ -1,6 +1,6 @@
 import { SiteNavItem, SITE_NAV_EMPTY_ROOT, ViewableNode } from "../types/site";
 import { DataItem, QueryPeriod } from "../types/data";
-import { DashboardParamsService } from '../services/DashboardParamsService';
+import { DashboardParamsService, DashboardParams } from '../services/DashboardParamsService';
 
 declare const angular: any;
 
@@ -13,100 +13,74 @@ function SiteNavigationController($scope: any, $controller: any, $paramsService:
     this.params = {
         sites: [],
         data: [],
-        currentSite: undefined,
-        currentSiteData: undefined,
-        currentSiteComparedData: undefined,        
-        liveMode: false
-    };
+        comparedData: [],
+        period: undefined,
+        comparedPeriod: undefined
+    } as DashboardParams;    
+
     this.three = Object.assign({}, SITE_NAV_EMPTY_ROOT);
     this.threePos = this.three;
-    this.originalSites = undefined;
+    this.originalSites = undefined;    
 
-    const that = this;
+    $scope.init = (params: DashboardParams) => {
+    
+        this.params = angular.copy(params);
 
-    $scope.init = function (params: any) {
-
-        // that.params = Object.assign({}, params);
-        // that.params = JSON.parse(JSON.stringify(params));
-        that.params = angular.copy(params);
-
-        $scope.$watch("params.sitesWithChilds", function (newSites: ViewableNode[]) {
+        $scope.$watch("params.sitesWithChilds", (newSites: ViewableNode[]) => {
             if (newSites !== undefined && newSites.length) {
-                that.originalSites = newSites.slice(0).map((site: ViewableNode) => Object.assign({}, site, {
+                this.originalSites = newSites.slice(0).map((site: ViewableNode) => Object.assign({}, site, {
                     haveItems: newSites.find((s: ViewableNode) => s.parent_id == site.id) != null
                 }));
-                that.params.sites = that.originalSites.filter((site: ViewableNode) => !site.parent_id);
-                that.createSitesTree(newSites);
+                this.params.sites = this.originalSites.filter((site: ViewableNode) => !site.parent_id);
+                this.createSitesTree(newSites);
             }
         });
 
-        $scope.$watch('params.data', function (newData: DataItem[]) {
+        $scope.$watch('params.data', (newData: DataItem[]) => {
             if (newData !== undefined && newData.length) {
-                that.goNav(that.threePos);
+                this.goNav(this.threePos);
             }
         });
 
-        $scope.$watch('params.comparedData', function (newData: DataItem[]) {
+        $scope.$watch('params.comparedData', (newData: DataItem[]) => {
             if (newData == undefined) {
-                that.params.comparedData = undefined;
+                this.params.comparedData = undefined;
             }
         });
 
-        $scope.$watch('params.period', function (newData: QueryPeriod) {
+        $scope.$watch('params.period', (newData: QueryPeriod) => {
             if (newData !== undefined) {
-                that.params.period = newData;
+                this.params.period = newData;
             }
         });
 
-        $scope.$watch('params.comparedPeriod', function (newData: QueryPeriod) {
+        $scope.$watch('params.comparedPeriod', (newData: QueryPeriod) => {
             if (newData !== undefined) {
-                that.params.comparedPeriod = newData;
+                this.params.comparedPeriod = newData;
             }
-        });
+        });        
 
-        $scope.$watch('params.liveMode', (newValue: boolean, oldValue: boolean) => {
-            if (newValue !== oldValue) {
-                that.params.liveMode = newValue;
-            }
-        });
+        $scope.reloadData = () => {
+            this.uploadData();
+        };
 
-        return that.params;
+        return this.params;
     };
 
-    this.goNav = function (nav: SiteNavItem | ViewableNode) {        
+    this.goNav = (nav: SiteNavItem | ViewableNode) => {                
 
-        // we retrieve the current site from the original list in case we pass a SiteNavItem or a simple { id: } object
-        this.params.currentSite = nav.id !== undefined ? that.originalSites.find((site: ViewableNode) => site.id == nav.id) : undefined;
-
-        this.params.sites = that.originalSites.filter((site: ViewableNode) => site.parent_id == nav.id);
+        this.params.sites = this.originalSites.filter((site: ViewableNode) => site.parent_id == nav.id);
 
         this.uploadData();
 
         this.threePos = nav;
     };
 
-    this.uploadData = () => {
-
-        if(this.params.currentSite !== undefined) {
-            $paramsService.loadDataForSites([this.params.currentSite])
-            .then((res: any[]) => {
-                this.params.currentSiteData = res[0];
-                if (res[1]) {
-                    this.params.currentSiteComparedData = res[1];
-                }
-            });
-        }
-
-        $paramsService.loadDataForSites(this.params.sites)
-            .then((res: any[]) => {
-                this.params.data = res[0];
-                if (res[1]) {
-                    this.params.comparedData = res[1];
-                }
-            });
+    this.uploadData = () => {        
+        $paramsService.reloadDataWithParams(this.params).then(() => true);            
     };
 
-    this.goUp = function () {
+    this.goUp = () => {
 
         if (this.threePos.parent) {
             this.threePos = this.threePos.parent;
@@ -114,7 +88,7 @@ function SiteNavigationController($scope: any, $controller: any, $paramsService:
 
     };
 
-    this.goChildFromId = function (id: string) {
+    this.goChildFromId = (id: string) => {
 
         const child: SiteNavItem = (<SiteNavItem>this.threePos).childs.find(c => c.id == id);
 
@@ -124,7 +98,7 @@ function SiteNavigationController($scope: any, $controller: any, $paramsService:
 
     };
 
-    this.createSitesTree = function (items: ViewableNode[]) {
+    this.createSitesTree = (items: ViewableNode[]) => {
 
         const wrapViewableNode = (threePos: SiteNavItem, vn: ViewableNode): SiteNavItem => {
             return {

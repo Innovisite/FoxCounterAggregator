@@ -26,16 +26,20 @@
       </section>
 
       <div class="row">
-        <div class="col-lg-3 col-xs-6" ng-controller="KPISum as kpi">          
-            <fca-stat-box-kpi kpi="kpi" params="nav.params" indicator="in" label="Total In" unit='ent' description="Total number of entries over the selected perdiod.">
-            </fca-stat-box-kpi>                
-            <fca-stat-box-kpi kpi="kpi" params="nav.params" indicator="in" label="Total In" unit='ent' description="Total number of entries over the selected perdiod.">
-            </fca-stat-box-kpi>          
+        <div ng-controller="CurrentSiteController as currentSite" ng-init="init(params,'5ad4bfe35d82803a28f34300')">
+          <div class="col-lg-3 col-xs-6" ng-controller="KPISum as kpi">
+            <fca-stat-box-kpi kpi="kpi" params="currentSite.params" indicator="in" label="Total In" unit='ent' description="Total number of entries over the selected period.">
+            </fca-stat-box-kpi>
+            <fca-stat-box-kpi kpi="kpi" params="currentSite.params" indicator="out" label="Total Out" unit='ent' description="Total number of exits over the selected period.">
+            </fca-stat-box-kpi>
+          </div>
         </div>
-        <div class="col-lg-3 col-xs-6" ng-controller="KPISum as kpi">
-          <fca-gauge-box-kpi class="center-block widget-gauge" kpi="kpi" params="nav.params" indicator="in" label="Total In" unit='ent'
-            description="Total number of entries over the selected perdiod.">
-          </fca-gauge-box-kpi>
+        <div ng-controller="LiveModeController as live" ng-init="init(nav.params)">
+          <div class="col-lg-3 col-xs-6" ng-controller="KPISum as kpi">
+            <fca-gauge-box-kpi class="center-block widget-gauge" kpi="kpi" params="live.params" indicator="in" label="Total In" unit='ent'
+              description="Total number of entries over the selected perdiod.">
+            </fca-gauge-box-kpi>
+          </div>
         </div>
         <div class="col-lg-3 col-xs-6" ng-controller="KPISum as kpi">
           <fca-gauge-box-kpi class="center-block widget-gauge" kpi="kpi" params="nav.params" indicator="out" label="Total Out" unit='exit'

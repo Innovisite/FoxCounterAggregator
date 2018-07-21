@@ -13,8 +13,7 @@ export class MonoWidgetCtrlBase {
         this.$scope.label = this.$scope.label !== undefined ? this.$scope.label : this.$scope.kpi.getLabel(this.$scope.indicator);
 		this.$scope.value = 0;
 		this.$scope.valueCompared = 0;
-		this.$scope.widgetId = 'statbox/' + this.$scope.kpi + '/' + this.$scope.indicator;
-		this.$scope.liveMode = false;
+		this.$scope.widgetId = 'statbox/' + this.$scope.kpi + '/' + this.$scope.indicator;		
 		this.$scope.periodComparisonSelected = false;
 
 		this.widgetStyleService.getStyle(this.$scope.widgetId)
@@ -38,28 +37,8 @@ export class MonoWidgetCtrlBase {
 			} else if (this.$scope.periodComparisonSelected) {
 				this.$scope.periodComparisonSelected = false;
 			}
-		});
-
-		this.$scope.$watch('params.liveMode', (newValue: boolean, oldValue: boolean) => {
-			if (newValue !== oldValue) {
-				this.$scope.liveMode = newValue;
-			}
-		});
-
-		this.$scope.$watch('params.currentSiteData', (newData: DataItem[], oldData: DataItem[]) => {
-			if (newData !== oldData) {
-				this.update();
-			}
-		});
-
-		this.$scope.$watch('params.currentSiteComparedData', (newData: DataItem[]) => {
-			if (newData !== undefined && newData.length) {
-				this.$scope.periodComparisonSelected = true;
-				this.updateCompared();
-			} else if (this.$scope.periodComparisonSelected) {
-				this.$scope.periodComparisonSelected = false;
-			}
-		});
+		});		
+		
     }
 
 	protected applyFilters(value: any) {
@@ -74,8 +53,7 @@ export class MonoWidgetCtrlBase {
 			allsitedata: data.map((_: any) => _.data),
 			period: period,
 			indicator: this.$scope.indicator,
-			groupBy: undefined,
-			periodLive: this.$scope.liveMode
+			groupBy: undefined			
 		});
 		if (res.isSiteIndex) {
 			res.value = this.$scope.params.sites[res.value].id;
@@ -85,14 +63,14 @@ export class MonoWidgetCtrlBase {
 
 	protected update() {
 		this.$scope.value = this.getValue(
-			this.$scope.params.currentSiteData ? this.$scope.params.currentSiteData : this.$scope.params.data,
+			this.$scope.params.data,
 			this.$scope.params.period);
 	}
 
 	protected updateCompared() {
 		if (this.$scope.periodComparisonSelected) {
 			this.$scope.valueCompared = this.getValue(
-				this.$scope.params.currentSiteComparedData ? this.$scope.params.currentSiteComparedData : this.$scope.params.comparedData,
+				this.$scope.params.comparedData,
 				this.$scope.params.comparedPeriod);
 		}
 	}

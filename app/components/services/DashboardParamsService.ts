@@ -12,12 +12,20 @@ import { DataService } from './DataService';
 import { cApplyLocalTimezone } from './ComputeService';
 import { UserLiveModeConfig } from '../types/user';
 
+export interface DashboardParams {
+    sites: ViewableNode[];
+    data: DataItemV2[];
+    comparedData: DataItemV2[];
+    period: QueryPeriod;
+    comparedPeriod: QueryPeriod;    
+}
+
 /**
  * @class DashboardParamsService
  * @memberOf FSCounterAggregatorApp
  * @description Manage global dashboard parameters such as periods
  **/
-export class DashboardParamsService {
+export class DashboardParamsService implements DashboardParams {
 
     static $inject = [
         "$http", "$q", "DataService", "UserService",
@@ -124,48 +132,43 @@ export class DashboardParamsService {
     }
 
     loadData() {
-        return this.loadDataOnPeriod(this.sites, this.period)
-            .then((data) => {
-                this.data = data;
-                return this;
-            });
+        return this.loadDataWithParams(this);
     }
 
     loadDataCompared() {
-        return this.loadDataOnPeriod(this.sites, this.comparedPeriod)
-            .then((data) => {
-                this.comparedData = data;
-                return this.loadData();
-            });
+        return this.loadDataComparedWithParams(this);
     }
 
     // reload all the data including comparison if activated
     reloadData() {
-        const promises = [ this.loadData() ];
-        if (this.comparedData !== undefined) {
-            promises.push(this.loadDataCompared());
-        }
-        return this.$q.all(promises);
+        return this.reloadDataWithParams(this);
     }
 
     // must be called in order to remove comparison on widget sides
     disableDataCompared() {
         this.comparedData = undefined;
+    }    
+
+    loadDataWithParams(params: DashboardParams) {
+        return this.loadDataOnPeriod(params.sites, params.period)
+            .then((data) => {
+                params.data = data;
+                return this;
+            });
     }
 
-    /**
-    * Fetch data using the specified sites list, using
-    * the current period, tz and compared params.
-    * Returns promise on data & comparedData if activated
-    */
-    loadDataForSites(sites: ViewableNode[]) {
-        const promises = [
-            this.loadDataOnPeriod(sites, this.period)
-        ];
+    loadDataComparedWithParams(params: DashboardParams) {
+        return this.loadDataOnPeriod(params.sites, params.comparedPeriod)
+            .then((data) => {
+                params.comparedData = data;
+                return this.loadDataWithParams(params);
+            });
+    }
+
+    reloadDataWithParams(params: DashboardParams) {
+        const promises = [ this.loadDataWithParams(params) ];
         if (this.comparedData !== undefined) {
-            promises.push(
-                this.loadDataOnPeriod(sites, this.comparedPeriod)
-            );
+            promises.push(this.loadDataComparedWithParams(params));
         }
         return this.$q.all(promises);
     }

@@ -68,6 +68,8 @@
     .controller('KPIMaxSiteRatio', require('./components/kpis/KPIMaxSiteRatio'))
     .controller('KPIMaxPeriod', require('./components/kpis/KPIMaxPeriod'))
     .controller('SiteNavigationController', require('./components/widgets/SiteNavigationController'))
+    .controller('CurrentSiteController', require('./components/widgets/CurrentSiteController'))
+    .controller('LiveModeController', require('./components/widgets/LiveModeController'))
     .controller('DashboardController', require('./components/dashboard/DashboardController'));
 
   // filters

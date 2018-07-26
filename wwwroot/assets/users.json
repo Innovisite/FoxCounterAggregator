@@ -1,69 +1,37 @@
-[
-  {
-    "_id": "5677c83000f7e4d816512595",
-    "name": "test",
-    "email": "user@foxstream.fr",
-    "enabled": true,
-    "password": "pbkdf2$10000$eb79f1a6f81b12106ba8a3fba6089fc1e88e5102063ba77dfcc6df0308645856c7f5a17c0ae849d273d158d7e5bd9d847bb454bd496990ccb9d133dee7988251$2d9194c8f21c35aceb56f12cf6945f39d1d27ad540315cabba90a4cc3b09aa45c9a172dd31b86660f9eadd2fb1f54cb7c24186a41b8c8faa39c3ca5ad23f9583"
-  },
-  {
-    "_id": "5677d75af5fcf1641fa2dbbd",
-    "name": "ionel",
-    "email": "admin@foxstream.fr",
-    "admin": true,
-    "enabled": true,
-    "password": "pbkdf2$10000$443bec5faba84084a67496c39873159fdaff82179cef657f320a4b2e590bbead5e91db0cb5dc6097f392b572bacbe305b336394f2e74cf0889aed6ea9a3a0dee$e3bdc25058a9aa30d6d9d65431591e0179f0c05b2a478109362b0f9fe46fd6d4cb5261e1c0dbe805db0056a1333ae3121059e824c87f127cf33adcd986b33165"
-  },
-  {
-    "_id": "568e309a28054e9015221075",
-    "name": "Jean-Baptiste",
-    "email": "jb.ducatez@foxstream.fr",
-    "enabled": true,
-    "password": "pbkdf2$10000$ba2c72c81ed9491ccea0efc1191ce5d9e2d75faee20a6923ae3c76459fcdf8581e4249d14a22c6e1197adee0e292040760a70518e892489e5bf8f10daa91a588$fc1344decc21cb02a94073c8dbaf479d58b169d343e80bf1668f148a5174d1168d4b8fc1b3793fec68ce134c2c5d57d1919d8ffc9a605c397a2eaac1dfdf1aae"
-  },
-  {
-    "_id": "568e30b428054e9015221076",
-    "name": "Pierre-Jean",
-    "email": "pj.riviere@foxstream.us.com",
-    "enabled": true,
-    "password": "pbkdf2$10000$6481eb59d953a5d0c0a7cbc7cda72b43de8c6063d76f49a56c9f11c419581b9d16331077e77f52bf0205c36a6e4e89571775ce620f087b235cafdc219613fd46$ccca4496a6b4607f365e7cafc519881bca0d58dbdc8f6deb5865401921d4e262e29806a93cd4df10e6dbfac97b8046975954acbeccc472d4a333bb998308721c"
-  },
-  {
-    "_id": "568e30cd28054e9015221077",
-    "name": "Ionel",
-    "email": "i.pop@foxstream.fr",
-    "enabled": true,
-    "password": "pbkdf2$10000$24861f76737040408c997a6c450c9d1e3c183935390e0550dfcd528dcf4c5ac0bfd7afec904daa90ce3d641ced23b48f6c41d8f4978260bc3d4ff9dd9c0f3a68$30e42f1690fe5b1536fc06de18aec1bedbdc914df7b83ee5f3fe6fd58509a868a40fb2502e9199150c02cb77aac6e1bf5b3bdc30fd7baec58194689577f61c60"
-  },
-  {
-    "_id": "568e346a28054e9015221087",
-    "name": "maxime",
-    "email": "m.barduca@foxstream.fr",
-    "enabled": true,
-    "password": "pbkdf2$10000$564125a0957da3e69d5410aa5de08f1bdb53a1d6bc50ea4205252c2f72c33dcda9fcbe7b046e91c8abceb0cc466271c13ced9589790b8a4619b0828e2e758beb$3afcb729d8a8978ff64df8b935c2b05b69940df952002313eb02a8bbac3ebf20f6a7a57eecd05c0c3917ce96f2237e62fcf337ba29855149b3b75233ba0a3003"
-  },
-  {
-    "_id": "5694f3bae87e3ec02ad7ba51",
-    "name": "Delta admin",
-    "email": "admin@delta",
-    "enabled": true,
-    "password": "pbkdf2$10000$564125a0957da3e69d5410aa5de08f1bdb53a1d6bc50ea4205252c2f72c33dcda9fcbe7b046e91c8abceb0cc466271c13ced9589790b8a4619b0828e2e758beb$3afcb729d8a8978ff64df8b935c2b05b69940df952002313eb02a8bbac3ebf20f6a7a57eecd05c0c3917ce96f2237e62fcf337ba29855149b3b75233ba0a3003"
-  },
-  {
-    "_id": "5694f4a8e87e3ec02ad7ba5e",
-    "name": "ATL",
-    "email": "atl@delta",
-    "enabled": true,
-    "password": "pbkdf2$10000$564125a0957da3e69d5410aa5de08f1bdb53a1d6bc50ea4205252c2f72c33dcda9fcbe7b046e91c8abceb0cc466271c13ced9589790b8a4619b0828e2e758beb$3afcb729d8a8978ff64df8b935c2b05b69940df952002313eb02a8bbac3ebf20f6a7a57eecd05c0c3917ce96f2237e62fcf337ba29855149b3b75233ba0a3003",
-    "userInfo": {
-	"dashboard": "<div class='row'>\n  <section class='col-md-12'>\n    <div ng-controller='KPIPeriodGeneric as kpi'>\n      <fca-graph-kpi params='params' kpi='kpi'>\n      </fca-graph-kpi>\n    </div>\n  </section>\n</div>"
+[{
+        "type": "user",
+        "id": "5ad4b8775d82803a28f342d1",
+        "display_name": "Ionel",
+        "email": "i.pop@foxstream.fr",
+        "is_global_administrator": false,
+        "require_password_reset": false,
+        "is_enabled": true,
+        "app_data": {
+            "dashboard": "<div class='row'>\n<section class='col-md-12'>\n<fca-heat-map-kpi params='params'></fca-heat-map-kpi>\n</section>\n<section class='col-md-12'>\n<div ng-controller='KPIPeriodGeneric as kpi'>\n<fca-graph-kpi params='params' kpi='kpi' show-items='true'>\n</fca-graph-kpi>\n</div>\n</section>\n</div>",
+            "live_mode": {
+                "enabled": true,
+                "refresh_rate": 10000
+            }
+        }
+    },
+    {
+        "type": "user",
+        "id": "5ad4bc1e5d82803a28f342dc",
+        "display_name": "Test",
+        "email": "test@foxstream.fr",
+        "is_global_administrator": false,
+        "require_password_reset": false,
+        "is_enabled": true,
+        "app_data": {}
+    },
+    {
+        "type": "user",
+        "id": "000000000000000000000000",
+        "display_name": "admin",
+        "email": "admin@admin",
+        "is_global_administrator": true,
+        "require_password_reset": false,
+        "is_enabled": true,
+        "app_data": {}
     }
-  },
-  {
-    "_id": "5694f4bee87e3ec02ad7ba5f",
-    "name": "BOS",
-    "email": "bos@delta",
-    "enabled": true,
-    "password": "pbkdf2$10000$564125a0957da3e69d5410aa5de08f1bdb53a1d6bc50ea4205252c2f72c33dcda9fcbe7b046e91c8abceb0cc466271c13ced9589790b8a4619b0828e2e758beb$3afcb729d8a8978ff64df8b935c2b05b69940df952002313eb02a8bbac3ebf20f6a7a57eecd05c0c3917ce96f2237e62fcf337ba29855149b3b75233ba0a3003"
-  }
 ]

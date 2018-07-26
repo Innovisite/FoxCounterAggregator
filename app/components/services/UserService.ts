@@ -87,15 +87,15 @@ export class UserService {
                         return {};
                     }
                 });
-            return fakeResource;
-            //return $resource('assets/users.json');
+            return fakeResource;            
         } else {
-            return this.$resource('/users/:userId',
-                { userId: '@_id' },
+            return this.$resource('/api/v1/users/:userId',
+                { userId: '@id' },
                 {
+                    'update':   {method: 'PATCH'},
                     resetPassword: {
-                        method: 'POST',
-                        url: '/users/:userId/passwordreset'
+                        method: 'PATCH',
+                        url: '/api/v1/users/:userId'
                     }
                 });
         }

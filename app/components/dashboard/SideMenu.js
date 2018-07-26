@@ -3,53 +3,56 @@
  * @memberOf FSCounterAggregatorApp
  * @description Menu used to select dashboards
  */
-(function () {
+(function() {
 
-	require('../services/UserService');
+    require('../services/UserService');
 
-	angular.module('FSCounterAggregatorApp')
-		.directive('fcaSideMenu', [
-			'LayoutService',
-			'UserService',
-			function (
-				LayoutService,
-				UserService
-			) {
-				return {
-					link: function (scope, element, attr) {
+    angular.module('FSCounterAggregatorApp')
+        .directive('fcaSideMenu', [
+            'LayoutService',
+            'UserService',
+            function(
+                LayoutService,
+                UserService
+            ) {
+                return {
+                    link: function(scope, element, attr) {
 
-						scope.user = {};
-						scope.hasAdminSites = false;
-						scope.hasUserDashboard = false;
+                        scope.user = {};
+                        scope.hasAdminSites = false;
+                        scope.globaladmin = false;
+                        scope.hasUserDashboard = false;
 
-						LayoutService.init();
+                        LayoutService.init();
 
-						function updateRights(data) {
-							var currentUserSites = data.viewable_nodes;
-							scope.hasAdminSites = false;
-							for (var i = 0; i < currentUserSites.length; ++i) {
-								if (currentUserSites[i].isadmin) {
-									scope.hasAdminSites = true;
-									break;
-								}
-							}
-							scope.hasUserDashboard = data.app_data && data.app_data.dashboard && data.app_data.dashboard.length > 0;
-						}
+                        function updateRights(data) {
+                            var currentUserSites = data.viewable_nodes;
+                            scope.hasAdminSites = false;
+                            scope.globaladmin = data.is_global_administrator;
+                            for (var i = 0; i < currentUserSites.length; ++i) {
+                                if (currentUserSites[i].isadmin) {
+                                    scope.hasAdminSites = true;
+                                    break;
+                                }
+                            }
+                            scope.hasUserDashboard = data.app_data && data.app_data.dashboard && data.app_data.dashboard.length > 0;
+                        }
 
-						UserService.getSettings()
-							.then(function (ret) {
-								scope.user = ret.user;
-								updateRights(ret);
-							});
+                        UserService.getSettings()
+                            .then(function(ret) {
+                                scope.user = ret;
+                                updateRights(ret);
+                            });
 
-						scope.$watch('UserService.currentUserData', function (newVal) {
-							if (newVal) {
-								scope.user = newVal.user;
-								updateRights(newVal);
-							}
-						});
-					},
-					templateUrl: 'build/html/SideMenuView.html'
-				};
-			}]);
+                        scope.$watch('UserService.currentUserData', function(newVal) {
+                            if (newVal) {
+                                scope.user = newVal;
+                                updateRights(newVal);
+                            }
+                        });
+                    },
+                    templateUrl: 'build/html/SideMenuView.html'
+                };
+            }
+        ]);
 }());

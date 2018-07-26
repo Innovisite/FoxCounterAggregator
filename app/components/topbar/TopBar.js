@@ -6,32 +6,32 @@
 (function() {
 
     require('../services/UserService');
-    
+
     angular.module('FSCounterAggregatorApp')
-	.directive('fcaTopBar', 
-		   ['UserService',
-		    function(
-			UserService
-		    ) {
-			return {
-			    link: function(scope, element, attr) {
-				scope.params = UserService;
-				scope.user = undefined;
-				
-				UserService.getSettings()
-				    .then(function(ret) {
-					scope.user = ret.user;
-				    });
+        .directive('fcaTopBar', ['UserService',
+            function(
+                UserService
+            ) {
+                return {
+                    link: function(scope, element, attr) {
+                        scope.params = UserService;
+                        scope.user = undefined;
 
-				scope.$watch('params.currentUserData', function(newVal, oldVal) {
-				    if(oldVal != newVal) {
-					scope.user = newVal.user;
-				    }
-				});
+                        UserService.getSettings()
+                            .then(function(ret) {
+                                scope.user = ret;
+                            });
 
-			    },
-			    templateUrl: 'build/html/TopBarView.html'
-			};
-	}]);
-    
+                        scope.$watch('params.currentUserData', function(newVal, oldVal) {
+                            if (oldVal != newVal) {
+                                scope.user = newVal;
+                            }
+                        });
+
+                    },
+                    templateUrl: 'build/html/TopBarView.html'
+                };
+            }
+        ]);
+
 }());

@@ -29,7 +29,7 @@
                             <li class="user-header">
                                 <i class="fa fa-user" style="font-size: 6em;"></i>
                                 <p>
-                                    {{user.name}} - {{user.admin ? 'Administrator' : 'User' }}
+                                    {{user.display_name}} - {{user.is_global_administrator ? 'Administrator' : 'User' }}
                                     <small>{{user.email}}</small>
                                 </p>
                             </li>
@@ -42,7 +42,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#/current_user" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="#!/current_user" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a class="btn btn-default btn-flat" href="/auth/logout">Sign out</a>

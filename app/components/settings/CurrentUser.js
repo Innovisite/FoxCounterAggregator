@@ -54,8 +54,7 @@ angular.module('FSCounterAggregatorApp')
                     return;
 
                 UserService.setPassword({
-                        "password": $scope.newPassword,
-                        "oldpassword": $scope.oldPassword
+                        "password": $scope.newPassword //, "oldpassword": $scope.oldPassword
                     })
                     .then(function() {
                             $scope.oldPassword = $scope.newPassword = $scope.newPassword2 = "";

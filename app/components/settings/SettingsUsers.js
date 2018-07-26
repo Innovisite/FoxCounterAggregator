@@ -80,7 +80,7 @@
                         "is_enabled": true,
                         "display_name": "",
                         "email": "",
-                        "is_global_admin": false
+                        "is_global_administrator": false
                     });
                 };
 

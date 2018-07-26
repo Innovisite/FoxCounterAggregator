@@ -41,7 +41,7 @@ export class UserService {
         if (this.myconfig.debug) {
             return this.getSettings();
         } else {
-            return this.$http.post('/users/current', params);
+            return this.$http.patch('/api/v1/users' + this.currentUserData.id, params);
         }
     }
 
@@ -54,7 +54,7 @@ export class UserService {
         if (this.myconfig.debug) {
             return this.getSettings();
         } else {
-            return this.$http.post('/users/current/password', params);
+            return this.$http.patch('/api/v1/users' + this.currentUserData.id, params);
         }
     }
 

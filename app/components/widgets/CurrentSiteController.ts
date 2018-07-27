@@ -28,6 +28,9 @@ function CurrentSiteController($scope: any, $paramsService: DashboardParamsServi
         $scope.$watch("params.sitesWithChilds", (newSites: ViewableNode[]) => {
             if (newSites !== undefined && newSites.length) {
                 this.originalSites = newSites;
+                if (siteId !== undefined) {
+                    this.goNav(siteId);
+                }
             }
         });
 

@@ -1,17 +1,18 @@
 import { DashboardParamsService } from "../services/DashboardParamsService";
-import { USER_LIVE_REFRESH_RATE } from "../types/user";
-import { QueryPeriod } from "../types/data";
+import { ExportService } from "../services/ExportService";
 
 declare const window: any;
-declare const angular: any;
-declare const moment: any;
 
 /*
  * Manage the dashboard data
  **/
-function DashboardController($scope: any, $interval: any, paramsService: DashboardParamsService) {    
+function DashboardController(
+    $scope: any,
+    paramsService: DashboardParamsService,
+    exportService: ExportService
+) {
 
-    $scope.params = paramsService;    
+    $scope.params = paramsService;
 
     $scope.params.loadParams().then(function () {
         $scope.params.loadData()
@@ -25,10 +26,19 @@ function DashboardController($scope: any, $interval: any, paramsService: Dashboa
 
     $scope.exportPrint = function () {
         window.print();
-    };    
+    };
+
+    $scope.exportCurrentData = function () {
+        const dateFormat = "YYYY-MM-DD";
+        const fileName = "RawData_" + $scope.params.period.startDate.format(dateFormat) +
+            "__" + $scope.params.period.endDate.format(dateFormat) + ".csv";
+        // fab: we have to refactor ExportService for DataItemV2 type i.e $scope.params.data
+        // const csvData = exportService.ConvertDataToCSV($scope.params.data, $scope.params.sites);
+        // exportService.ProposeToDownload(csvData, fileName, 'text/csv;encoding:utf-8');
+    };
 
 }
 
-(<any>DashboardController).$inject = ["$scope", "$interval", "DashboardParamsService"];
+(<any>DashboardController).$inject = ["$scope", "DashboardParamsService", "ExportService"];
 
 export = DashboardController;

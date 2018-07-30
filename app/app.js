@@ -81,7 +81,8 @@
     .service('UserService', require('./components/services/UserService').UserService)    
     .service('DashboardParamsService', require('./components/services/DashboardParamsService').DashboardParamsService)
     .service('WidgetStyleService', require('./components/services/WidgetStyleService').WidgetStyleService)
-    .service('DataService', require('./components/services/DataService').DataService);
+    .service('DataService', require('./components/services/DataService').DataService)
+    .service('ExportService', require('./components/services/ExportService').ExportService);
 
   // Configure routes
   angular.module('FSCounterAggregatorApp').config(['$urlRouterProvider', '$stateProvider',

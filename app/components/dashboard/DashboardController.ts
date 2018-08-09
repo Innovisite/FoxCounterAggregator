@@ -32,9 +32,9 @@ function DashboardController(
         const dateFormat = "YYYY-MM-DD";
         const fileName = "RawData_" + $scope.params.period.startDate.format(dateFormat) +
             "__" + $scope.params.period.endDate.format(dateFormat) + ".csv";
-        // fab: we have to refactor ExportService for DataItemV2 type i.e $scope.params.data
-        // const csvData = exportService.ConvertDataToCSV($scope.params.data, $scope.params.sites);
-        // exportService.ProposeToDownload(csvData, fileName, 'text/csv;encoding:utf-8');
+        
+        const csvData = exportService.ConvertDataV2ToCSV($scope.params.data, $scope.params.sites);
+        exportService.ProposeToDownload(csvData, fileName, 'text/csv;encoding:utf-8');
     };
 
 }

@@ -1,76 +1,74 @@
 <div class="content-wrapper">
-  <section class="content-header">
-    <nav class="navbar">
-      <div class="pull-left">
-        <h3>
-          <i class="fa fa-pie-chart"></i>
-          <span> Counters / Generic</span>
-        </h3>
-      </div>
-      <fca-calendar-picker params="params"></fca-calendar-picker>
-      <div class="pull-right">
-        <h3>
-          <a ng-click="switchTimeZone()" class="btn btn-default" type="text">{{params.useTimeZone ? 'On Site Time': 'Local Time'}}
+    <section class="content-header">
+        <nav class="navbar">
+            <div class="pull-left">
+                <h3>
+                    <i class="fa fa-pie-chart"></i>
+                    <span> Counters / Generic</span>
+                </h3>
+            </div>
+            <fca-calendar-picker params="params"></fca-calendar-picker>
+            <div class="pull-right">
+                <h3>
+                    <a ng-click="exportCurrentData()" class="btn btn-default" type="text" title="Export data"><i class="fa fa-cloud-download"></i></a>
+                    <a ng-click="switchTimeZone()" class="btn btn-default" type="text">{{params.useTimeZone ? 'On Site Time': 'Local Time'}}
             <i class="fa fa-globe"></i>
           </a>
-        </h3>
-      </div>
-    </nav>
-  </section>
+                </h3>
+            </div>
+        </nav>
+    </section>
 
-  <section class="content">
-    <div class="row section-group" ng-controller="SiteNavigationController as nav" ng-init="init(params)">
-      <section class="col-md-12 header">
-        <fca-widget-navigation three="nav.three" three-pos="nav.threePos" on-next-site="nav.goNav($event)">
-        </fca-widget-navigation>
-      </section>
+    <section class="content">
+        <div class="row section-group" ng-controller="SiteNavigationController as nav" ng-init="init(params)">
+            <section class="col-md-12 header">
+                <fca-widget-navigation three="nav.three" three-pos="nav.threePos" on-next-site="nav.goNav($event)">
+                </fca-widget-navigation>
+            </section>
 
-      <div class="row">
-        <div ng-controller="CurrentSiteController as currentSite" ng-init="init(params,'5ad4bfe35d82803a28f34300')">
-          <div class="col-lg-3 col-xs-6" ng-controller="KPISum as kpi">
-            <fca-stat-box-kpi kpi="kpi" params="currentSite.params" indicator="in" label="Total In" unit='ent' description="Total number of entries over the selected period.">
-            </fca-stat-box-kpi>
-            <fca-stat-box-kpi kpi="kpi" params="currentSite.params" indicator="out" label="Total Out" unit='ent' description="Total number of exits over the selected period.">
-            </fca-stat-box-kpi>
-          </div>
-        </div>
-        <div ng-controller="LiveModeController as live" ng-init="init(nav.params)">
-          <div class="col-lg-3 col-xs-6" ng-controller="KPISum as kpi">
-            <fca-gauge-box-kpi class="center-block widget-gauge" kpi="kpi" params="live.params" indicator="in" label="Total In" unit='ent'
-              description="Total number of entries over the selected perdiod.">
-            </fca-gauge-box-kpi>
-          </div>
-        </div>
-        <div class="col-lg-3 col-xs-6" ng-controller="KPISum as kpi">
-          <fca-gauge-box-kpi class="center-block widget-gauge" kpi="kpi" params="nav.params" indicator="out" label="Total Out" unit='exit'
-            description="Total number of exits over the selected perdiod.">
-          </fca-gauge-box-kpi>
-        </div>
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div ng-controller="KPIMaxSiteRatio as kpi">
-            <fca-stat-box-kpi params="params" kpi="kpi" indicator="in" display-filters="SiteName" label="Most active site" icon="ion-ios-pie"
-              description="The site having the largest occupancy">
-            </fca-stat-box-kpi>
-          </div>
-        </div>
-      </div>
+            <div class="row">
+                <div ng-controller="CurrentSiteController as currentSite" ng-init="init(params,'5ad4bfe35d82803a28f34300')">
+                    <div class="col-lg-3 col-xs-6" ng-controller="KPISum as kpi">
+                        <fca-stat-box-kpi kpi="kpi" params="currentSite.params" indicator="in" label="Total In" unit='ent' description="Total number of entries over the selected period.">
+                        </fca-stat-box-kpi>
+                        <fca-stat-box-kpi kpi="kpi" params="currentSite.params" indicator="out" label="Total Out" unit='ent' description="Total number of exits over the selected period.">
+                        </fca-stat-box-kpi>
+                    </div>
+                </div>
+                <div ng-controller="LiveModeController as live" ng-init="init(nav.params)">
+                    <div class="col-lg-3 col-xs-6" ng-controller="KPISum as kpi">
+                        <fca-gauge-box-kpi class="center-block widget-gauge" kpi="kpi" params="live.params" indicator="in" label="Total In" unit='ent' description="Total number of entries over the selected perdiod.">
+                        </fca-gauge-box-kpi>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xs-6" ng-controller="KPISum as kpi">
+                    <fca-gauge-box-kpi class="center-block widget-gauge" kpi="kpi" params="nav.params" indicator="out" label="Total Out" unit='exit' description="Total number of exits over the selected perdiod.">
+                    </fca-gauge-box-kpi>
+                </div>
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div ng-controller="KPIMaxSiteRatio as kpi">
+                        <fca-stat-box-kpi params="params" kpi="kpi" indicator="in" display-filters="SiteName" label="Most active site" icon="ion-ios-pie" description="The site having the largest occupancy">
+                        </fca-stat-box-kpi>
+                    </div>
+                </div>
+            </div>
 
-      <section class="col-md-12">
-        <div ng-controller="KPIServerGeneric as kpi" ng-init="init(params)">
-          <fca-graph-kpi ng-if="kpi.kpis.length" params="nav.params" kpi="kpi">
-          </fca-graph-kpi>
+            <section class="col-md-12">
+                <div ng-controller="KPIServerGeneric as kpi" ng-init="init(params)">
+                    <fca-graph-kpi ng-if="kpi.kpis.length" params="nav.params" kpi="kpi">
+                    </fca-graph-kpi>
+                </div>
+            </section>
+            <div class="row">
+                <section class="col-md-12">
+                    <div ng-controller="KPIServerGeneric as kpi" ng-init="init(params)">
+                        <fca-table-kpi ng-if="kpi.kpis.length" params="nav.params" kpi="kpi" on-next-item="nav.goChildFromId($event)">
+                        </fca-table-kpi>
+                    </div>
+                </section>
+            </div>
         </div>
-      </section>
-      <div class="row">
-        <section class="col-md-12">
-          <div ng-controller="KPIServerGeneric as kpi" ng-init="init(params)">
-            <fca-table-kpi ng-if="kpi.kpis.length" params="nav.params" kpi="kpi" on-next-item="nav.goChildFromId($event)">
-            </fca-table-kpi>
-          </div>
-        </section>
-      </div>
-    </div>
-  </section>
+    </section>
 
 </div>

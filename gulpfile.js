@@ -25,11 +25,12 @@ var buffer = require('vinyl-buffer');
 var collapse = require('bundle-collapser/plugin');
 var tsify = require('tsify');
 
-var usageCmd = '\nUsage: gulp build|release|docs|install [--local] [--dest]\n \
+var usageCmd = '\nUsage: gulp build|build-min|release|docs|install [--local] [--dest]\n \
 \t--local\tUse fake data instead of retrieving them from the server.\n \
 \t--dest\tSet the destination folder for the install task.\n\
 \tbuild\tSimply build the project.\n\
-\trelease\tBuild the project with minify and uglify.\n\
+\tbuild-min\tBuild the project with minify and uglify to check.\n\
+\trelease\tBuild the project with minify and uglify. Extract the new git revision.\n\
 \tdocs\tBuild the javascript documentation.\n\
 \tinstall\tBuild the project and then copy all the files to the folder specified with --dest.\n\
 ';
@@ -120,6 +121,8 @@ gulp.task('installdebug', gulpSequence('build', 'copy-files'));
 gulp.task('install', gulpSequence('release', 'copy-files'));
 
 gulp.task('build', ['common', 'prepare-css', 'prepare-js', 'browser-js']);
+
+gulp.task('build-min', ['common', 'prepare-css-release', 'prepare-js-release', 'browser-js-release']);
 
 gulp.task('release', ['common', 'prepare-css-release',
     'prepare-js-release', 'browser-js-release',

@@ -1,5 +1,4 @@
-import * as ComputeService from "../services/ComputeService";
-import { QueryCompute, DataResElt, DataEltV2 } from "../types/data";
+import { QueryCompute, DataEltV2 } from "../types/data";
 
 declare const _: any;
 declare const moment: any;
@@ -9,25 +8,32 @@ declare const moment: any;
  * @memberOf FSCounterAggregatorApp
  * @description Retrieve the period which have the max indicator value
  */
-function KPIMaxPeriod() {
+export class KPIMaxPeriod {
 
-    this.getDefaultIndicatorId = () => "in";
+    constructor() {
+    }
 
-    this.getLabel = (id: string) => "max period";
+    getDefaultIndicatorId() {
+        return "in";
+    }
 
-    function groupSiteByHour(data: DataEltV2[], indicator: string) {
+    getLabel() {
+        return "max period";
+    }
+
+    private groupSiteByHour(data: DataEltV2[], indicator: string) {
         const arrayOfDataPerHour = _.groupBy(
             data.filter(_ => _.key == indicator),
-            (item:DataEltV2) => moment(item.time.start).add(1800, "s").hour() //the closest hour (16:45 -> 17:00)
+            (item: DataEltV2) => moment(item.time.start).add(1800, "s").hour() //the closest hour (16:45 -> 17:00)
         );
 
-        const siteByHour = _.mapValues(arrayOfDataPerHour, (it: DataEltV2) => _.sumBy(it, "value"));    
+        const siteByHour = _.mapValues(arrayOfDataPerHour, (it: DataEltV2) => _.sumBy(it, "value"));
 
         return siteByHour;
     }
 
-    function groupAllSitesByHour(data: DataEltV2[][], indicator: string) {
-        const sitesSumByHour = _.map(data, (siteData: DataEltV2[]) => groupSiteByHour(siteData, indicator));
+    private groupAllSitesByHour(data: DataEltV2[][], indicator: string) {
+        const sitesSumByHour = _.map(data, (siteData: DataEltV2[]) => this.groupSiteByHour(siteData, indicator));
 
         return _.reduce(sitesSumByHour, function (acc: any, siteSumByHour: any) {
             _.forEach(siteSumByHour, function (value: any, hour: any) {
@@ -43,7 +49,7 @@ function KPIMaxPeriod() {
      * @memberOf FSCounterAggregatorApp.KPIMaxPeriod
      * @description Returns the period which have the max value
      */
-    this.compute = function (query: QueryCompute) {
+    compute(query: QueryCompute) {
         if (!query.indicator)
             query.indicator = this.getDefaultIndicatorId();
 
@@ -55,20 +61,16 @@ function KPIMaxPeriod() {
         let hours = [];
 
         if (query.allsitedata)
-            hours = groupAllSitesByHour(query.allsitedata, query.indicator);
+            hours = this.groupAllSitesByHour(query.allsitedata, query.indicator);
         else if (query.sitedata)
-            hours = groupSiteByHour(query.sitedata, query.indicator);
+            hours = this.groupSiteByHour(query.sitedata, query.indicator);
 
         var mx = _.max(_.values(hours));
-        var maxHour = _.findKey(hours, (v:any) => v == mx);
+        var maxHour = _.findKey(hours, (v: any) => v == mx);
 
 
         res.value = maxHour ? maxHour : "no data";
 
         return res;
-    };
+    }
 }
-
-(<any>KPIMaxPeriod).prototype.$inject = ["$scope", "$controller"];
-
-export = KPIMaxPeriod;

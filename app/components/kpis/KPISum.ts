@@ -7,11 +7,19 @@ import { QueryCompute, DataResElt } from "../types/data";
  * @memberOf FSCounterAggregatorApp
  * @description Compute the sum for a set of data indicators
  */
-function KPISum($scope: any, $controller: any) {
+export class KPISum {
 
-	this.getDefaultIndicatorId = () => "in";
+	constructor() {
 
-	this.getLabel = (id: string) => "total ".concat(id);
+	}
+
+	getDefaultIndicatorId() {
+		return "in";
+	}
+
+	getLabel(id: string) {
+		return "total ".concat(id);
+	}
 
 	/**
 	 * @function compute
@@ -19,7 +27,7 @@ function KPISum($scope: any, $controller: any) {
 	 * @description Returns the total of
 	 * data within a period of time (for a site or for multi-site)
 	 */
-	this.compute = (query: QueryCompute) => {
+	compute(query: QueryCompute) {
 
 		const res = {
 			query: query,
@@ -44,19 +52,15 @@ function KPISum($scope: any, $controller: any) {
 
 		if (query.allsitedata) {
 
-			query.allsitedata.forEach(sitedata => res.value += computeSum(sitedata));			
+			query.allsitedata.forEach(sitedata => res.value += computeSum(sitedata));
 
 		} else {
 
-			res.value = computeSum(query.sitedata);			
-			
+			res.value = computeSum(query.sitedata);
+
 		}
 
 		return res;
-	};
+	}
 
 }
-
-(<any>KPISum).prototype.$inject = ["$scope", "$controller"];
-
-export = KPISum;

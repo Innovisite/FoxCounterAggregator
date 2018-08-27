@@ -6,11 +6,18 @@ import { QueryCompute, DataResElt, DataEltV2 } from "../types/data";
  * @memberOf FSCounterAggregatorApp
  * @description Compute the mean value for on a set of data indicators
  */
-function KPIMean($scope: any, $controller: any) {
+export class KPIMean {
 
-	this.getDefaultIndicatorId = () => "in";
+	constructor() {		
+	}
 
-	this.getLabel = (id: string) => "mean ".concat(id);
+	getDefaultIndicatorId() {
+		return "in";
+	}
+
+	getLabel(id: string) {
+		return "mean ".concat(id);
+	}
 
 	/**
 	 * @function compute
@@ -18,7 +25,7 @@ function KPIMean($scope: any, $controller: any) {
 	 * @description Returns the mean value of
 	 * data within a period of time
 	 */
-	this.compute = (query: QueryCompute) => {
+	compute(query: QueryCompute) {
 
 		var res = {
 			query: query,
@@ -50,10 +57,6 @@ function KPIMean($scope: any, $controller: any) {
 		res.value = Math.round(res.value / (query.period.endDate - query.period.startDate));
 
 		return res;
-	};
+	}
 
 }
-
-(<any>KPIMean).prototype.$inject = ["$scope", "$controller"];
-
-export = KPIMean;

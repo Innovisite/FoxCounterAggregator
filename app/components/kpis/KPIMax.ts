@@ -1,20 +1,22 @@
-import * as ComputeService from "../services/ComputeService";
-import { QueryCompute, DataResElt, DataEltV2 } from "../types/data";
+import { QueryCompute } from "../types/data";
 
 /**
  * @class KPIMax
  * @memberOf FSCounterAggregatorApp
  * @description Compute the max value for on a set of data indicators
  */
-function KPIMax($scope: any, $controller: any) {
+export class KPIMax {
 
-	this.getDefaultIndicatorId = () => "in";
+	constructor() {
 
-	this.getLabel = (id: string) => "max ".concat(id);
+	}
 
-	// todo: use the kpi default value as the default max
-	function computeMaxSite(data: number[]) {
-		return data.reduce((a, b) => a >= b ? a : b, 0);
+	getDefaultIndicatorId() {
+		return "in";
+	}
+
+	getLabel(id: string) {
+		return "max ".concat(id);
 	}
 
 	/**
@@ -23,7 +25,12 @@ function KPIMax($scope: any, $controller: any) {
 	 * @description Returns the mean value of
 	 * data within a period of time
 	 */
-	this.compute = (query: QueryCompute) => {
+	compute(query: QueryCompute) {
+
+		// todo: use the kpi default value as the default max
+		function computeMaxSite(data: number[]) {
+			return data.reduce((a, b) => a >= b ? a : b, 0);
+		}
 
 		var res = {
 			query: query,
@@ -53,9 +60,5 @@ function KPIMax($scope: any, $controller: any) {
 		}
 
 		return res;
-	};
+	}
 }
-
-(<any>KPIMax).prototype.$inject = ["$scope", "$controller"];
-
-export = KPIMax;

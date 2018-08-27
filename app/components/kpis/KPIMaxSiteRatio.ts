@@ -1,5 +1,4 @@
-import * as ComputeService from "../services/ComputeService";
-import { QueryCompute, DataResElt, ComputeRes } from "../types/data";
+import { QueryCompute, ComputeRes } from "../types/data";
 
 declare const _: any;
 
@@ -8,11 +7,18 @@ declare const _: any;
  * @memberOf FSCounterAggregatorApp
  * @description Retrieve the site which have the biggest amount of data
  */
-function KPIMaxSiteRatio() {
+export class KPIMaxSiteRatio {
 
-	this.getDefaultIndicatorId = () => "in";
+	constructor() {		
+	}
 
-	this.getLabel = (id:string) => "";
+	getDefaultIndicatorId() {
+		return "in";
+	}
+
+	getLabel() {
+		return "";
+	}
 
 	/**
 	 * @function compute
@@ -20,7 +26,7 @@ function KPIMaxSiteRatio() {
 	 * @description Returns the site which have the biggest
 	 * amount of data
 	 */
-	this.compute = function (query: QueryCompute) {				
+	compute(query: QueryCompute) {				
 
 		if (!query.indicator)
 			query.indicator = this.getDefaultIndicatorId();
@@ -39,10 +45,6 @@ function KPIMaxSiteRatio() {
 
 		res.value = maxIdx;
 		return res;
-	};
+	}
 
 }
-
-(<any>KPIMaxSiteRatio).prototype.$inject = ["$scope", "$controller"];
-
-export = KPIMaxSiteRatio;
